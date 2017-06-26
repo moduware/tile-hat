@@ -1,0 +1,39 @@
+@mixin nxp-fixed-header($image: "../img/fixed-header.png") {
+	#tmpl {
+		position: fixed;
+		width: 100%;
+		height: calc(100vw * 0.198);
+		top: 0;
+		left: 0;
+	  z-index: 2500;
+		background-image: url($image);
+		background-size: 100%;
+		opacity: 1;
+	  background-repeat: no-repeat;
+
+    &.invert {
+			@include filter(invert(100%));
+    }
+
+		/*.fixed-go-back,
+		.fixed-go-nexpaq,
+		.fixed-go-social {
+			content: '';
+	    	@include position(absolute, 0 null null 0);
+	    	width: 20%;
+	    	height: 100%;
+	    	border: 0;
+	    	background-color: rgba(255, 0, 0, 0);
+		}
+	    .fixed-go-back {
+
+	    }
+	    .fixed-go-nexpaq {
+	    	left: 40%;
+	    }
+	    .fixed-go-social {
+			left: auto;
+			right: 0;
+		}*/
+	}
+}

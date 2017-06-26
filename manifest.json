@@ -1,0 +1,16 @@
+{
+  "id": "nexpaq.tile.hat",
+  "name": "Temperature and Humidity",
+  "description": "Nexpaq T&H tile module interface",
+
+  "version": "1.1.2",
+  "changes": "Smaller package size",
+  "app_version": "1.0.3",
+  "modules": [
+    "nexpaq.module.hat"
+  ],
+  
+  "title": "Temperature",
+  "color": "#FFB930",
+  "text_color": "white"
+}

@@ -1,0 +1,49 @@
+@mixin nxp-console($background-color: rgba(0,0,0,0.4), $text-color: white, $link-color: #F01E8F, $text-size: 10px, $height: 15%, $position: bottom) {
+	$close_button_offset: 3%;
+	$close_button_color: white;
+	$close_button_size: 15px;
+	$distance_between_items: 4px;
+
+	#nxpConsole {
+		display: block;
+		position: absolute;
+		left: 0;
+		width: 100%;
+		height: $height;
+
+		@if $position == bottom {
+			bottom: 0;
+		} @else {
+			top: 0;
+		}
+
+		background-color: $background-color;
+		color: $text-color;
+		font-size: $text-size;
+		font-family: sans-serif;
+		overflow: scroll;
+
+		.close_nxp_console {
+			position: fixed;
+		    bottom: $height - $close_button_offset;
+			right: $close_button_offset;
+			border: 0;
+			background-color: $close_button_color;
+			color: black;
+			border-radius: 50px;
+			width: $close_button_size;
+			height: $close_button_size;
+			line-height: $close_button_size;
+			padding: 0;
+		}
+		.nxplogitem {
+		    border-bottom: 1px dashed;
+		    padding-top: $distance_between_items;
+
+		    a {
+		    	text-decoration: none;
+				color: $link-color;
+		    }
+		}
+	}
+}

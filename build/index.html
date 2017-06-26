@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Temperature</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="manifest" href="manifest.json">
+
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <!-- vendor -->
+    <link rel="stylesheet" type="text/css" href="vendor/material.min.css">
+
+    <link rel="stylesheet" type="text/css" href="fonts/fonts.css">
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+
+
+    <!-- nexpaq libs -->
+    <script type="text/javascript" src="js/NexpaqHeader.js"></script>
+
+    <!-- partials -->
+    <script type="text/javascript" src="js/location.js"></script>
+
+    <!-- screens -->
+
+    <!-- tools-->
+
+    <!-- core -->
+    <script type="text/javascript" src="js/variables.js"></script>
+    <script type="text/javascript" src="js/native.js"></script>
+    <script type="text/javascript" src="js/scripts.js"></script>
+  </head>
+  <body>
+    <div id="wrapper" class="wrapper">
+      
+      <div id="main-screen" class="main-screen mdl-layout mdl-js-layout">
+
+          <div class="result-screen" id="result-screen">
+            <div id="svg-container" class="svg-container">
+              <div id="scale-svg" class="scale-svg"></div>
+              <div id="gradient" class="gradient"></div>
+              <div id="line-svg" class="line-svg"></div>
+            </div>
+            <div class="temp-value" id="temp-value1">25°</div>
+            <div class="humidity">
+              <div class="humidity-title" id="humidity-title">Humidity</div>
+              <div class="humidity-value" id="humidity-value1">32%</div>
+            </div>
+            <button class="button-object" id="button-object">Measure object</button>
+            <button class="button-snapshot mdl-button--raised" id="button-snapshot">Create Snapshot</button>
+          </div>
+
+          <div class="settings-screen hidden" id="settings-screen">
+            <div class="unit_container" id="unit_container">
+              <span>Units</span>
+              <input type="radio" class="celsius" id="celsius" checked>
+              <label class="unit-celsius" for="celsius" >Celsius</label>
+              <input type="radio" class="fahrenheit" id="fahrenheit" >
+              <label class="unit-fahrenheit" for="fahrenheit">Fahrenheit</label>
+            </div>
+          </div>
+
+          <div class="snapshot-screen hidden" id="snapshot-screen">
+          <table class="measurement_table" id="measurement_table">
+            <thead>
+              <th><input type="text" id="label" placeholder="Add Label"></th>
+            </thead>
+            <tr>
+              <td class="temp-name" id="temp-title">Ambient Temperature</td>
+              <td class="temp-value" id="temp-value2">25°</td>
+            </tr>
+            <tr>
+              <td class="humidity-name">Humidity</td>
+              <td class="humidity-value" id="humidity-value2">32%</td>
+            </tr>
+            <tr>
+              <td class="date" id="date">Date</td>
+              <td class="time" id="time">Time</td>
+            </tr>
+          </table>
+          <div class="button-container">
+            <button class="button-cancel" id="button-cancel">Cancel</button>
+            <button class="button-history hidden" id="button-history">Save To History</button>
+          </div>
+        </div>
+        <div id="snackbar">Saved</div>
+      </div>
+  </body>
+</html>

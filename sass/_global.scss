@@ -1,0 +1,53 @@
+* {
+	outline: none;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+svg {
+	width: 100%;
+	height: auto;
+}
+img {
+	max-width: 100%;
+}
+body {
+	font-family: $main-font;
+}
+button {
+	color: inherit;
+	font-size: inherit;
+	font-family: $main-font;
+	border: 0;
+	padding: 0;
+	background-color: transparent;
+}
+.hidden.hidden.hidden {
+	display: none;
+}
+.invisible {
+	visibility: hidden !important;
+}
+.no-overflow {
+	overflow: hidden;
+}
+.unselectable {
+  @include user-select(none);
+}
+#templates {
+	@extend .hidden;
+}
+#wrapper {
+	@extend .no-overflow;
+	@include position(fixed, 40px 0 null null);
+	width: 100%;
+	height: calc(100% - 40px);
+	body.platform-android & {
+    top: 55px;
+    height: calc(100% - 55px)
+    }
+}
+.app-screen {
+	@extend .no-overflow;
+}
+.app-screen:not(.active) {
+	@extend .hidden;
+}

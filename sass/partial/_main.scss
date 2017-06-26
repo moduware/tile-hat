@@ -1,0 +1,25 @@
+.main-screen {
+  @include position(absolute, 0 null null 0);
+  width: 100%; height: 100%;
+  overflow: hidden;
+  background-color: #ffffff;
+
+  #snackbar {
+    visibility: hidden; /* Hidden by default. Visible on click */
+    min-width: 100px; /* Set a default minimum width */
+    padding: 5px;
+    background-color: #333; /* Black background color */
+    color: #fff; /* White text color */
+    text-align: center; /* Centered text */
+    border-radius: 10px; /* Rounded borders */
+    position: fixed; /* Sit on top of the screen */
+    z-index: 11; /* Add a z-index if needed */
+    left: 35%;
+    bottom: 70px; /* 30px from the bottom */
+  }
+
+  /* Show the snackbar when clicking on a button (class added with JavaScript) */
+  #snackbar.show {
+      visibility: visible; /* Show the snackbar */
+  }
+}

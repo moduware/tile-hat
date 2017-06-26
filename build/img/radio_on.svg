@@ -1,0 +1,16 @@
+
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 43.1 (39012) - http://www.bohemiancoding.com/sketch -->
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Temperature" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Android/Laserdist/settings" transform="translate(-26.000000, -137.000000)" fill="#000000">
+            <g id="row" transform="translate(0.000000, 119.000000)">
+                <g id="Material/Dark/Radio-button-on" transform="translate(24.000000, 16.000000)">
+                    <rect id="bounds" fill="none" x="0" y="0" width="24" height="24"></rect>
+                    <path d="M12,7 C9.2,7 7,9.2 7,12 C7,14.8 9.2,17 12,17 C14.8,17 17,14.8 17,12 C17,9.2 14.8,7 12,7 L12,7 Z M12,2 C6.5,2 2,6.5 2,12 C2,17.5 6.5,22 12,22 C17.5,22 22,17.5 22,12 C22,6.5 17.5,2 12,2 L12,2 Z M12,20 C7.6,20 4,16.4 4,12 C4,7.6 7.6,4 12,4 C16.4,4 20,7.6 20,12 C20,16.4 16.4,20 12,20 L12,20 Z" id="Shape" fill="#FFB931"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

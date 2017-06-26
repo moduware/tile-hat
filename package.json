@@ -1,0 +1,30 @@
+{
+  "name": "new_temperature",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Alex Chernov",
+  "license": "ISC",
+  "buildFiles": [
+    "manifest.json",
+    "icon.svg",
+    "index.html",
+    "css/**/*",
+    "fonts/**/",
+    "img/**/",
+    "js/**/",
+    "vendor/**/"
+  ],
+  "devDependencies": {
+    "bourbon": "^4.3.4",
+    "browser-sync": "^2.17.5",
+    "gulp": "^3.9.1",
+    "gulp-file-include": "^0.13.7",
+    "gulp-sass": "^2.2.0",
+    "gulp-zip": "^3.2.0",
+    "rimraf": "^2.6.1"
+  }
+}
