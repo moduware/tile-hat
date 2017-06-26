@@ -38,7 +38,7 @@
   }
 
   .line-svg {
-    @include position(absolute, 50% null null 54%);
+    @include position(absolute, 46% null null 54%);
     background-image: url('../img/line.svg');
     transform: translateY(-1px);
     width: 34px;

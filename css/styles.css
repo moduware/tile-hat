@@ -121,7 +121,7 @@ button {
     z-index: 2; }
   .result-screen .line-svg {
     position: absolute;
-    top: 50%;
+    top: 46%;
     left: 54%;
     background-image: url("../img/line.svg");
     transform: translateY(-1px);
