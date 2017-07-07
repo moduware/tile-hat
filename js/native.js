@@ -13,9 +13,9 @@ function nativeDataUpdateHandler(data) {
 	if(document.getElementById('fahrenheit').checked == true) {
 		temperature = Celsius2Farenheit(temperature).toFixed(1);
 		var tempValue = parseFloat(document.getElementById('temp-value1').textContent);
-		document.getElementById('scale-svg').style.top = ((tempValue-77)*3)+'px';		//setting temperature scale
+		document.getElementById('temperature-scale').style.top = ((tempValue-77)*3)+'px';		//setting temperature scale
 	} else {
-		document.getElementById('scale-svg').style.top = ((temperature-25)*7)+'px';		//setting temperature scale
+		document.getElementById('temperature-scale').style.top = ((temperature-25)*7)+'px';		//setting temperature scale
 	}
 	
 	SetValues(temperature, humidity);

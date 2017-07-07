@@ -19,13 +19,31 @@
     overflow: hidden;
   }
 
-  .scale-svg {
+  .scale {
     @include position(absolute, 0px null null 0%);
-    background-image: url('../img/celsius_scale.svg');
+    background-repeat: no-repeat;
     width: inherit;
     height: 400px;
     @include transition(top 0.5s);
     z-index: 1;
+
+    &.scale-celsius {
+      background-image: url('../img/celsius_scale_2x.png');
+      background-size: 72px 721px;
+      background-position: 0 -2px;
+    }
+
+    &.scale-fahrenheit {
+      background-image: url('../img/fahrenheit_scale_2x.png');
+      background-size: 71px 746px;
+      background-position: 0 -258px;
+    }
+  }
+
+  .scale-svg {
+    
+    
+    
   }
 
   .gradient {
