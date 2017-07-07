@@ -6,10 +6,10 @@
   flex-direction: column;
   justify-content: space-between;
 
-  
+
   .material-icons {
     font-size: 24px;
-    margin-top: 15%; 
+    margin-top: 15%;
   }
 
   .svg-container {
@@ -45,7 +45,7 @@
     height: 2px;
     z-index: 3;
   }
-  
+
   .temp-value{
     order: 1;
     @include position(fixed, 39% null null 39%);
@@ -103,7 +103,7 @@
     background-repeat: no-repeat;
     background-color: #FFB931;
     border: 2px solid white;
-    padding-left: 7%;   
+    padding-left: 7%;
     z-index: 2;
     &.active{
       background-color: rgba(0, 0, 0, 0.5);
@@ -126,14 +126,16 @@
     font-size: 20px;
     font-weight: 400;
     color: #46320A;
-    background-color: #ffffff;
+    background-color: white;
     margin: auto;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     z-index: 2;
+
     body.platform-ios & {
-      width: 300px;
+      width: calc(100% - 20px);
       height: 57px;
       color: #917642;
+      box-shadow: none;
     }
   }
 }
