@@ -207,14 +207,15 @@ button {
     font-size: 20px;
     font-weight: 400;
     color: #46320A;
-    background-color: #ffffff;
+    background-color: white;
     margin: auto;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     z-index: 2; }
     body.platform-ios .result-screen .button-snapshot {
-      width: 300px;
+      width: calc(100% - 20px);
       height: 57px;
-      color: #917642; }
+      color: #917642;
+      box-shadow: none; }
 
 .snapshot-screen {
   position: absolute;
