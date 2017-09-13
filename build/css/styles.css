@@ -99,17 +99,25 @@ button {
     width: 73px;
     height: 400px;
     overflow: hidden; }
-  .result-screen .scale-svg {
+  .result-screen .scale {
     position: absolute;
     top: 0px;
     left: 0%;
-    background-image: url("../img/celsius_scale.svg");
+    background-repeat: no-repeat;
     width: inherit;
     height: 400px;
     -webkit-transition: top 0.5s;
     -moz-transition: top 0.5s;
     transition: top 0.5s;
     z-index: 1; }
+    .result-screen .scale.scale-celsius {
+      background-image: url("../img/celsius_scale_2x.png");
+      background-size: 72px 721px;
+      background-position: 0 -2px; }
+    .result-screen .scale.scale-fahrenheit {
+      background-image: url("../img/fahrenheit_scale_2x.png");
+      background-size: 71px 746px;
+      background-position: 0 -258px; }
   .result-screen .gradient {
     position: absolute;
     top: 0;
@@ -207,14 +215,15 @@ button {
     font-size: 20px;
     font-weight: 400;
     color: #46320A;
-    background-color: #ffffff;
+    background-color: white;
     margin: auto;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     z-index: 2; }
     body.platform-ios .result-screen .button-snapshot {
-      width: 300px;
+      width: calc(100% - 20px);
       height: 57px;
-      color: #917642; }
+      color: #917642;
+      box-shadow: none; }
 
 .snapshot-screen {
   position: absolute;

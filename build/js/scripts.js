@@ -175,24 +175,37 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
   Nexpaq.Header.addEventListener('BackButtonClicked', function(e) {
     if(!document.getElementById('settings-screen').classList.contains('hidden')) {
+      
       Nexpaq.Header.setTitle("Temperature");
       Nexpaq.Header.cleanButtons();
       Nexpaq.Header.addButton({image:"img/icon-settings.svg"}, settingsHandler);
+
+
       document.getElementById('settings-screen').classList.add('hidden');
       document.getElementById('result-screen').classList.remove('hidden');
+      
+      var scale = document.getElementById('temperature-scale');
       if(document.getElementById('fahrenheit').checked) {
-        document.getElementById('scale-svg').style.backgroundImage = "url('./img/fahrenheit_scale.svg')";
+        scale.classList.remove('scale-celsius');
+        scale.classList.add('scale-fahrenheit');
+
         document.getElementById('svg-container').style.width = "79px";
         document.getElementById('line-svg').style.left = "57%";
+
         var tempValue = parseFloat(document.getElementById('temp-value1').textContent);
-        document.getElementById('scale-svg').style.top = ((tempValue-77)*3)+'px';
+
+        document.getElementById('temperature-scale').style.top = ((tempValue-77)*3)+'px';
+      
       } else {
-        document.getElementById('scale-svg').style.backgroundImage = "url('./img/celsius_scale.svg')";
+        scale.classList.add('scale-celsius');
+        scale.classList.remove('scale-fahrenheit');
+
         document.getElementById('svg-container').style.width = "73px";
         document.getElementById('line-svg').style.left = "54%";
         var tempValue = parseFloat(document.getElementById('temp-value1').textContent);
-        document.getElementById('scale-svg').style.top = ((tempValue-25)*7)+'px';
+        document.getElementById('temperature-scale').style.top = ((tempValue-25)*7)+'px';
       }
+
     }
       else if(document.getElementById('result-screen').classList.contains('hidden')) {
       document.getElementById('snapshot-screen').classList.add('hidden');
