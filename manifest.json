@@ -3,9 +3,9 @@
   "name": "Temperature and Humidity",
   "description": "Moduware T&H tile module interface",
 
-  "version": "1.1.3",
-  "changes": "Fixes placeholder's not disappearing problem on focus ",
-  "app_version": "1.0.3",
+  "version": "1.2.0",
+  "changes": "Preserving settings, small screen fix, snapshot saving",
+  "app_version": "1.1.4",
   "modules": [
     "nexpaq.module.hat"
   ],
