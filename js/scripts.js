@@ -1,4 +1,4 @@
-var degree = "c";
+var degree = 'c';
 
 function setTime(date) {
   var hours = date.getHours();
@@ -155,7 +155,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     document.getElementById('measurement_table').classList.add('slideleft');
     setTimeout(function() {
       document.getElementById('snapshot-screen').classList.add('hidden');
-      document.getElementById("label").value = "";
+      document.getElementById('label').value = '';
       document.getElementById('result-screen').classList.remove('hidden');
     },1000);
   });
