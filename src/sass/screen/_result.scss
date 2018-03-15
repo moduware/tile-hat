@@ -75,6 +75,10 @@
     font-weight: 400;
     line-height: 85px;
     z-index: 2;
+
+    &::after {
+      content: '°';
+    }
   }
 
   .humidity {
@@ -93,6 +97,7 @@
     line-height: 23px;
     color: white;
     z-index: 2;
+
   }
 
   .humidity-value {
@@ -104,6 +109,10 @@
     color: white;
     text-align: center;
     z-index: 2;
+
+    &::after {
+      content: '%';
+    }
   }
 
   .button-object {
