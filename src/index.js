@@ -7,8 +7,7 @@ import 'webview-tile-header/WebViewTileHeader.js';
 
 import headerSettingsIcon from './img/icon-settings.svg';
 
-console.log(headerSettingsIcon);
-
+Nexpaq.Header._detectCurrentPlatform();
 Nexpaq.Header.create('Temperature');
 Nexpaq.Header.customize({color: 'white', iconColor:'white', backgroundColor:'#FFB931', borderBottom:'none'});
 Nexpaq.Header.hideShadow();
