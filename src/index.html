@@ -7,33 +7,21 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="format-detection" content="telephone=no">
-    <!-- partials -->
-    <!-- <script type="text/javascript" src="js/location.js"></script> -->
-
-    <!-- screens -->
-
-    <!-- tools-->
-
-    <!-- core -->
-    <!-- <script type="text/javascript" src="js/variables.js"></script>
-    <script type="text/javascript" src="js/native.js"></script>
-    <script type="text/javascript" src="js/scripts.js"></script> -->
   </head>
   <body>
     <div id="wrapper" class="wrapper">
       
       <div id="main-screen" class="main-screen mdl-layout mdl-js-layout">
-
           <div class="result-screen" id="result-screen">
             <div id="svg-container" class="svg-container">
               <div id="temperature-scale" class="scale scale-celsius"></div>
               <div id="gradient" class="gradient"></div>
               <div id="line-svg" class="line-svg"></div>
             </div>
-            <div class="temp-value" id="temp-value1">25</div>
+            <div class="temp-value" id="temp-value1"></div>
             <div class="humidity">
               <div class="humidity-title" id="humidity-title">Humidity</div>
-              <div class="humidity-value" id="humidity-value1">32</div>
+              <div class="humidity-value" id="humidity-value1"></div>
             </div>
             <button class="button-object" id="button-object">Measure object</button>
             <button class="button-snapshot mdl-button--raised" id="button-snapshot">Create Snapshot</button>
@@ -43,7 +31,7 @@
             <div class="unit_container" id="unit_container">
               <span>Units</span>
               <input type="radio" class="celsius" id="celsius" checked>
-              <label class="unit-celsius" for="celsius" >Celsius</label>
+              <label class="unit-celsius" for="celsius">Celsius</label>
               <input type="radio" class="fahrenheit" id="fahrenheit" >
               <label class="unit-fahrenheit" for="fahrenheit">Fahrenheit</label>
             </div>
@@ -56,11 +44,11 @@
             </thead>
             <tr>
               <td class="temp-name" id="temp-title">Ambient Temperature</td>
-              <td class="temp-value" id="temp-value2">25°</td>
+              <td class="temp-value" id="temp-value2"></td>
             </tr>
             <tr>
               <td class="humidity-name">Humidity</td>
-              <td class="humidity-value" id="humidity-value2">32%</td>
+              <td class="humidity-value" id="humidity-value2"></td>
             </tr>
             <tr>
               <td class="date" id="date">Date</td>

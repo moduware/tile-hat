@@ -76,8 +76,15 @@
     line-height: 85px;
     z-index: 2;
 
+    
     &::after {
       content: '°';
+    }
+    
+    &:empty::after {
+      content: '...';
+      font-size: 0.3em;
+      font-style: italic;
     }
   }
 
@@ -112,6 +119,11 @@
 
     &::after {
       content: '%';
+    }
+
+    &:empty::after {
+      content: '...';
+      font-style: italic;
     }
   }
 

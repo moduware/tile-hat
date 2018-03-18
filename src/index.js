@@ -53,10 +53,11 @@ document.addEventListener('NexpaqAPIReady', () => {
     Nexpaq.API.Module.addEventListener('DataReceived', function(event) {
         // we don't care about data not related to our module
         if(event.module_uuid != Nexpaq.Arguments[0]) return;
+        if(event.dataSource != 'SensorValue') return;
 
-        values.ambientTemperature = parseFloat(data.variables.ambient_temperature);
-        values.objectTemperature = parseFloat(data.variables.object_temperature);
-        values.humidity = parseFloat(data.variables.humidity);
+        values.ambientTemperature = parseFloat(event.variables.ambient_temperature);
+        values.objectTemperature = parseFloat(event.variables.object_temperature);
+        values.humidity = parseFloat(event.variables.humidity);
         
         renderValues();
     }); 
