@@ -29,6 +29,9 @@ const values = {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
+    /* Revealing UI */
+    document.getElementById('wrapper').style.opacity = 1;
+
     /* Header configuration */
     Nexpaq.Header.create('Temperature');
     Nexpaq.Header.customize({color: 'white', iconColor:'white', backgroundColor:'#FFB931', borderBottom:'none'});

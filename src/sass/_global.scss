@@ -40,9 +40,10 @@ button {
 	@include position(fixed, 40px 0 null null);
 	width: 100%;
 	height: calc(100% - 40px);
+
 	body.platform-android & {
-    top: 55px;
-    height: calc(100% - 55px)
+		top: 55px;
+		height: calc(100% - 55px)
     }
 }
 .app-screen {
