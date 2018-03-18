@@ -20,6 +20,7 @@ const defaultSettings = {
 };
 Settings.setPrefix('hat');
 const settings = Settings.Load(defaultSettings);
+renderSettings(settings);
 
 const values = {
     ambientTemperature: 0,
@@ -44,6 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     document.getElementById('button-snapshot').addEventListener('click', () => Pages.showSnapshotPage());
     document.getElementById('button-cancel').addEventListener('click', () => Pages.showMainPage());
+    document.getElementById('button-object').addEventListener('click', buttonObjectClickHandler);
 });
 
 document.addEventListener('NexpaqAPIReady', () => {
@@ -64,6 +66,16 @@ document.addEventListener('NexpaqAPIReady', () => {
 
 });
 
+function buttonObjectClickHandler() {
+    this.classList.toggle('active');
+    if(settings.measureType == MeasureType.Ambient) {
+        settings.measureType = MeasureType.Object;
+    } else {
+        settings.measureType = MeasureType.Ambient;
+    }
+    Settings.Save(settings);
+}
+
 function renderValues() {
     let temperature;
     // taking required temperature
@@ -83,6 +95,12 @@ function renderValues() {
     // displaying values in UI
     document.getElementById('temp-value1').textContent = temperature;
     document.getElementById('humidity-value1').textContent = humidity;
+}
+
+function renderSettings(settings) {
+    if(settings.measureType == MeasureType.Object) {
+        document.getElementById('button-object').classList.add('active');
+    }
 }
 
 window.renderValues = renderValues;
