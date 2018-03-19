@@ -7,6 +7,10 @@
     body.platform-ios & {
         border-radius: 12px;
     }
+
+    body.platform-android & {
+        box-shadow: 0 0 1px rgba(0,0,0,.12), 0 1px 1px rgba(0,0,0,.24);
+    }
 }
 
 .snapshot-item__title {
@@ -29,6 +33,14 @@
     body.platform-ios & {
         font-size: 17px;
     }
+
+    body.platform-android & {
+        padding-top: 15px;
+        box-sizing: border-box;
+        margin-bottom: 15px;
+        line-height: calc(35px);
+        border-bottom: 1px solid rgba(0,0,0,.12);
+    }
 }
 
 .snapshot-item__values {
@@ -39,6 +51,10 @@
 .snapshot-item__line {
     line-height: 30px;
     font-size: 17px;
+
+    body.platform-android & {
+        line-height: 40px;
+    }
 }
 
 .snapshot-item__field-value {
