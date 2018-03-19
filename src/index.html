@@ -13,18 +13,33 @@
       
       <div id="main-screen" class="main-screen mdl-layout mdl-js-layout">
           <div class="result-screen" id="result-screen">
-            <div id="svg-container" class="svg-container">
+            <!-- <div id="svg-container" class="svg-container">
               <div id="temperature-scale" class="scale scale-celsius"></div>
               <div id="gradient" class="gradient"></div>
               <div id="line-svg" class="line-svg"></div>
+            </div> -->
+            
+            <div class="result-screen__content">
+                <div class="result-screen__left-side">
+                  <div class="temperature-scale">
+                    <div class="temperature-scale__scale temperature-scale__scale--fahrenheit" id="temperature-scale"></div>
+                  </div>
+                </div>
+                <!-- <div class="result-screen__right-side">
+                  <div class="temperature-numbers">
+                      <div class="temperature-numbers__temparature-value" id="temperature-value">26</div>
+                      <div class="temperature-numbers__humidity">
+                        <span class="temperature-numbers__humidity-title">Humidity</span>
+                        <span class="temperature-numbers__humidity-value" id="humidity-value">29</span>
+                      </div>
+                    </div>
+                    
+                    <button class="measure-type-button" id="button-object">Measure object</button>
+                </div> -->
             </div>
-            <div class="temp-value" id="temp-value1"></div>
-            <div class="humidity">
-              <div class="humidity-title" id="humidity-title">Humidity</div>
-              <div class="humidity-value" id="humidity-value1"></div>
-            </div>
-            <button class="button-object" id="button-object">Measure object</button>
-            <button class="button-snapshot mdl-button--raised" id="button-snapshot">Create Snapshot</button>
+            
+            
+            <button class="action-button action-button--primary" id="button-snapshot">Create Snapshot</button>
           </div>
 
           <div class="settings-screen hidden" id="settings-screen">

@@ -1,0 +1,180 @@
+.result-screen {
+  @include position(absolute, 0 null null 0);
+  width: 100%; height: 100%;
+  background-color: #FFB931;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+
+  .material-icons {
+    font-size: 24px;
+    margin-top: 15%;
+  }
+
+  .svg-container {
+    @include position(fixed, 17% null null 8%);
+    width: 73px;
+    height: 400px;
+    overflow: hidden;
+  }
+
+  .scale {
+    @include position(absolute, 0px null null 0%);
+    background-repeat: no-repeat;
+    width: inherit;
+    height: 400px;
+    @include transition(top 0.5s);
+    z-index: 1;
+
+    &.scale-celsius {
+      background-image: url('../img/celsius_scale_2x.png');
+      background-size: 72px 721px;
+      background-position: 0 -2px;
+    }
+
+    &.scale-fahrenheit {
+      background-image: url('../img/fahrenheit_scale_2x.png');
+      background-size: 71px 746px;
+      background-position: 0 -258px;
+    }
+  }
+
+  .scale-svg {
+    
+    
+    
+  }
+
+  .gradient {
+    @include position(absolute, 0 null null 0%);
+    width: inherit;
+    height: 100%;
+    background-image: linear-gradient(to bottom, rgba(255,185,49,100) 0%, rgba(255,185,49,0) 25%, rgba(255,185,49,0) 50%, rgba(255,185,49,0) 75%, rgba(255,185,49,100) 92%);
+    background-image: -webkit-linear-gradient(to bottom, rgba(255,185,49,100) 0%, rgba(255,185,49,0) 25%, rgba(255,185,49,0) 50%, rgba(255,185,49,0) 75%, rgba(255,185,49,100) 92%);
+    z-index: 2;
+  }
+
+  .line-svg {
+    @include position(absolute, 46% null null 54%);
+    background-image: url('../img/line.svg');
+    transform: translateY(-1px);
+    width: 34px;
+    height: 2px;
+    z-index: 3;
+  }
+
+  .temp-value{
+    order: 1;
+    @include position(fixed, 39% null null 39%);
+    body.platform-android & {
+      @include position(fixed, 40% null null 39%);
+    }
+    color: white;
+    font-size: 72px;
+    font-weight: 400;
+    line-height: 85px;
+    z-index: 2;
+
+    
+    &::after {
+      content: '°';
+    }
+    
+    &:empty::after {
+      content: '...';
+      font-size: 0.3em;
+      font-style: italic;
+    }
+  }
+
+  .humidity {
+    order: 2;
+    @include position(relative, 50% null null 40%);
+    line-height: 23px;
+    color: white;
+    z-index: 2;
+  }
+
+  .humidity-title {
+    @include position(relative, 0 null null 0);
+    display: inline-block;
+    font-size: 17px;
+    font-weight: 300;
+    line-height: 23px;
+    color: white;
+    z-index: 2;
+
+  }
+
+  .humidity-value {
+    @include position(relative, 0 null null 2%);
+    display: inline-block;
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 23px;
+    color: white;
+    text-align: center;
+    z-index: 2;
+
+    &::after {
+      content: '%';
+    }
+
+    &:empty::after {
+      content: '...';
+      font-style: italic;
+    }
+  }
+
+  .button-object {
+    order: 3;
+    @include position(relative, 53% null null 40%);
+    width: 176px;
+    height: 44px;
+    border-radius: 3px;
+    font-size: 16px;
+    font-weight: 400;
+    text-align: center;
+    color: white;
+    background-image: url('../img/icon-measure-object.svg');
+    background-position: 10px center;
+    background-repeat: no-repeat;
+    background-color: #FFB931;
+    border: 2px solid white;
+    padding-left: 7%;
+    z-index: 2;
+    &.active{
+      background-color: rgba(0, 0, 0, 0.5);
+      box-shadow: none;
+      border: none;
+      background-position: 12px center;
+    }
+    body.platform-ios & {
+    width: 150px;
+    height: 44px;
+    font-size: 13px;
+    }
+  }
+
+  .button-snapshot {
+    order: 4;
+    width: 328px;
+    height: 56px;
+    border-radius: 5px;
+    font-size: 20px;
+    font-weight: 400;
+    color: #46320A;
+    background-color: white;
+    margin: auto;
+    margin-bottom: 10px;
+    z-index: 2;
+
+    body.platform-ios & {
+      width: calc(100% - 20px);
+      height: 57px;
+      color: #917642;
+      box-shadow: none;
+    }
+  }
+}

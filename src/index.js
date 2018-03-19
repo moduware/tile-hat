@@ -133,23 +133,28 @@ function createSnapshot() {
 
 function renderValues() {
     let temperature;
+    let scaleValue;
     // taking required temperature
     if(settings.measureType == MeasureType.Ambient) {
         temperature = values.ambientTemperature;
     } else {
         temperature = values.objectTemperature;
     }
+    scaleValue = temperature * 7;
+
     // if user uses fahrenheit, converting value
     if(settings.units == TemperatureUnit.Fahrenheit) {
         temperature = Utils.Celsius2Farenheit(temperature);
+        scaleValue = temperature * 3;
     }
     // formatting temperature
     temperature = temperature.toFixed(1);
     const humidity = values.humidity.toFixed(1);
 
     // displaying values in UI
-    document.getElementById('temp-value1').textContent = temperature;
-    document.getElementById('humidity-value1').textContent = humidity;
+    document.getElementById('temperature-value').textContent = temperature;
+    document.getElementById('humidity-value').textContent = humidity;
+    document.getElementById('temperature-scale').style.transform = 'translateY(' + scaleValue + 'px)';
 }
 
 function renderSettings(settings) {
