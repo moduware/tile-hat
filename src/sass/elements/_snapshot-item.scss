@@ -1,0 +1,64 @@
+.snapshot-item {
+    background-color: white;
+    font-size: 16px;
+    padding: 0 15px 10px 15px;
+    overflow: hidden;
+
+    body.platform-ios & {
+        border-radius: 12px;
+    }
+}
+
+.snapshot-item__title {
+    width: 100%;
+    line-height: 50px;
+
+    color: black;
+    font-size: 16px;
+    font-weight: 400;
+    text-align: center;
+    border: none;      
+    outline: none;
+    outline-offset: 0;
+    -webkit-appearance:none;
+    
+    &::-webkit-input-placeholder {
+        color: #929292;
+    }
+
+    body.platform-ios & {
+        font-size: 17px;
+    }
+}
+
+.snapshot-item__values {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.snapshot-item__line {
+    line-height: 30px;
+    font-size: 17px;
+}
+
+.snapshot-item__field-value {
+    text-align: right;
+}
+
+.snapshot-item__field-value--temperature::after {
+    content: '°';
+}
+
+.snapshot-item__field-value--humidity::after {
+    content: '%';
+}
+
+.snapshot-item__daytime,
+.snapshot-item__location {
+    font-size: 14px;
+    color: #929292;
+}
+
+.snapshot-item__daytime {
+    margin-bottom: 5px;
+}

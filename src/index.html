@@ -12,7 +12,7 @@
     <div id="wrapper" class="wrapper" style="opacity: 0;">
       
       <div id="main-screen" class="main-screen mdl-layout mdl-js-layout">
-          <div class="result-screen" id="result-screen">
+          <div class="result-screen hidden" id="result-screen">
             <div id="svg-container" class="svg-container">
               <div id="temperature-scale" class="scale scale-celsius"></div>
               <div id="gradient" class="gradient"></div>
@@ -39,30 +39,47 @@
             </div>
           </div>
 
-          <div class="snapshot-screen hidden" id="snapshot-screen">
-          <table class="measurement_table" id="measurement_table">
-            <thead>
-              <th><input type="text" id="label" placeholder="Add Label" onfocus="this.placeholder=''" onblur="this.placeholder='Add Label'"></th>
-            </thead>
-            <tr>
-              <td class="temp-name" id="temp-title">Ambient Temperature</td>
-              <td class="temp-value" id="temp-value-snapshot"></td>
-            </tr>
-            <tr>
-              <td class="humidity-name">Humidity</td>
-              <td class="humidity-value" id="humidity-value-snapshot"></td>
-            </tr>
-            <tr>
-              <td class="date" id="date">Date</td>
-              <td class="time" id="time">Time</td>
-            </tr>
-          </table>
-          <div class="button-container">
-            <button class="button-cancel" id="button-cancel">Cancel</button>
-            <button class="button-history hidden" id="button-history">Save To History</button>
+          <div class="snapshot-screen" id="snapshot-screen">
+            <div class="snapshot-item">
+              <input type="text" class="snapshot-item__title" placeholder="Add Label" onfocus="this.placeholder=''" onblur="this.placeholder='Add Label'">
+              <table class="snapshot-item__values">
+                <tr class="snapshot-item__line">
+                  <td class="snapshot-item__field-title" id="snapshot-temperature-title">Ambient Temperature</td>
+                  <td class="snapshot-item__field-value snapshot-item__field-value--temperature" id="snapshot-temperature-value">26</td>
+                </tr>
+                <tr class="snapshot-item__line">
+                  <td class="snapshot-item__field-title">Humidity</td>
+                  <td class="snapshot-item__field-value snapshot-item__field-value--humidity" id="snapshot-humidity-value">29</td>
+                </tr>
+              </table>
+              <div class="snapshot-item__daytime" id="snapshotDayAndTime">01/04/2017 – 9:41 AM</div>
+              <div class="snapshot-item__location" id="snapshotDayAndTime">One Kowloon, 1 Wang Yuen Street, Kowloon Bay, Hong Kong</div>
+            </div>
+            <!-- <table class="measurement_table" id="measurement_table">
+              <thead>
+                <th colspan="2">
+                  
+                </th>
+              </thead>
+              <tr>
+                <td class="temp-name" id="temp-title">Ambient Temperature</td>
+                <td class="temp-value" id="temp-value-snapshot"></td>
+              </tr>
+              <tr>
+                <td class="humidity-name">Humidity</td>
+                <td class="humidity-value" id="humidity-value-snapshot"></td>
+              </tr>
+              <tr>
+                <td class="date" id="date">Date</td>
+                <td class="time" id="time">Time</td>
+              </tr>
+            </table> -->
+            <div class="button-container">
+              <button class="button-cancel" id="button-cancel">Cancel</button>
+              <button class="button-history hidden" id="button-history">Save To History</button>
+            </div>
           </div>
-        </div>
-        <!-- <div id="snackbar">Saved</div> -->
+          <!-- <div id="snackbar">Saved</div> -->
       </div>
   </body>
 </html>
