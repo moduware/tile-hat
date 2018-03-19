@@ -83,7 +83,10 @@ function snapshotButtonCancelClickHandler() {
     const animationPromise1 = Utils.runCssAnimationByClass(containerElement, 'animation-slidedown');
     const animationPromise2 = Utils.runCssAnimationByClass(snapshotItemElement, 'animation-disapear');
 
-    Promise.all([animationPromise1, animationPromise2]).then(() => Pages.showMainPage());
+    Promise.all([animationPromise1, animationPromise2]).then(() => {
+        Pages.showMainPage();
+        document.getElementById('spanshot-title').value = '';
+    });
 }
 
 function buttonObjectClickHandler() {
@@ -97,10 +100,15 @@ function buttonObjectClickHandler() {
 }
 
 function measureUnitSettingClickHandler() {
+    const scale = document.getElementById('temperature-scale');
     if(this.value == 'celsius') {
-        settings.units = TemperatureUnit.Celsius
+        settings.units = TemperatureUnit.Celsius;
+        scale.classList.remove('temperature-scale__scale--fahrenheit');
+        scale.classList.add('temperature-scale__scale--celsius');
     } else {
         settings.units = TemperatureUnit.Fahrenheit;
+        scale.classList.add('temperature-scale__scale--fahrenheit');
+        scale.classList.remove('temperature-scale__scale--celsius');
     }
     Settings.Save(settings);
 }

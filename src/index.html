@@ -21,10 +21,10 @@
                 </div>
                 <div class="result-screen__right-side">
                   <div class="temperature-numbers">
-                      <div class="temperature-numbers__temparature-value" id="temperature-value">26</div>
+                      <div class="temperature-numbers__temparature-value" id="temperature-value"></div>
                       <div class="temperature-numbers__humidity">
                         <span class="temperature-numbers__humidity-title">Humidity</span>
-                        <span class="temperature-numbers__humidity-value" id="humidity-value">29</span>
+                        <span class="temperature-numbers__humidity-value" id="humidity-value"></span>
                       </div>
                     </div>
                     
@@ -50,7 +50,7 @@
 
           <div class="snapshot-screen hidden" id="snapshot-screen">
             <div class="snapshot-item" id="snapshot-item">
-              <input type="text" class="snapshot-item__title" placeholder="Add Label" onfocus="this.placeholder=''" onblur="this.placeholder='Add Label'">
+              <input type="text" id="spanshot-title" class="snapshot-item__title" placeholder="Add Label" onfocus="this.placeholder=''" onblur="this.placeholder='Add Label'">
               <table class="snapshot-item__values">
                 <tr class="snapshot-item__line">
                   <td class="snapshot-item__field-title" id="snapshot-temperature-title">Ambient Temperature</td>
