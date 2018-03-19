@@ -46,7 +46,10 @@ document.addEventListener('DOMContentLoaded', () => {
             Pages.showMainPage();
         }
     });
-    document.getElementById('button-snapshot').addEventListener('click', () => Pages.showSnapshotPage());
+    document.getElementById('button-snapshot').addEventListener('click', () => {
+        createSnapshot();
+        Pages.showSnapshotPage();
+    });
     document.getElementById('button-cancel').addEventListener('click', () => Pages.showMainPage());
     document.getElementById('button-object').addEventListener('click', buttonObjectClickHandler);
     document.querySelectorAll('input[type=radio][name=measureUnit]').forEach(
@@ -80,6 +83,29 @@ function buttonObjectClickHandler() {
         settings.measureType = MeasureType.Ambient;
     }
     Settings.Save(settings);
+}
+
+function createSnapshot() {
+    let temperature;
+    // taking required temperature
+    if(settings.measureType == MeasureType.Ambient) {
+        document.getElementById('temp-title').textContent = 'Ambient Temperature';
+        temperature = values.ambientTemperature;
+    } else {
+        document.getElementById('temp-title').textContent = 'Object Temperature';
+        temperature = values.objectTemperature;
+    }
+    // if user uses fahrenheit, converting value
+    if(settings.units == TemperatureUnit.Fahrenheit) {
+        temperature = Utils.Celsius2Farenheit(temperature);
+    }
+    // formatting temperature
+    temperature = temperature.toFixed(1);
+    const humidity = values.humidity.toFixed(1);
+
+    // displaying values in UI
+    document.getElementById('temp-value-snapshot').textContent = temperature;
+    document.getElementById('humidity-value-snapshot').textContent = humidity;
 }
 
 function measureUnitSettingClickHandler() {
