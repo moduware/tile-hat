@@ -49,6 +49,9 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('button-snapshot').addEventListener('click', () => Pages.showSnapshotPage());
     document.getElementById('button-cancel').addEventListener('click', () => Pages.showMainPage());
     document.getElementById('button-object').addEventListener('click', buttonObjectClickHandler);
+    document.querySelectorAll('input[type=radio][name=measureUnit]').forEach(
+        item => item.addEventListener('click', measureUnitSettingClickHandler)
+    );
 });
 
 document.addEventListener('NexpaqAPIReady', () => {
@@ -79,6 +82,15 @@ function buttonObjectClickHandler() {
     Settings.Save(settings);
 }
 
+function measureUnitSettingClickHandler() {
+    if(this.value == 'celsius') {
+        settings.units = TemperatureUnit.Celsius
+    } else {
+        settings.units = TemperatureUnit.Fahrenheit;
+    }
+    Settings.Save(settings);
+}
+
 function renderValues() {
     let temperature;
     // taking required temperature
@@ -103,6 +115,9 @@ function renderValues() {
 function renderSettings(settings) {
     if(settings.measureType == MeasureType.Object) {
         document.getElementById('button-object').classList.add('active');
+    }
+    if(settings.units == TemperatureUnit.Fahrenheit) {
+        document.getElementById('fahrenheitSetting').checked = true;
     }
 }
 
