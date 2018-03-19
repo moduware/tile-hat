@@ -1,0 +1,27 @@
+.animation-slidedown {
+    animation: 1s 1 normal animation-slidedown-keyframes;
+}
+
+.animation-disapear {
+    animation: 1s 1 normal aniamtion-disapear-keyframes;
+}
+
+@keyframes animation-slidedown-keyframes {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(100%);
+    }
+}
+
+@keyframes aniamtion-disapear-keyframes {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}

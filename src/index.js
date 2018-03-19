@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
         createSnapshot();
         Pages.showSnapshotPage();
     });
-    document.getElementById('button-cancel').addEventListener('click', () => Pages.showMainPage());
+    document.getElementById('snapshot-button-cancel').addEventListener('click', snapshotButtonCancelClickHandler);
     document.getElementById('button-object').addEventListener('click', buttonObjectClickHandler);
     document.querySelectorAll('input[type=radio][name=measureUnit]').forEach(
         item => item.addEventListener('click', measureUnitSettingClickHandler)
@@ -75,6 +75,16 @@ document.addEventListener('NexpaqAPIReady', () => {
 
 });
 
+function snapshotButtonCancelClickHandler() {
+    const containerElement = document.getElementById('snapshot-buttons-container');
+    const snapshotItemElement = document.getElementById('snapshot-item');
+
+    const animationPromise1 = Utils.runCssAnimationByClass(containerElement, 'animation-slidedown');
+    const animationPromise2 = Utils.runCssAnimationByClass(snapshotItemElement, 'animation-disapear');
+
+    Promise.all([animationPromise1, animationPromise2]).then(() => Pages.showMainPage());
+}
+
 function buttonObjectClickHandler() {
     this.classList.toggle('active');
     if(settings.measureType == MeasureType.Ambient) {
@@ -85,14 +95,23 @@ function buttonObjectClickHandler() {
     Settings.Save(settings);
 }
 
+function measureUnitSettingClickHandler() {
+    if(this.value == 'celsius') {
+        settings.units = TemperatureUnit.Celsius
+    } else {
+        settings.units = TemperatureUnit.Fahrenheit;
+    }
+    Settings.Save(settings);
+}
+
 function createSnapshot() {
     let temperature;
     // taking required temperature
     if(settings.measureType == MeasureType.Ambient) {
-        document.getElementById('temp-title').textContent = 'Ambient Temperature';
+        document.getElementById('snapshot-temperature-title').textContent = 'Ambient Temperature';
         temperature = values.ambientTemperature;
     } else {
-        document.getElementById('temp-title').textContent = 'Object Temperature';
+        document.getElementById('snapshot-temperature-title').textContent = 'Object Temperature';
         temperature = values.objectTemperature;
     }
     // if user uses fahrenheit, converting value
@@ -104,18 +123,10 @@ function createSnapshot() {
     const humidity = values.humidity.toFixed(1);
 
     // displaying values in UI
-    document.getElementById('temp-value-snapshot').textContent = temperature;
-    document.getElementById('humidity-value-snapshot').textContent = humidity;
+    document.getElementById('snapshot-temperature-value').textContent = temperature;
+    document.getElementById('snapshot-humidity-value').textContent = humidity;
 }
 
-function measureUnitSettingClickHandler() {
-    if(this.value == 'celsius') {
-        settings.units = TemperatureUnit.Celsius
-    } else {
-        settings.units = TemperatureUnit.Fahrenheit;
-    }
-    Settings.Save(settings);
-}
 
 function renderValues() {
     let temperature;
