@@ -2,6 +2,7 @@ import 'reset-css/reset.css';
 import 'material-design-lite/material.min.css';
 import './sass/styles.scss';
 
+import moment from 'moment';
 import 'material-design-lite/material.min.js';
 import 'webview-tile-header/WebViewTileHeader.js';
 
@@ -121,10 +122,12 @@ function createSnapshot() {
     // formatting temperature
     temperature = temperature.toFixed(1);
     const humidity = values.humidity.toFixed(1);
+    const time = moment().format('DD/MM/YYYY - h:mm a');
 
     // displaying values in UI
     document.getElementById('snapshot-temperature-value').textContent = temperature;
     document.getElementById('snapshot-humidity-value').textContent = humidity;
+    document.getElementById('snapshotDayAndTime').textContent = time;
 }
 
 
