@@ -1,6 +1,6 @@
 .measure-type-button {
     max-width: 150px;
-    line-height: 44px;
+    line-height: 38px;
     border-radius: 3px;
     font-size: 13px;
     font-weight: 400;
@@ -10,11 +10,12 @@
     background-position: 10px center;
     background-repeat: no-repeat;
     border: 2px solid white;
-    padding-left: 35px;
+    padding-left: 40px;
+    padding-right: 10px;
     box-sizing: border-box;
     
     &.active{
         background-color: rgba(0, 0, 0, 0.5);
-        border: transparent;
+        border-color: transparent;
     }
 }

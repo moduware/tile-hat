@@ -14,7 +14,17 @@
   display: flex;
 }
 
-.result-screen__left-side,
+.result-screen__left-side {
+  padding-left: 20px;
+}
+
 .result-screen__right-side {
-  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 30px;
+}
+
+.temperature-numbers {
+  margin-bottom: 20px;
 }
