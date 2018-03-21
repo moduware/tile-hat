@@ -3,6 +3,7 @@ import 'material-design-lite/material.min.css';
 import './sass/styles.scss';
 
 import moment from 'moment';
+import Vue from 'vue';
 import 'material-design-lite/material.min.js';
 import 'webview-tile-header/WebViewTileHeader.js';
 
@@ -15,19 +16,84 @@ import TemperatureUnit from './enums/TemperatureUnit';
 import MeasureType from './enums/MeasureType';
 
 /* Loading settings */
-const defaultSettings = {
-    units: TemperatureUnit.Celsius,
-    measureType: MeasureType.Ambient
-};
-Settings.setPrefix('hat');
-const settings = Settings.Load(defaultSettings);
-renderSettings(settings);
+// const defaultSettings = {
+//     units: TemperatureUnit.Celsius,
+//     measureType: MeasureType.Ambient
+// };
+// Settings.setPrefix('hat');
+// const settings = Settings.Load(defaultSettings);
+// renderSettings(settings);
 
-const values = {
-    ambientTemperature: 0,
-    objectTemperature: 0,
-    humidity: 0
-};
+// const values = {
+//     ambientTemperature: 0,
+//     objectTemperature: 0,
+//     humidity: 0
+// };
+
+const tile = new Vue({
+    el: '#wrapper',
+    data: {
+        sensorValues: {
+            ambientTemperature: 0,
+            objectTemperature: 0,
+            humidity: 0
+        },
+        settings: {
+            units: TemperatureUnit.Celsius,
+            measureType: MeasureType.Ambient
+        }
+    },
+    computed: {
+        temperatureValue: function() {
+            let temperature;
+            // taking required temperature
+            if(this.settings.measureType == MeasureType.Ambient) {
+                temperature = this.sensorValues.ambientTemperature;
+            } else {
+                temperature = this.sensorValues.objectTemperature;
+            }
+
+            // if user uses fahrenheit, converting value
+            if(this.settings.units == TemperatureUnit.Fahrenheit) {
+                temperature = Utils.Celsius2Farenheit(temperature);
+            }
+
+            return temperature;
+        },
+        temperatureOutput: function() {
+            const temperature = this.temperatureValue.toFixed(1);
+
+            return temperature;
+        },
+        scaleClasses: function() {
+            return {
+                'temperature-scale__scale': true,
+                'temperature-scale__scale--celsius': this.settings.units == TemperatureUnit.Celsius,
+                'temperature-scale__scale--fahrenheit': this.settings.units == TemperatureUnit.Fahrenheit
+            }
+        },
+        scaleValue: function() {
+            let scaleValue;
+            if(this.settings.units == TemperatureUnit.Celsius) {
+                scaleValue = this.temperatureValue * 7;
+            } else {
+                scaleValue = this.temperatureValue * 3;
+            }
+            return {
+                transform: `translateY(${scaleValue}px)`
+            }
+        }
+    },
+    watch: {
+        
+    }
+});
+
+window.tile = tile;
+
+Settings.setPrefix('hat');
+tile.$data.settings = Settings.Load(tile.$data.settings);
+renderSettings(tile.$data.settings);
 
 document.addEventListener('DOMContentLoaded', () => {
     /* Revealing UI */
@@ -64,12 +130,12 @@ document.addEventListener('NexpaqAPIReady', () => {
 
     Nexpaq.API.Module.addEventListener('DataReceived', function(event) {
         // we don't care about data not related to our module
-        if(event.module_uuid != Nexpaq.Arguments[0]) return;
+        if(event.moduleUuid != Nexpaq.Arguments[0]) return;
         if(event.dataSource != 'SensorValue') return;
 
-        values.ambientTemperature = parseFloat(event.variables.ambient_temperature);
-        values.objectTemperature = parseFloat(event.variables.object_temperature);
-        values.humidity = parseFloat(event.variables.humidity);
+        tile.data.values.ambientTemperature = parseFloat(event.variables.ambient_temperature);
+        tile.data.values.objectTemperature = parseFloat(event.variables.object_temperature);
+        tile.data.values.humidity = parseFloat(event.variables.humidity);
         
         renderValues();
     }); 
@@ -91,45 +157,45 @@ function snapshotButtonCancelClickHandler() {
 
 function buttonObjectClickHandler() {
     this.classList.toggle('active');
-    if(settings.measureType == MeasureType.Ambient) {
-        settings.measureType = MeasureType.Object;
+    if(tile.data.settings.measureType == MeasureType.Ambient) {
+        tile.data.settings.measureType = MeasureType.Object;
     } else {
-        settings.measureType = MeasureType.Ambient;
+        tile.data.settings.measureType = MeasureType.Ambient;
     }
-    Settings.Save(settings);
+    Settings.Save(tile.data.settings);
 }
 
 function measureUnitSettingClickHandler() {
     const scale = document.getElementById('temperature-scale');
     if(this.value == 'celsius') {
-        settings.units = TemperatureUnit.Celsius;
+        tile.data.settings.units = TemperatureUnit.Celsius;
         scale.classList.remove('temperature-scale__scale--fahrenheit');
         scale.classList.add('temperature-scale__scale--celsius');
     } else {
-        settings.units = TemperatureUnit.Fahrenheit;
+        tile.data.settings.units = TemperatureUnit.Fahrenheit;
         scale.classList.add('temperature-scale__scale--fahrenheit');
         scale.classList.remove('temperature-scale__scale--celsius');
     }
-    Settings.Save(settings);
+    Settings.Save(tile.data.settings);
 }
 
 function createSnapshot() {
     let temperature;
     // taking required temperature
-    if(settings.measureType == MeasureType.Ambient) {
+    if(tile.data.settings.measureType == MeasureType.Ambient) {
         document.getElementById('snapshot-temperature-title').textContent = 'Ambient Temperature';
-        temperature = values.ambientTemperature;
+        temperature = tile.data.values.ambientTemperature;
     } else {
         document.getElementById('snapshot-temperature-title').textContent = 'Object Temperature';
-        temperature = values.objectTemperature;
+        temperature = tile.data.values.objectTemperature;
     }
     // if user uses fahrenheit, converting value
-    if(settings.units == TemperatureUnit.Fahrenheit) {
+    if(tile.data.settings.units == TemperatureUnit.Fahrenheit) {
         temperature = Utils.Celsius2Farenheit(temperature);
     }
     // formatting temperature
     temperature = temperature.toFixed(1);
-    const humidity = values.humidity.toFixed(1);
+    const humidity = tile.data.values.humidity.toFixed(1);
     const time = moment().format('DD/MM/YYYY - h:mm a');
 
     // displaying values in UI
@@ -143,21 +209,21 @@ function renderValues() {
     let temperature;
     let scaleValue;
     // taking required temperature
-    if(settings.measureType == MeasureType.Ambient) {
-        temperature = values.ambientTemperature;
+    if(tile.data.settings.measureType == MeasureType.Ambient) {
+        temperature = tile.data.values.ambientTemperature;
     } else {
-        temperature = values.objectTemperature;
+        temperature = tile.data.values.objectTemperature;
     }
     scaleValue = temperature * 7;
 
     // if user uses fahrenheit, converting value
-    if(settings.units == TemperatureUnit.Fahrenheit) {
+    if(tile.data.settings.units == TemperatureUnit.Fahrenheit) {
         temperature = Utils.Celsius2Farenheit(temperature);
         scaleValue = temperature * 3;
     }
     // formatting temperature
     temperature = temperature.toFixed(1);
-    const humidity = values.humidity.toFixed(1);
+    const humidity = tile.data.values.humidity.toFixed(1);
 
     // displaying values in UI
     document.getElementById('temperature-value').textContent = temperature;

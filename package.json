@@ -30,10 +30,11 @@
     "reset-css": "^3.0.0",
     "sass-loader": "^6.0.7",
     "style-loader": "^0.20.3",
+    "vue": "^2.5.16",
     "webpack": "^4.1.1",
-    "webpack-cli": "^2.0.12"
+    "webpack-cli": "^2.0.12",
+    "webview-tile-header": "git+https://github.com/moduware/webview-tile-header.git"
   },
   "dependencies": {
-    "webview-tile-header": "git+https://github.com/moduware/webview-tile-header.git"
   }
 }

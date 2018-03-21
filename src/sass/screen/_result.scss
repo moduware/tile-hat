@@ -20,10 +20,12 @@
 }
 
 .result-screen__right-side {
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding-left: 40px;
+  min-width: 210px;
 }
 
 .temperature-numbers {

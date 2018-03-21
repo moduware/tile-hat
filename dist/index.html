@@ -16,15 +16,15 @@
             <div class="result-screen__content">
                 <div class="result-screen__left-side">
                   <div class="temperature-scale">
-                    <div class="temperature-scale__scale temperature-scale__scale--celsius" id="temperature-scale"></div>
+                    <div :class="scaleClasses" :style="scaleValue" id="temperature-scale"></div>
                   </div>
                 </div>
                 <div class="result-screen__right-side">
                   <div class="temperature-numbers">
-                      <div class="temperature-numbers__temparature-value" id="temperature-value"></div>
+                      <div class="temperature-numbers__temparature-value" id="temperature-value">{{ temperatureOutput }}</div>
                       <div class="temperature-numbers__humidity">
                         <span class="temperature-numbers__humidity-title">Humidity</span>
-                        <span class="temperature-numbers__humidity-value" id="humidity-value"></span>
+                        <span class="temperature-numbers__humidity-value" id="humidity-value">{{ sensorValues.humidity }}</span>
                       </div>
                     </div>
                     
