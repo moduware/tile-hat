@@ -1,6 +1,6 @@
 const TemperatureUnit = Object.freeze({
-    Celsius: 1,
-    Fahrenheit: 2
+    Celsius: 'celsius',
+    Fahrenheit: 'fahrenheit'
 });
 
 export default TemperatureUnit;

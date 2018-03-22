@@ -15,20 +15,7 @@ import * as Utils from './lib/Utils';
 import TemperatureUnit from './enums/TemperatureUnit';
 import MeasureType from './enums/MeasureType';
 
-/* Loading settings */
-// const defaultSettings = {
-//     units: TemperatureUnit.Celsius,
-//     measureType: MeasureType.Ambient
-// };
-// Settings.setPrefix('hat');
-// const settings = Settings.Load(defaultSettings);
-// renderSettings(settings);
-
-// const values = {
-//     ambientTemperature: 0,
-//     objectTemperature: 0,
-//     humidity: 0
-// };
+console.log(TemperatureUnit);
 
 const tile = new Vue({
     el: '#wrapper',
@@ -97,7 +84,6 @@ window.tile = tile;
 
 Settings.setPrefix('hat');
 tile.$data.settings = Settings.Load(tile.$data.settings);
-renderSettings(tile.$data.settings);
 
 document.addEventListener('DOMContentLoaded', () => {
     /* Revealing UI */
@@ -122,9 +108,6 @@ document.addEventListener('DOMContentLoaded', () => {
         Pages.showSnapshotPage();
     });
     document.getElementById('snapshot-button-cancel').addEventListener('click', snapshotButtonCancelClickHandler);
-    document.querySelectorAll('input[type=radio][name=measureUnit]').forEach(
-        item => item.addEventListener('click', measureUnitSettingClickHandler)
-    );
 });
 
 document.addEventListener('NexpaqAPIReady', () => {
@@ -158,20 +141,6 @@ function snapshotButtonCancelClickHandler() {
     });
 }
 
-function measureUnitSettingClickHandler() {
-    const scale = document.getElementById('temperature-scale');
-    if(this.value == 'celsius') {
-        tile.data.settings.units = TemperatureUnit.Celsius;
-        scale.classList.remove('temperature-scale__scale--fahrenheit');
-        scale.classList.add('temperature-scale__scale--celsius');
-    } else {
-        tile.data.settings.units = TemperatureUnit.Fahrenheit;
-        scale.classList.add('temperature-scale__scale--fahrenheit');
-        scale.classList.remove('temperature-scale__scale--celsius');
-    }
-    Settings.Save(tile.data.settings);
-}
-
 function createSnapshot() {
     let temperature;
     // taking required temperature
@@ -196,41 +165,3 @@ function createSnapshot() {
     document.getElementById('snapshot-humidity-value').textContent = humidity;
     document.getElementById('snapshotDayAndTime').textContent = time;
 }
-
-
-function renderValues() {
-    let temperature;
-    let scaleValue;
-    // taking required temperature
-    if(tile.data.settings.measureType == MeasureType.Ambient) {
-        temperature = tile.data.values.ambientTemperature;
-    } else {
-        temperature = tile.data.values.objectTemperature;
-    }
-    scaleValue = temperature * 7;
-
-    // if user uses fahrenheit, converting value
-    if(tile.data.settings.units == TemperatureUnit.Fahrenheit) {
-        temperature = Utils.Celsius2Farenheit(temperature);
-        scaleValue = temperature * 3;
-    }
-    // formatting temperature
-    temperature = temperature.toFixed(1);
-    const humidity = tile.data.values.humidity.toFixed(1);
-
-    // displaying values in UI
-    document.getElementById('temperature-value').textContent = temperature;
-    document.getElementById('humidity-value').textContent = humidity;
-    document.getElementById('temperature-scale').style.transform = 'translateY(' + scaleValue + 'px)';
-}
-
-function renderSettings(settings) {
-    if(settings.measureType == MeasureType.Object) {
-        document.getElementById('button-object').classList.add('active');
-    }
-    if(settings.units == TemperatureUnit.Fahrenheit) {
-        document.getElementById('fahrenheitSetting').checked = true;
-    }
-}
-
-window.renderValues = renderValues;
