@@ -30,6 +30,12 @@ const tile = new Vue({
             objectTemperature: 0,
             humidity: 0
         },
+        snapshotValues: {
+            measureType: MeasureType.Ambient,
+            temperature: 0,
+            humidity: 0,
+            timestamp: 0
+        },
         settings: loadedSettings
     },
     methods: {
@@ -86,13 +92,22 @@ const tile = new Vue({
         },
         isMeasuringObject: function() {
             return this.settings.measureType == MeasureType.Object;
+        },
+        snapshotTimeOutput: function() {
+            return moment.unix(this.snapshotValues.timestamp).format('DD/MM/YYYY - h:mm a');;
+        },
+        snapshotTemperatureOutput: function() {
+            let temperature = this.snapshotValues.temperature;
+            // if user uses fahrenheit, converting value
+            if(this.settings.units == TemperatureUnit.Fahrenheit) {
+                temperature = Utils.Celsius2Farenheit(temperature);
+            }
+            return temperature;
         }
     },
 });
 
 window.tile = tile;
-
-
 
 document.addEventListener('DOMContentLoaded', () => {
     /* Revealing UI */
@@ -128,11 +143,9 @@ document.addEventListener('NexpaqAPIReady', () => {
         if(event.moduleUuid != Nexpaq.Arguments[0]) return;
         if(event.dataSource != 'SensorValue') return;
 
-        tile.data.values.ambientTemperature = parseFloat(event.variables.ambient_temperature);
-        tile.data.values.objectTemperature = parseFloat(event.variables.object_temperature);
-        tile.data.values.humidity = parseFloat(event.variables.humidity);
-        
-        renderValues();
+        tile.sensorValues.ambientTemperature = event.variables.ambient_temperature;
+        tile.sensorValues.objectTemperature = event.variables.object_temperature;
+        tile.sensorValues.humidity = event.variables.humidity;
     }); 
 
 });
@@ -144,33 +157,16 @@ function snapshotButtonCancelClickHandler() {
     const animationPromise1 = Utils.runCssAnimationByClass(containerElement, 'animation-slidedown');
     const animationPromise2 = Utils.runCssAnimationByClass(snapshotItemElement, 'animation-disapear');
 
-    Promise.all([animationPromise1, animationPromise2]).then(() => {
-        Pages.showMainPage();
-        document.getElementById('spanshot-title').value = '';
-    });
+    Promise.all([animationPromise1, animationPromise2]).then(() => Pages.showMainPage());
 }
 
 function createSnapshot() {
-    let temperature;
-    // taking required temperature
-    if(tile.data.settings.measureType == MeasureType.Ambient) {
-        document.getElementById('snapshot-temperature-title').textContent = 'Ambient Temperature';
-        temperature = tile.data.values.ambientTemperature;
+    tile.snapshotValues.measureType = tile.settings.measureType;
+    tile.snapshotValues.humidity = tile.sensorValues.humidity;
+    if(tile.settings.measureType == MeasureType.Ambient) {
+        tile.snapshotValues.temperature = tile.sensorValues.ambientTemperature;
     } else {
-        document.getElementById('snapshot-temperature-title').textContent = 'Object Temperature';
-        temperature = tile.data.values.objectTemperature;
+        tile.snapshotValues.temperature = tile.sensorValues.objectTemperature;
     }
-    // if user uses fahrenheit, converting value
-    if(tile.data.settings.units == TemperatureUnit.Fahrenheit) {
-        temperature = Utils.Celsius2Farenheit(temperature);
-    }
-    // formatting temperature
-    temperature = temperature.toFixed(1);
-    const humidity = tile.data.values.humidity.toFixed(1);
-    const time = moment().format('DD/MM/YYYY - h:mm a');
-
-    // displaying values in UI
-    document.getElementById('snapshot-temperature-value').textContent = temperature;
-    document.getElementById('snapshot-humidity-value').textContent = humidity;
-    document.getElementById('snapshotDayAndTime').textContent = time;
+    tile.snapshotValues.timestamp = moment().unix();
 }

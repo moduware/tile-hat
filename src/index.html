@@ -53,15 +53,18 @@
               <input type="text" id="spanshot-title" class="snapshot-item__title" placeholder="Add Label" onfocus="this.placeholder=''" onblur="this.placeholder='Add Label'">
               <table class="snapshot-item__values">
                 <tr class="snapshot-item__line">
-                  <td class="snapshot-item__field-title" id="snapshot-temperature-title">Ambient Temperature</td>
-                  <td class="snapshot-item__field-value snapshot-item__field-value--temperature" id="snapshot-temperature-value">26</td>
+                  <td class="snapshot-item__field-title" id="snapshot-temperature-title">
+                    <span v-if="snapshotValues.measureType == 'ambient'">Ambient Temperature</span>
+                    <span v-if="snapshotValues.measureType == 'object'">Object Temperature</span>
+                  </td>
+                  <td class="snapshot-item__field-value snapshot-item__field-value--temperature">{{ snapshotTemperatureOutput }}</td>
                 </tr>
                 <tr class="snapshot-item__line">
                   <td class="snapshot-item__field-title">Humidity</td>
-                  <td class="snapshot-item__field-value snapshot-item__field-value--humidity" id="snapshot-humidity-value">29</td>
+                  <td class="snapshot-item__field-value snapshot-item__field-value--humidity">{{ snapshotValues.humidity }}</td>
                 </tr>
               </table>
-              <div class="snapshot-item__daytime" id="snapshotDayAndTime">01/04/2017 – 9:41 AM</div>
+              <div class="snapshot-item__daytime" id="snapshotDayAndTime">{{ snapshotTimeOutput }}</div>
               <!-- <div class="snapshot-item__location" id="snapshotDayAndTime">One Kowloon, 1 Wang Yuen Street, Kowloon Bay, Hong Kong</div> -->
             </div>
             <div class="button-container" id="snapshot-buttons-container">

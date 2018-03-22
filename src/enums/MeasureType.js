@@ -1,6 +1,6 @@
 const MeasureType = Object.freeze({
-    Ambient: 1,
-    Object: 2
+    Ambient: 'ambient',
+    Object: 'object'
 });
 
 export default MeasureType;
