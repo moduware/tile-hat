@@ -12,7 +12,7 @@
     <div id="wrapper" class="wrapper" style="opacity: 0;">
       
       <div id="main-screen" class="main-screen mdl-layout mdl-js-layout">
-          <div class="result-screen" id="result-screen">
+          <div class="tile-screen result-screen hidden" id="result-screen">
             <div class="result-screen__content">
                 <div class="result-screen__left-side">
                   <div class="temperature-scale">
@@ -33,10 +33,10 @@
             </div>
             
             
-            <button class="action-button action-button--primary" id="button-snapshot">Create Snapshot</button>
+            <a href="#snapshot" class="action-button action-button--primary" id="button-snapshot">Create Snapshot</a>
           </div>
 
-          <div class="settings-screen hidden" id="settings-screen">
+          <div class="tile-screen settings-screen hidden" id="settings-screen">
             <div class="unit_container" id="unit_container">
               <span>Units</span>
 
@@ -48,7 +48,7 @@
             </div>
           </div>
 
-          <div class="snapshot-screen hidden" id="snapshot-screen">
+          <div class="tile-screen snapshot-screen hidden" id="snapshot-screen">
             <div class="snapshot-item" id="snapshot-item">
               <input type="text" id="spanshot-title" class="snapshot-item__title" placeholder="Add Label" onfocus="this.placeholder=''" onblur="this.placeholder='Add Label'">
               <table class="snapshot-item__values">

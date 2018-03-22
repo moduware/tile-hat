@@ -2,6 +2,7 @@ import 'reset-css/reset.css';
 import 'material-design-lite/material.min.css';
 import './sass/styles.scss';
 
+import Navigo from 'navigo';
 import moment from 'moment';
 import Vue from 'vue';
 import 'material-design-lite/material.min.js';
@@ -10,7 +11,6 @@ import 'webview-tile-header/WebViewTileHeader.js';
 import headerSettingsIcon from './img/icon-settings.svg';
 
 import Settings from './lib/Settings';
-import * as Pages from './lib/Pages';
 import * as Utils from './lib/Utils';
 import TemperatureUnit from './enums/TemperatureUnit';
 import MeasureType from './enums/MeasureType';
@@ -21,6 +21,8 @@ const defaultSettings = {
     measureType: MeasureType.Ambient
 };
 const loadedSettings = Settings.Load(defaultSettings);
+
+const router = new Navigo(null, true, '#');
 
 const tile = new Vue({
     el: '#wrapper',
@@ -109,6 +111,18 @@ const tile = new Vue({
 
 window.tile = tile;
 
+router.on({
+    'settings': function() {
+        showPage('settings-screen');
+    },
+    'snapshot': function() {
+        showPage('snapshot-screen')
+    },
+    '*': function() {
+        showPage('result-screen');
+    }
+}).resolve();
+
 document.addEventListener('DOMContentLoaded', () => {
     /* Revealing UI */
     document.getElementById('wrapper').style.opacity = 1;
@@ -119,18 +133,15 @@ document.addEventListener('DOMContentLoaded', () => {
     Nexpaq.Header.hideShadow();
 
     /* Paging system */
-    Nexpaq.Header.addButton({image: headerSettingsIcon}, () => Pages.showSettingsPage());
+    Nexpaq.Header.addButton({image: headerSettingsIcon}, () => router.navigate('settings'));//Pages.showSettingsPage());
     Nexpaq.Header.addEventListener('BackButtonClicked', () => {
-        if(Pages.currentPage == 'main') {
+        if(document.location.hash == '') {
             Nexpaq.API.Exit();
         } else {
-            Pages.showMainPage();
+            history.back();
         }
     });
-    document.getElementById('button-snapshot').addEventListener('click', () => {
-        createSnapshot();
-        Pages.showSnapshotPage();
-    });
+    document.getElementById('button-snapshot').addEventListener('click', () => createSnapshot());
     document.getElementById('snapshot-button-cancel').addEventListener('click', snapshotButtonCancelClickHandler);
 });
 
@@ -150,6 +161,13 @@ document.addEventListener('NexpaqAPIReady', () => {
 
 });
 
+function showPage(name) {
+    const pages = Array.from(document.querySelectorAll('.tile-screen'));
+    pages.map(
+        page => page.classList.contains(name) ? page.classList.remove('hidden') : page.classList.add('hidden')
+    );
+}
+
 function snapshotButtonCancelClickHandler() {
     const containerElement = document.getElementById('snapshot-buttons-container');
     const snapshotItemElement = document.getElementById('snapshot-item');
@@ -157,7 +175,7 @@ function snapshotButtonCancelClickHandler() {
     const animationPromise1 = Utils.runCssAnimationByClass(containerElement, 'animation-slidedown');
     const animationPromise2 = Utils.runCssAnimationByClass(snapshotItemElement, 'animation-disapear');
 
-    Promise.all([animationPromise1, animationPromise2]).then(() => Pages.showMainPage());
+    Promise.all([animationPromise1, animationPromise2]).then(() => router.navigate(''));
 }
 
 function createSnapshot() {
