@@ -16,7 +16,7 @@
             <div class="result-screen__content">
                 <div class="result-screen__left-side">
                   <div class="temperature-scale">
-                    <div :class="scaleClasses" :style="scaleValue" id="temperature-scale"></div>
+                    <div class="temperature-scale__scale" :class="scaleUnitClass" :style="scaleValue" id="temperature-scale"></div>
                   </div>
                 </div>
                 <div class="result-screen__right-side">
@@ -28,7 +28,7 @@
                       </div>
                     </div>
                     
-                    <button class="measure-type-button" id="button-object">Measure object</button>
+                    <button class="measure-type-button" :class="{ active: isMeasuringObject }" @click="changeMeasureType">Measure object</button>
                 </div>
             </div>
             

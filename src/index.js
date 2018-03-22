@@ -43,6 +43,11 @@ const tile = new Vue({
             measureType: MeasureType.Ambient
         }
     },
+    methods: {
+        changeMeasureType: function() {
+            this.settings.measureType = this.settings.measureType == MeasureType.Ambient ? MeasureType.Object : MeasureType.Ambient;
+        }
+    },
     computed: {
         temperatureValue: function() {
             let temperature;
@@ -65,9 +70,8 @@ const tile = new Vue({
 
             return temperature;
         },
-        scaleClasses: function() {
+        scaleUnitClass: function() {
             return {
-                'temperature-scale__scale': true,
                 'temperature-scale__scale--celsius': this.settings.units == TemperatureUnit.Celsius,
                 'temperature-scale__scale--fahrenheit': this.settings.units == TemperatureUnit.Fahrenheit
             }
@@ -82,11 +86,11 @@ const tile = new Vue({
             return {
                 transform: `translateY(${scaleValue}px)`
             }
+        },
+        isMeasuringObject: function() {
+            return this.settings.measureType == MeasureType.Object;
         }
     },
-    watch: {
-        
-    }
 });
 
 window.tile = tile;
@@ -118,7 +122,6 @@ document.addEventListener('DOMContentLoaded', () => {
         Pages.showSnapshotPage();
     });
     document.getElementById('snapshot-button-cancel').addEventListener('click', snapshotButtonCancelClickHandler);
-    document.getElementById('button-object').addEventListener('click', buttonObjectClickHandler);
     document.querySelectorAll('input[type=radio][name=measureUnit]').forEach(
         item => item.addEventListener('click', measureUnitSettingClickHandler)
     );
@@ -153,16 +156,6 @@ function snapshotButtonCancelClickHandler() {
         Pages.showMainPage();
         document.getElementById('spanshot-title').value = '';
     });
-}
-
-function buttonObjectClickHandler() {
-    this.classList.toggle('active');
-    if(tile.data.settings.measureType == MeasureType.Ambient) {
-        tile.data.settings.measureType = MeasureType.Object;
-    } else {
-        tile.data.settings.measureType = MeasureType.Ambient;
-    }
-    Settings.Save(tile.data.settings);
 }
 
 function measureUnitSettingClickHandler() {
