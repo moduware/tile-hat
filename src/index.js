@@ -15,7 +15,7 @@ import * as Utils from './lib/Utils';
 import TemperatureUnit from './enums/TemperatureUnit';
 import MeasureType from './enums/MeasureType';
 
-Settings.setPrefix('hat');
+Settings.setPrefix('hat_tile_v1_');
 const defaultSettings = {
     units: TemperatureUnit.Celsius,
     measureType: MeasureType.Ambient
