@@ -15,7 +15,12 @@ import * as Utils from './lib/Utils';
 import TemperatureUnit from './enums/TemperatureUnit';
 import MeasureType from './enums/MeasureType';
 
-console.log(TemperatureUnit);
+Settings.setPrefix('hat');
+const defaultSettings = {
+    units: TemperatureUnit.Celsius,
+    measureType: MeasureType.Ambient
+};
+const loadedSettings = Settings.Load(defaultSettings);
 
 const tile = new Vue({
     el: '#wrapper',
@@ -25,14 +30,19 @@ const tile = new Vue({
             objectTemperature: 0,
             humidity: 0
         },
-        settings: {
-            units: TemperatureUnit.Celsius,
-            measureType: MeasureType.Ambient
-        }
+        settings: loadedSettings
     },
     methods: {
         changeMeasureType: function() {
             this.settings.measureType = this.settings.measureType == MeasureType.Ambient ? MeasureType.Object : MeasureType.Ambient;
+        }
+    },
+    watch: {
+        settings: {
+            handler: function(newSettings, oldSettings) {
+                Settings.Save(newSettings);
+            },
+            deep: true
         }
     },
     computed: {
@@ -82,8 +92,7 @@ const tile = new Vue({
 
 window.tile = tile;
 
-Settings.setPrefix('hat');
-tile.$data.settings = Settings.Load(tile.$data.settings);
+
 
 document.addEventListener('DOMContentLoaded', () => {
     /* Revealing UI */
