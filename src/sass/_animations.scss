@@ -1,9 +1,11 @@
 .animation-slidedown {
     animation: 1s 1 normal animation-slidedown-keyframes;
+    transform: translateY(calc(100% + 10px));
 }
 
 .animation-disapear {
     animation: 1s 1 normal aniamtion-disapear-keyframes;
+    opacity: 0;
 }
 
 @keyframes animation-slidedown-keyframes {
@@ -12,7 +14,7 @@
     }
 
     to {
-        transform: translateY(100%);
+        transform: translateY(calc(100% + 10px));
     }
 }
 

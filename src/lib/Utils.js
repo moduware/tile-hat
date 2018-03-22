@@ -11,8 +11,8 @@ export function runCssAnimationByClass(target, cssClass) {
         let handler = null;
         handler = () => {
             target.removeEventListener('animationend', handler);
-            target.classList.remove(cssClass);
             resolve();
+            //target.classList.remove(cssClass);
         };
         target.addEventListener('animationend', handler);
         target.classList.add(cssClass);

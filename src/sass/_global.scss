@@ -21,7 +21,9 @@ button {
 	background-color: transparent;
 }
 .hidden.hidden.hidden {
-	display: none;
+	// display: none;
+	opacity: 0;
+	pointer-events: none;
 }
 .invisible {
 	visibility: hidden !important;
@@ -37,9 +39,9 @@ button {
 }
 #wrapper {
 	@extend .no-overflow;
-	@include position(fixed, 40px 0 null null);
+	@include position(fixed, 44px 0 null null);
 	width: 100%;
-	height: calc(100% - 40px);
+	height: calc(100% - 44px);
 
 	body.platform-android & {
 		top: 55px;

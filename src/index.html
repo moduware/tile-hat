@@ -24,7 +24,7 @@
                       <div class="temperature-numbers__temparature-value" id="temperature-value">{{ temperatureOutput }}</div>
                       <div class="temperature-numbers__humidity">
                         <span class="temperature-numbers__humidity-title">Humidity</span>
-                        <span class="temperature-numbers__humidity-value" id="humidity-value">{{ sensorValues.humidity }}</span>
+                        <span class="temperature-numbers__humidity-value" id="humidity-value">{{ humidityOutput }}</span>
                       </div>
                     </div>
                     
@@ -61,7 +61,7 @@
                 </tr>
                 <tr class="snapshot-item__line">
                   <td class="snapshot-item__field-title">Humidity</td>
-                  <td class="snapshot-item__field-value snapshot-item__field-value--humidity">{{ snapshotValues.humidity }}</td>
+                  <td class="snapshot-item__field-value snapshot-item__field-value--humidity">{{ snapshotHumidityOutput }}</td>
                 </tr>
               </table>
               <div class="snapshot-item__daytime" id="snapshotDayAndTime">{{ snapshotTimeOutput }}</div>

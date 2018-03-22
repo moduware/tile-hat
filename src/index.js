@@ -75,6 +75,9 @@ const tile = new Vue({
 
             return temperature;
         },
+        humidityOutput: function() {
+            return this.sensorValues.humidity.toFixed(1);
+        },
         scaleUnitClass: function() {
             return {
                 'temperature-scale__scale--celsius': this.settings.units == TemperatureUnit.Celsius,
@@ -105,6 +108,9 @@ const tile = new Vue({
                 temperature = Utils.Celsius2Farenheit(temperature);
             }
             return temperature;
+        },
+        snapshotHumidityOutput: function() {
+            return this.snapshotValues.humidity.toFixed(1);
         }
     },
 });
@@ -154,9 +160,9 @@ document.addEventListener('NexpaqAPIReady', () => {
         if(event.moduleUuid != Nexpaq.Arguments[0]) return;
         if(event.dataSource != 'SensorValue') return;
 
-        tile.sensorValues.ambientTemperature = event.variables.ambient_temperature;
-        tile.sensorValues.objectTemperature = event.variables.object_temperature;
-        tile.sensorValues.humidity = event.variables.humidity;
+        tile.sensorValues.ambientTemperature = parseFloat(event.variables.ambient_temperature);
+        tile.sensorValues.objectTemperature = parseFloat(event.variables.object_temperature);
+        tile.sensorValues.humidity = parseFloat(event.variables.humidity);
     }); 
 
 });
@@ -175,7 +181,13 @@ function snapshotButtonCancelClickHandler() {
     const animationPromise1 = Utils.runCssAnimationByClass(containerElement, 'animation-slidedown');
     const animationPromise2 = Utils.runCssAnimationByClass(snapshotItemElement, 'animation-disapear');
 
-    Promise.all([animationPromise1, animationPromise2]).then(() => router.navigate(''));
+    Promise.all([animationPromise1, animationPromise2]).then(() => {
+        router.navigate('');
+        setTimeout(() => {
+            containerElement.classList.remove('animation-slidedown');
+            snapshotItemElement.classList.remove('animation-disapear');
+        }, 500);
+    });
 }
 
 function createSnapshot() {
