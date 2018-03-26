@@ -20,7 +20,8 @@ import MeasureType from './enums/MeasureType';
 Settings.setPrefix('hat_tile_v1_');
 const defaultSettings = {
     units: TemperatureUnit.Celsius,
-    measureType: MeasureType.Ambient
+    measureType: MeasureType.Ambient,
+    showInstruction: true
 };
 const loadedSettings = Settings.Load(defaultSettings);
 
@@ -45,6 +46,9 @@ const tile = new Vue({
     methods: {
         changeMeasureType: function() {
             this.settings.measureType = this.settings.measureType == MeasureType.Ambient ? MeasureType.Object : MeasureType.Ambient;
+        },
+        disableInstruction: function() {
+            this.settings.showInstruction = false;
         }
     },
     watch: {
@@ -118,6 +122,11 @@ const tile = new Vue({
 });
 
 window.tile = tile;
+
+// Showing module instruction to user by default
+if(tile.settings.showInstruction) {
+    document.location.hash = 'instruction';
+}
 
 router.on({
     'instruction': function() {

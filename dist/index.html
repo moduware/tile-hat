@@ -61,8 +61,8 @@
                 <div class="swiper-pagination"></div>
             </div>
             <div class="button-container">
-              <a class="action-button action-button--primary" href="#">Okay</button>
-              <a class="action-button action-button--link" id="instruction-dont-show-again-button">Don't Show Again</button>
+              <a class="action-button action-button--primary" href="#">Okay</a>
+              <a class="action-button action-button--link" href="#" @click="disableInstruction">Don't Show Again</a>
             </div>
           </div>
 
@@ -109,6 +109,18 @@
               <input type="radio" class="fahrenheit" name="measureUnit" value="fahrenheit" v-model="settings.units" id="fahrenheitSetting" >
               <label class="settings-container__label unit-fahrenheit" for="fahrenheitSetting">Fahrenheit</label>
             </div>
+            <div class="settings-container">
+                <span class="settings-container__title">General</span>
+  
+                <!-- <input type="checkbox" class="celsius" name="instructionSetting" v-model="settings.showInstruction" id="instructionSetting"> -->
+                <label class="settings-container__label" for="instructionSetting">
+                  Show instruction
+                  <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="instructionSetting">
+                    <input type="checkbox" id="instructionSetting" class="mdl-switch__input" v-model="settings.showInstruction">
+                    <span class="mdl-switch__label"></span>
+                  </label>
+                </label>
+              </div>
           </div>
 
           <div class="tile-screen snapshot-screen hidden" id="snapshot-screen">

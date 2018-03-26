@@ -48,4 +48,20 @@
   input[type=radio]:checked + .settings-container__label::after {
     display: inline-block;
   }
+
+  .mdl-switch {
+    position: absolute;
+    width: 50px;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .mdl-switch.is-checked .mdl-switch__thumb {
+    background: #ffb931;
+  }
+
+  .mdl-switch.is-checked .mdl-switch__track {
+    background: rgba(255, 185, 49, 0.5);
+  }
 }
