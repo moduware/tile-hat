@@ -9,17 +9,6 @@
   },
   "author": "Alex Chernov",
   "license": "ISC",
-  "buildFiles": [
-    "manifest.json",
-    "icon.svg",
-    "index.html",
-    "node_modules/webview-tile-header/WebViewTileHeader.js",
-    "css/**/*",
-    "fonts/**/",
-    "img/**/",
-    "js/**/",
-    "vendor/**/"
-  ],
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.4",
