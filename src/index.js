@@ -1,9 +1,11 @@
 import 'reset-css/reset.css';
 import 'material-design-lite/material.min.css';
+import 'swiper/dist/css/swiper.min.css';
 import './sass/styles.scss';
 
 import Navigo from 'navigo';
 import moment from 'moment';
+import Swiper from 'swiper';
 import Vue from 'vue';
 import 'material-design-lite/material.min.js';
 import 'webview-tile-header/WebViewTileHeader.js';
@@ -118,6 +120,9 @@ const tile = new Vue({
 window.tile = tile;
 
 router.on({
+    'instruction': function() {
+        showPage('instruction-screen');
+    },
     'settings': function() {
         showPage('settings-screen');
     },
@@ -130,6 +135,10 @@ router.on({
 }).resolve();
 
 document.addEventListener('DOMContentLoaded', () => {
+    const instructionSwiper = new Swiper('.swiper-container', {
+        direction: 'horizontal'
+    });
+
     /* Revealing UI */
     document.getElementById('wrapper').style.opacity = 1;
 

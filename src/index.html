@@ -12,6 +12,20 @@
     <div id="wrapper" class="wrapper" style="opacity: 0;">
       
       <div id="main-screen" class="main-screen mdl-layout mdl-js-layout">
+          <div class="tile-screen instruction-screen hidden">
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">Ambient mode Slide</div>
+                    <div class="swiper-slide">Object mode Slide</div>
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+            <div class="button-container">
+              <a class="action-button" href="#">Okay</button>
+              <a class="action-button action-button--link" id="instruction-dont-show-again-button">Don't Show Again</button>
+            </div>
+          </div>
+
           <div class="tile-screen result-screen hidden" id="result-screen">
             <div class="result-screen__content">
                 <div class="result-screen__left-side">
@@ -81,7 +95,6 @@
               <!-- <button class="button-history hidden" id="button-history">Save To History</button> -->
             </div>
           </div>
-          <!-- <div id="snackbar">Saved</div> -->
       </div>
   </body>
 </html>

@@ -20,8 +20,12 @@
     "vendor/**/"
   ],
   "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.4",
+    "babel-preset-env": "^1.6.1",
     "bourbon": "^4.3.4",
     "css-loader": "^0.28.11",
+    "dom7": "^2.0.3",
     "file-loader": "^1.1.11",
     "html-webpack-plugin": "^3.0.6",
     "material-design-lite": "^1.3.0",
@@ -31,6 +35,7 @@
     "reset-css": "^3.0.0",
     "sass-loader": "^6.0.7",
     "style-loader": "^0.20.3",
+    "swiper": "^4.2.0",
     "vue": "^2.5.16",
     "webpack": "^4.1.1",
     "webpack-cli": "^2.0.12",

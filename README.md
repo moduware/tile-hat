@@ -18,3 +18,10 @@ As result you will get tile.zip file in root directory containing latest tile pa
 [Live Preview][preview]
 
 [preview]: https://material.io/resizer/#device=handset&url=https%3A%2F%2Fnexpaq.github.io%2Ftile-hat%2F&width=360
+
+## TODO:
+- Instruction screen
+- Animate screens
+- Location in snapshot (dep: App webview location support)
+- Saving screenshot to timeline (dep: App timeline api)
+- [ Snapshots graph? ]
