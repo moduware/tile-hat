@@ -135,8 +135,12 @@ router.on({
 }).resolve();
 
 document.addEventListener('DOMContentLoaded', () => {
+    /* Configuring instruction slider */
     const instructionSwiper = new Swiper('.swiper-container', {
-        direction: 'horizontal'
+        direction: 'horizontal',
+        pagination: {
+            el: '.swiper-pagination'
+        }
     });
 
     /* Revealing UI */

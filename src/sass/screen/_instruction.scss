@@ -1,0 +1,37 @@
+.instruction-screen {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-sizing: border-box;
+
+    .button-container {
+        padding: 0 10px 10px;
+    }
+
+    .swiper-slide {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        font-size: 14px;
+        color: white;
+        padding: 0 10px 10px;
+        box-sizing: border-box;
+    }
+
+    .slide-image-container {
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        margin-bottom: 50px;
+        min-height: 150px;
+    }
+
+    .slide-image {
+        width: auto;
+    }
+
+    .slide-note {
+        min-height: 100px;
+    }
+}
