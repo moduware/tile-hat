@@ -3,5 +3,6 @@ const common = require('./webpack.common.js');
 
 module.exports = merge(common, {
   devtool: 'inline-source-map', // 'eval-cheap-module-source-map'
-  watch: true
+  watch: true,
+  mode: 'development'
 });

@@ -163,7 +163,7 @@ document.addEventListener('DOMContentLoaded', () => {
     /* Paging system */
     Nexpaq.Header.addButton({image: headerSettingsIcon}, () => router.navigate('settings'));//Pages.showSettingsPage());
     Nexpaq.Header.addEventListener('BackButtonClicked', () => {
-        if(document.location.hash == '') {
+        if(document.location.hash == '' || document.location.hash == '#instruction') {
             Nexpaq.API.Exit();
         } else {
             history.back();
