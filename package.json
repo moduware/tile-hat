@@ -31,7 +31,8 @@
     "webpack": "^4.1.1",
     "webpack-cli": "^2.0.12",
     "webpack-merge": "^4.1.2",
-    "webview-tile-header": "git+https://github.com/moduware/webview-tile-header.git"
+    "webview-tile-header": "git+https://github.com/moduware/webview-tile-header.git",
+    "zip-webpack-plugin": "^3.0.0"
   },
   "dependencies": {}
 }
