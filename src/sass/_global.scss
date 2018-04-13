@@ -11,6 +11,7 @@ img {
 }
 body {
 	font-family: $main-font;
+	min-height: initial;
 }
 button {
 	color: inherit;
@@ -38,10 +39,14 @@ button {
 	@extend .hidden;
 }
 #wrapper {
-	@extend .no-overflow;
-	@include position(fixed, 44px 0 null null);
+	overflow: hidden;
+	position: absolute;
 	width: 100%;
-	height: calc(100% - 44px);
+
+	body.platform-ios & {
+		top: 44px;
+		height: calc(100% - 44px)
+    }
 
 	body.platform-android & {
 		top: 55px;
@@ -49,7 +54,7 @@ button {
     }
 }
 .app-screen {
-	@extend .no-overflow;
+	overflow: hidden;
 }
 .app-screen:not(.active) {
 	@extend .hidden;
