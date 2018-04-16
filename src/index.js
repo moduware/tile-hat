@@ -81,6 +81,15 @@ const tile = new Vue({
 
             return temperature;
         },
+        temperatureUnitSelected: function () {
+            let temperatureUnit;
+            if (this.settings.units == TemperatureUnit.Celsius) {
+                temperatureUnit = 'C';
+            } else {
+                temperatureUnit = 'F';
+            }
+            return temperatureUnit;
+        },
         humidityOutput: function() {
             return this.sensorValues.humidity.toFixed(1);
         },
