@@ -105,7 +105,7 @@ const tile = new Vue({
             return this.settings.measureType == MeasureType.Object;
         },
         snapshotTimeOutput: function() {
-            return moment.unix(this.snapshotValues.timestamp).format('DD/MM/YYYY - h:mm a');;
+            return moment.unix(this.snapshotValues.timestamp).format('DD/MM/YYYY - h:mm a');
         },
         snapshotTemperatureOutput: function() {
             let temperature = this.snapshotValues.temperature;
@@ -113,7 +113,7 @@ const tile = new Vue({
             if(this.settings.units == TemperatureUnit.Fahrenheit) {
                 temperature = Utils.Celsius2Farenheit(temperature);
             }
-            return temperature;
+            return temperature.toFixed(1);
         },
         snapshotHumidityOutput: function() {
             return this.snapshotValues.humidity.toFixed(1);
