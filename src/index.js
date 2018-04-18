@@ -41,7 +41,8 @@ const tile = new Vue({
             humidity: 0,
             timestamp: 0
         },
-        settings: loadedSettings
+        settings: loadedSettings,
+        temperatureHistoryValues: []
     },
     methods: {
         changeMeasureType: function() {
@@ -49,6 +50,14 @@ const tile = new Vue({
         },
         disableInstruction: function() {
             this.settings.showInstruction = false;
+        },
+        saveTemperatureHistory: function() {
+            this.temperatureHistoryValues.push({ id: this.temperatureHistoryValues.length, temperatureValue: this.snapshotTemperatureOutput, timestamp: this.snapshotTimeOutput });
+            alert('Data saved!');
+        },
+        removeTodo: function (index) {
+            this.$delete(this.temperatureHistoryValues, index);
+            alert('Item removed!');
         }
     },
     watch: {
