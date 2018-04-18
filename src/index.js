@@ -27,6 +27,8 @@ const loadedSettings = Settings.Load(defaultSettings);
 
 const router = new Navigo(null, true, '#');
 
+const STORAGE_KEY = 'hat-history-storage';
+
 const tile = new Vue({
     el: '#wrapper',
     data: {
@@ -44,6 +46,9 @@ const tile = new Vue({
         settings: loadedSettings,
         temperatureHistoryValues: []
     },
+    created() {
+        this.temperatureHistoryValues = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+    },
     methods: {
         changeMeasureType: function() {
             this.settings.measureType = this.settings.measureType == MeasureType.Ambient ? MeasureType.Object : MeasureType.Ambient;
@@ -53,10 +58,12 @@ const tile = new Vue({
         },
         saveTemperatureHistory: function() {
             this.temperatureHistoryValues.push({ id: this.temperatureHistoryValues.length, temperatureValue: this.snapshotTemperatureOutput, timestamp: this.snapshotTimeOutput });
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(this.temperatureHistoryValues));
             alert('Data saved!');
         },
         removeTodo: function (index) {
             this.$delete(this.temperatureHistoryValues, index);
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(this.temperatureHistoryValues));
             alert('Item removed!');
         }
     },
