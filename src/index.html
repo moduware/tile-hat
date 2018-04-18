@@ -143,10 +143,20 @@
               </table>
               <div class="snapshot-item__daytime" id="snapshotDayAndTime">{{ snapshotTimeOutput }}</div>
               <!-- <div class="snapshot-item__location" id="snapshotDayAndTime">One Kowloon, 1 Wang Yuen Street, Kowloon Bay, Hong Kong</div> -->
+              <ul class="temperature-list">
+                <li v-for="(temperatureHistoryValue, index) in temperatureHistoryValues"
+                  class="temperature-history-value">
+                  <div class="view">
+                    <span class="snapshot-item__daytime" >{{ temperatureHistoryValue.temperatureValue }}</span>
+                    <span class="snapshot-item__daytime" >{{ temperatureHistoryValue.timestamp }}</span>
+                    <button class="nxp-btn-back destroy" style="border-radius: 50%; border: 1px solid red; height: 20px; width: 20px;" v-on:click="removeTodo(index)"></button>
+                  </div>
+                </li>
+              </ul>
             </div>
             <div class="button-container" id="snapshot-buttons-container">
               <button class="action-button" id="snapshot-button-cancel">Cancel</button>
-              <!-- <button class="button-history hidden" id="button-history">Save To History</button> -->
+              <button class="button-history action-button" style="background: rgb(149, 205, 238)" id="button-history" @click="saveTemperatureHistory()">Save To History</button>
             </div>
           </div>
       </div>
