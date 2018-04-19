@@ -157,7 +157,31 @@
             <div class="button-container" id="snapshot-buttons-container">
               <button class="action-button" id="snapshot-button-cancel">Cancel</button>
               <button class="button-history action-button" style="background: rgb(149, 205, 238)" id="button-history" @click="saveTemperatureHistory()">Save To History</button>
+              <a href="#history" class="action-button action-button--primary" id="history-snapshot">Go To History</a>
             </div>
+          </div>
+
+
+          <!-- history page -->
+          <div class="tile-screen history-screen hidden" id="snapshot-screen">
+            <div class="snapshot-item" id="snapshot-item">
+              
+              <ul class="temperature-list">
+                <li v-for="(temperatureHistoryValue, index) in temperatureHistoryValues" class="temperature-history-value" style="border: 1px 0px; border-bottom: 1px solid rgb(226, 213, 213);">
+                  <table class="snapshot-item__values view">
+                    <tr class="snapshot-item__line">
+                      <td class="snapshot-item__field-title" id="snapshot-temperature-title">
+                        <span>Ambient Temperature</span>
+                      </td>
+                      <td class="snapshot-item__field-value snapshot-item__field-value--temperature">{{ temperatureHistoryValue.temperatureValue }}</td>
+                    </tr>
+                  </table>
+                  <div class="snapshot-item__daytime" id="snapshotDayAndTime">{{ temperatureHistoryValue.timestamp }}</div>
+                  <button class="nxp-btn-back destroy" style="border-radius: 5px; background: red; color: white; padding: 3px;" v-on:click="removeTodo(index)">Delete</button>
+                </li>
+              </ul>
+            </div>
+            
           </div>
       </div>
   </body>

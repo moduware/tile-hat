@@ -163,6 +163,9 @@ router.on({
     'snapshot': function() {
         showPage('snapshot-screen')
     },
+    'history': function () {
+        showPage('history-screen')
+    },
     '*': function() {
         showPage('result-screen');
     }
