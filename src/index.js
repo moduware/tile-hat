@@ -8,7 +8,7 @@ import moment from 'moment';
 import Swiper from 'swiper';
 import Vue from 'vue';
 import 'material-design-lite/material.min.js';
-import 'webview-tile-header/WebViewTileHeader.js';
+import WebViewTileHeader from 'webview-tile-header/WebViewTileHeader.js';
 
 import headerSettingsIcon from './img/icon-settings.svg';
 
@@ -16,6 +16,9 @@ import Settings from './lib/Settings';
 import * as Utils from './lib/Utils';
 import TemperatureUnit from './enums/TemperatureUnit';
 import MeasureType from './enums/MeasureType';
+
+// import '../bower_components/morph-element/morph-element.html';  
+import '../bower_components/morph-tabbar/morph-tabbar.html';  
 
 Settings.setPrefix('hat_tile_v1_');
 const defaultSettings = {
@@ -172,7 +175,7 @@ router.on({
     }
 }).resolve();
 
-document.addEventListener('DOMContentLoaded', () => {
+// document.addEventListener('DOMContentLoaded', () => {
     /* Configuring instruction slider */
     const instructionSwiper = new Swiper('.swiper-container', {
         direction: 'horizontal',
@@ -184,14 +187,15 @@ document.addEventListener('DOMContentLoaded', () => {
     /* Revealing UI */
     document.getElementById('wrapper').style.opacity = 1;
 
+    WebViewTileHeader._detectCurrentPlatform();
     /* Header configuration */
-    Nexpaq.Header.create('Temperature');
-    Nexpaq.Header.customize({color: 'white', iconColor:'white', backgroundColor:'#FFB931', borderBottom:'none'});
-    Nexpaq.Header.hideShadow();
+    WebViewTileHeader.create('Temperature');
+    WebViewTileHeader.customize({color: 'white', iconColor:'white', backgroundColor:'#FFB931', borderBottom:'none'});
+    WebViewTileHeader.hideShadow();
 
     /* Paging system */
-    Nexpaq.Header.addButton({image: headerSettingsIcon}, () => router.navigate('settings'));//Pages.showSettingsPage());
-    Nexpaq.Header.addEventListener('BackButtonClicked', () => {
+    WebViewTileHeader.addButton({image: headerSettingsIcon}, () => router.navigate('settings'));//Pages.showSettingsPage());
+    WebViewTileHeader.addEventListener('BackButtonClicked', () => {
         if(document.location.hash == '' || document.location.hash == '#instruction') {
             Nexpaq.API.Exit();
         } else {
@@ -200,7 +204,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     document.getElementById('button-snapshot').addEventListener('click', () => createSnapshot());
     document.getElementById('snapshot-button-cancel').addEventListener('click', snapshotButtonCancelClickHandler);
-});
+// });
 
 document.addEventListener('NexpaqAPIReady', () => {
     Nexpaq.API.Module.SendCommand(Nexpaq.Arguments[0], 'StartSensor', []);

@@ -46,12 +46,12 @@ button {
 	body.platform-ios & {
 		top: 44px;
 		height: calc(100% - 44px)
-    }
+	}
 
 	body.platform-android & {
 		top: 55px;
 		height: calc(100% - 55px)
-    }
+	}
 }
 .app-screen {
 	overflow: hidden;

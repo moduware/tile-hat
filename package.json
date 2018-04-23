@@ -23,6 +23,7 @@
     "moment": "^2.21.0",
     "navigo": "^7.1.1",
     "node-sass": "^4.8.2",
+    "polymer-webpack-loader": "^2.0.2",
     "reset-css": "^3.0.0",
     "sass-loader": "^6.0.7",
     "style-loader": "^0.20.3",

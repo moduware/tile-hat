@@ -9,12 +9,28 @@ module.exports = {
     path: path.resolve(__dirname, './dist')
   },
   resolve: {
+    modules: [
+      path.resolve(__dirname, 'node_modules'),
+      path.resolve(__dirname, 'bower_components')
+    ],
     alias: {
       'vue$': 'vue/dist/vue.esm.js' // 'vue/dist/vue.common.js' for webpack 1
     }
   },
   module: {
     rules: [
+      {
+        // If you see a file that ends in .html, send it to these loaders.
+        test: /\.html$/,
+        // This is an example of chained loaders in Webpack.
+        // Chained loaders run last to first. So it will run
+        // polymer-webpack-loader, and hand the output to
+        // babel-loader. This let's us transpile JS in our `<script>` elements.
+        use: [
+          { loader: 'babel-loader' },
+          { loader: 'polymer-webpack-loader' }
+        ]
+      },
       {
         test: /\.scss$/,
         use: [{
@@ -66,11 +82,20 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       title: 'Temperature',
-      template: './src/index.html'
+      template: './src/index.ejs',
+      inject: false
     }),
     new CopyWebpackPlugin([
       { from: 'manifest.json', to: 'manifest.json' },
-      { from: 'icon.svg', to: 'icon.svg' }
+      { from: 'icon.svg', to: 'icon.svg' },
+      { 
+        from: 'bower_components/webcomponentsjs/custom-elements-es5-adapter.js', 
+        to: 'bower_components/webcomponentsjs/custom-elements-es5-adapter.js'
+      },
+      { 
+        from: 'bower_components/webcomponentsjs/webcomponents-loader.js', 
+        to: 'bower_components/webcomponentsjs/webcomponents-loader.js'
+      }
     ], {})
   ]
 };
