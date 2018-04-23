@@ -10,7 +10,11 @@
   </head>
   <body>
     <div id="wrapper" class="wrapper" style="opacity: 0;">
-      
+      <morph-tabbar selected="play" style="--android-background-color: transparent; background: transparent;">
+        <morph-tabbar-item name="play" has-label>Play</morph-tabbar-item>
+        <morph-tabbar-item name="favorite" has-label>Favorite</morph-tabbar-item>
+        <morph-tabbar-item name="mic" has-label>Mic</morph-tabbar-item>
+      </morph-tabbar>
       <div id="main-screen" class="main-screen mdl-layout mdl-js-layout">
           <div class="tile-screen instruction-screen hidden">
             <div class="swiper-container">

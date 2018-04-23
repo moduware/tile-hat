@@ -17,8 +17,8 @@ import * as Utils from './lib/Utils';
 import TemperatureUnit from './enums/TemperatureUnit';
 import MeasureType from './enums/MeasureType';
 
-// import '../bower_components/morph-element/morph-element.html';  
 import '../bower_components/morph-tabbar/morph-tabbar.html';  
+import '../bower_components/morph-tabbar-item/morph-tabbar-item.html';  
 
 Settings.setPrefix('hat_tile_v1_');
 const defaultSettings = {
