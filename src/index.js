@@ -165,10 +165,10 @@ router.on({
         showPage('settings-screen');
     },
     'snapshot': function() {
-        showPage('snapshot-screen')
+        showPage('snapshot-screen');
     },
     'history': function () {
-        showPage('history-screen')
+        showPage('history-screen');
     },
     '*': function() {
         showPage('result-screen');
