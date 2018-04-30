@@ -15,11 +15,10 @@
     "test",
     "tests"
   ],
-  "dependencies": {
-    "morph-tabbar": "https://github.com/moduware/morph-tabbar.git#master",
-    "morph-pages": "https://github.com/moduware/morph-pages.git#master"
-  },
+  "dependencies": { },
   "devDependencies": {
+    "morph-tabbar": "https://github.com/moduware/morph-tabbar.git#master",
+    "morph-pages": "https://github.com/moduware/morph-pages.git#master",
     "morph-tabbar-item": "https://github.com/moduware/morph-tabbar-item.git#master"
   }
 }
