@@ -180,6 +180,8 @@ if(tile.settings.showInstruction) {
 //     }
 // }).resolve();
 
+document.location.hash = 'instruction';
+
 // document.addEventListener('DOMContentLoaded', () => {
     /* Configuring instruction slider */
     const instructionSwiper = new Swiper('.swiper-container', {
