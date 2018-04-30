@@ -39,6 +39,8 @@ button {
 	@extend .hidden;
 }
 #wrapper {
+	display: flex;
+	flex-direction: column;
 	overflow: hidden;
 	position: absolute;
 	width: 100%;

@@ -3,7 +3,7 @@ import 'material-design-lite/material.min.css';
 import 'swiper/dist/css/swiper.min.css';
 import './sass/styles.scss';
 
-import Navigo from 'navigo';
+// import Navigo from 'navigo';
 import moment from 'moment';
 import Swiper from 'swiper';
 import Vue from 'vue';
@@ -20,6 +20,7 @@ import MeasureType from './enums/MeasureType';
 import '../bower_components/morph-tabbar/morph-tabbar.html'; 
 import '../bower_components/morph-tabbar-item/morph-tabbar-item.html';
 
+import '../bower_components/morph-pages/morph-location.html';
 import '../bower_components/morph-pages/morph-pages.html';
 
 Settings.setPrefix('hat_tile_v1_');
@@ -30,13 +31,15 @@ const defaultSettings = {
 };
 const loadedSettings = Settings.Load(defaultSettings);
 
-const router = new Navigo(null, true, '#');
+// const router = new Navigo(null, true, '#');
 
 const STORAGE_KEY = 'hat-history-storage';
 
 const tile = new Vue({
     el: '#wrapper',
     data: {
+        currentPage: 'instruction',
+        navigationDirection: 'forward',
         sensorValues: {
             ambientTemperature: 0,
             objectTemperature: 0,
@@ -159,23 +162,23 @@ if(tile.settings.showInstruction) {
     document.location.hash = 'instruction';
 }
 
-router.on({
-    'instruction': function() {
-        showPage('instruction-screen');
-    },
-    'settings': function() {
-        showPage('settings-screen');
-    },
-    'snapshot': function() {
-        showPage('snapshot-screen');
-    },
-    'history': function () {
-        showPage('history-screen');
-    },
-    '*': function() {
-        showPage('result-screen');
-    }
-}).resolve();
+// router.on({
+//     'instruction': function() {
+//         showPage('instruction-screen');
+//     },
+//     'settings': function() {
+//         showPage('settings-screen');
+//     },
+//     'snapshot': function() {
+//         showPage('snapshot-screen');
+//     },
+//     'history': function () {
+//         showPage('history-screen');
+//     },
+//     '*': function() {
+//         showPage('result-screen');
+//     }
+// }).resolve();
 
 // document.addEventListener('DOMContentLoaded', () => {
     /* Configuring instruction slider */
@@ -196,7 +199,7 @@ router.on({
     WebViewTileHeader.hideShadow();
 
     /* Paging system */
-    WebViewTileHeader.addButton({image: headerSettingsIcon}, () => router.navigate('settings'));//Pages.showSettingsPage());
+    WebViewTileHeader.addButton({image: headerSettingsIcon}, () => document.location.hash = 'settings');//Pages.showSettingsPage());
     WebViewTileHeader.addEventListener('BackButtonClicked', () => {
         if(document.location.hash == '' || document.location.hash == '#instruction') {
             Nexpaq.API.Exit();
@@ -224,12 +227,12 @@ document.addEventListener('NexpaqAPIReady', () => {
 
 });
 
-function showPage(name) {
-    const pages = Array.from(document.querySelectorAll('.tile-screen'));
-    pages.map(
-        page => page.classList.contains(name) ? page.classList.remove('hidden') : page.classList.add('hidden')
-    );
-}
+// function showPage(name) {
+//     const pages = Array.from(document.querySelectorAll('.tile-screen'));
+//     pages.map(
+//         page => page.classList.contains(name) ? page.classList.remove('hidden') : page.classList.add('hidden')
+//     );
+// }
 
 function snapshotButtonCancelClickHandler() {
     const containerElement = document.getElementById('snapshot-buttons-container');
@@ -239,7 +242,7 @@ function snapshotButtonCancelClickHandler() {
     const animationPromise2 = Utils.runCssAnimationByClass(snapshotItemElement, 'animation-disapear');
 
     Promise.all([animationPromise1, animationPromise2]).then(() => {
-        router.navigate('');
+        document.location.hash = 'result';
         setTimeout(() => {
             containerElement.classList.remove('animation-slidedown');
             snapshotItemElement.classList.remove('animation-disapear');

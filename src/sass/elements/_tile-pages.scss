@@ -1,0 +1,7 @@
+.tile-pages {
+  flex-grow: 1;
+}
+
+.tile-pages__page:not(.iron-selected) {
+  opacity: 0;
+}
