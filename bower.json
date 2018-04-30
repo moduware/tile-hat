@@ -16,7 +16,8 @@
     "tests"
   ],
   "dependencies": {
-    "morph-tabbar": "https://github.com/moduware/morph-tabbar.git#master"
+    "morph-tabbar": "https://github.com/moduware/morph-tabbar.git#master",
+    "morph-pages": "https://github.com/moduware/morph-pages.git#master"
   },
   "devDependencies": {
     "morph-tabbar-item": "https://github.com/moduware/morph-tabbar-item.git#master"

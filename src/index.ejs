@@ -70,7 +70,12 @@
               <a class="action-button action-button--link" href="#" @click="disableInstruction">Don't Show Again</a>
             </div>
           </div>
+          
 
+          <morph-pages selected="result" attr-for-selected="name">
+
+          </morph-pages>
+            
           <div class="tile-screen result-screen hidden" id="result-screen">
             <div class="result-screen__content">
                 <div class="result-screen__left-side">
@@ -93,9 +98,9 @@
                 </div>
             </div>
             
-            
             <a href="#snapshot" class="action-button action-button--primary" id="button-snapshot">Create Snapshot</a>
           </div>
+
 
           <div class="tile-screen settings-screen hidden" id="settings-screen">
             <div class="settings-container">
