@@ -199,7 +199,7 @@ if(tile.settings.showInstruction) {
     WebViewTileHeader.hideShadow();
 
     /* Paging system */
-    WebViewTileHeader.addButton({image: headerSettingsIcon}, () => document.location.hash = 'settings');//Pages.showSettingsPage());
+    // WebViewTileHeader.addButton({image: headerSettingsIcon}, () => document.location.hash = 'settings');//Pages.showSettingsPage());
     WebViewTileHeader.addEventListener('BackButtonClicked', () => {
         if(document.location.hash == '' || document.location.hash == '#instruction') {
             Nexpaq.API.Exit();

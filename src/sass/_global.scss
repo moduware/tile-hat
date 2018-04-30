@@ -21,10 +21,8 @@ button {
 	padding: 0;
 	background-color: transparent;
 }
-.hidden.hidden.hidden {
-	// display: none;
-	opacity: 0;
-	pointer-events: none;
+.hidden {
+	display: none;
 }
 .invisible {
 	visibility: hidden !important;
