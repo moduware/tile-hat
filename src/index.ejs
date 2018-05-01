@@ -90,8 +90,6 @@
                   <span class="temperature-numbers__humidity-value" id="humidity-value">{{ humidityOutput }}</span>
                 </div>
               </div>
-              
-              <!-- <button class="measure-type-button" :class="{ active: isMeasuringObject }" @click="changeMeasureType">Measure object</button> -->
             </div>
           </div>
           
@@ -133,7 +131,7 @@
 
         <div name="snapshot" class="tile-pages__page snapshot-screen">
           <div class="snapshot-item" id="snapshot-item">
-            <input type="text" id="spanshot-title" class="snapshot-item__title" placeholder="Add label" onfocus="this.placeholder=''" onblur="this.placeholder='Add Label'">
+            <input type="text" v-model="snapshotValues.textInput" id="snapshot-title" class="snapshot-item__title" placeholder="Add label" onfocus="this.placeholder=''" onblur="this.placeholder='Add Label'">
             
             <div class="snapshot-item__daytime" id="snapshotDayAndTime">{{ snapshotTimeOutput }}</div>
             
@@ -154,7 +152,7 @@
           </div>
           <div class="button-container" id="snapshot-buttons-container">
             <button class="action-button" id="snapshot-button-cancel">Cancel</button>
-            <a href="#history" class="action-button action-button--primary" id="history-snapshot">Save</a>
+            <a href="#history" class="action-button action-button--primary" id="history-snapshot" @click="saveTemperatureHistory()">Save</a>
           </div>
         </div> <!-- / page snapshot -->
 
@@ -171,7 +169,7 @@
                   </tr>
                 </table>
                 <div class="snapshot-item__daytime" id="snapshotDayAndTime">{{ temperatureHistoryValue.timestamp }}</div>
-                <button class="nxp-btn-back destroy" style="border-radius: 5px; background: red; color: white; padding: 3px;" v-on:click="removeTodo(index)">Delete</button>
+                <button class="nxp-btn-back destroy" style="border-radius: 5px; background: red; color: white; padding: 3px;" v-on:click="removeTemperatureHistoryItem(index)">Delete</button>
               </li>
             </ul>
           </div>
