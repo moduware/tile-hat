@@ -10,7 +10,7 @@
   </head>
   <body>
     <div id="wrapper" class="wrapper" style="opacity: 0;">
-      <morph-tabbar class="navigation-tabs" :selected="currentPage" @selected-changed="currentPage = $event.target.selected" :class="{ hidden: currentPage == 'instruction' }">
+      <morph-tabbar class="navigation-tabs" :selected="currentPage" @selected-changed="currentPage = $event.target.selected" :class="{ hidden: currentPage == 'instruction' || currentPage == 'snapshot'}">
         <morph-tabbar-item name="result" not-selected-image="../src/img/sensor-icon-not-active.svg" selected-image="../src/img/sensor-icon-active.svg"></morph-tabbar-item>
         <morph-tabbar-item name="history" not-selected-image="../src/img/timeline-icon-not-active.svg" selected-image="../src/img/timeline-icon-active.svg"></morph-tabbar-item>
         <!-- <morph-tabbar-item name="play2" not-selected-image="../src/img/map-icon-not-active.svg" selected-image="../src/img/map-icon-active.svg"></morph-tabbar-item> -->
@@ -95,7 +95,7 @@
             </div>
           </div>
           
-          <a href="#snapshot" class="action-button action-button--primary" id="button-snapshot">Create Snapshot</a>
+          <a href="#snapshot" class="action-button action-button--primary" id="button-snapshot">Save</a>
         </div> <!-- / page result -->
 
         <div name="settings" class="tile-pages__page settings-screen">
@@ -133,12 +133,15 @@
 
         <div name="snapshot" class="tile-pages__page snapshot-screen">
           <div class="snapshot-item" id="snapshot-item">
-            <input type="text" id="spanshot-title" class="snapshot-item__title" placeholder="Add Label" onfocus="this.placeholder=''" onblur="this.placeholder='Add Label'">
+            <input type="text" id="spanshot-title" class="snapshot-item__title" placeholder="Add label" onfocus="this.placeholder=''" onblur="this.placeholder='Add Label'">
+            
+            <div class="snapshot-item__daytime" id="snapshotDayAndTime">{{ snapshotTimeOutput }}</div>
+            
             <table class="snapshot-item__values">
               <tr class="snapshot-item__line">
                 <td class="snapshot-item__field-title" id="snapshot-temperature-title">
-                  <span v-if="snapshotValues.measureType == 'ambient'">Ambient Temperature</span>
-                  <span v-if="snapshotValues.measureType == 'object'">Object Temperature</span>
+                  <span v-if="snapshotValues.measureType == 'ambient'">Temperature</span>
+                  <span v-if="snapshotValues.measureType == 'object'">Temperature</span>
                 </td>
                 <td class="snapshot-item__field-value snapshot-item__field-value--temperature">{{ snapshotTemperatureOutput }}</td>
               </tr>
@@ -147,9 +150,8 @@
                 <td class="snapshot-item__field-value snapshot-item__field-value--humidity">{{ snapshotHumidityOutput }}</td>
               </tr>
             </table>
-            <div class="snapshot-item__daytime" id="snapshotDayAndTime">{{ snapshotTimeOutput }}</div>
             <!-- <div class="snapshot-item__location" id="snapshotDayAndTime">One Kowloon, 1 Wang Yuen Street, Kowloon Bay, Hong Kong</div> -->
-            <ul class="temperature-list">
+            <!-- <ul class="temperature-list">
               <li v-for="(temperatureHistoryValue, index) in temperatureHistoryValues"
                 class="temperature-history-value">
                 <div class="view">
@@ -158,12 +160,12 @@
                   <button class="nxp-btn-back destroy" style="border-radius: 50%; border: 1px solid red; height: 20px; width: 20px;" v-on:click="removeTodo(index)"></button>
                 </div>
               </li>
-            </ul>
+            </ul> -->
           </div>
           <div class="button-container" id="snapshot-buttons-container">
             <button class="action-button" id="snapshot-button-cancel">Cancel</button>
-            <button class="button-history action-button" style="background: rgb(149, 205, 238)" id="button-history" @click="saveTemperatureHistory()">Save To History</button>
-            <a href="#history" class="action-button action-button--primary" id="history-snapshot">Go To History</a>
+            <!-- <button class="button-history action-button" style="background: rgb(149, 205, 238)" id="button-history" @click="saveTemperatureHistory()">Save</button> -->
+            <a href="#history" class="action-button action-button--primary" id="history-snapshot">Save</a>
           </div>
         </div> <!-- / page snapshot -->
 
