@@ -68,14 +68,11 @@ const tile = new Vue({
       this.settings.showInstruction = false;
     },
     saveTemperatureHistory: function() {
-      console.log(this.snapshotValues.textInput);
-      // var input = document.getElementById("snapshot-title").value;
-      // alert(input);
       this.temperatureHistoryValues.push({
         id: this.temperatureHistoryValues.length,
         temperatureValue: this.snapshotTemperatureOutput,
         timestamp: this.snapshotTimeOutput,
-        label: snapshotValues.textInput,
+        label: this.snapshotValues.textInput.trim(),
         type: this.snapshotValues.measureType
         });
       localStorage.setItem(STORAGE_KEY, JSON.stringify(this.temperatureHistoryValues));
