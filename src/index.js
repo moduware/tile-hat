@@ -23,6 +23,11 @@ import '../bower_components/morph-tabbar-item/morph-tabbar-item.html';
 import '../bower_components/morph-pages/morph-location.html';
 import '../bower_components/morph-pages/morph-pages.html';
 
+import '../bower_components/morph-list-view/morph-list-view.html';
+import '../bower_components/morph-list-view-item/morph-list-view-item.html';
+import '../bower_components/morph-list-view-title/morph-list-view-title.html';
+
+
 Settings.setPrefix('hat_tile_v1_');
 const defaultSettings = {
   units: TemperatureUnit.Celsius,
@@ -71,17 +76,24 @@ const tile = new Vue({
       this.temperatureHistoryValues.push({
         id: this.temperatureHistoryValues.length,
         temperatureValue: this.snapshotTemperatureOutput,
-        timestamp: this.snapshotTimeOutput,
+        humidityValue: this.snapshotHumidityOutput,
+        time: this.snapshotTimeOutput,
+        date: this.snapshotDateOutput,
         label: this.snapshotValues.textInput.trim(),
         type: this.snapshotValues.measureType
-        });
+      });
+      this.snapshotValues.textInput = '';
       localStorage.setItem(STORAGE_KEY, JSON.stringify(this.temperatureHistoryValues));
-      alert('Data saved!');
     },
+
+    snapshotTimeObjectOutputFunction: function () {
+      // return moment(this.snapshotValues.timestamp).toObject();
+      let timestampObject = moment.unix(this.snapshotValues.timestamp);
+    },
+
     removeTemperatureHistoryItem: function (index) {
       this.$delete(this.temperatureHistoryValues, index);
       localStorage.setItem(STORAGE_KEY, JSON.stringify(this.temperatureHistoryValues));
-      alert('Item removed!');
     }
   },
   watch: {
@@ -147,7 +159,10 @@ const tile = new Vue({
       return this.settings.measureType == MeasureType.Object;
     },
     snapshotTimeOutput: function() {
-      return moment.unix(this.snapshotValues.timestamp).format('DD/MM/YYYY - h:mm a');
+      return moment.unix(this.snapshotValues.timestamp).format('h:mm A');
+    },
+    snapshotDateOutput: function () {
+      return moment.unix(this.snapshotValues.timestamp).format('DD/MM/YYYY');
     },
     snapshotTemperatureOutput: function() {
       let temperature = this.snapshotValues.temperature;
