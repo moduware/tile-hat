@@ -158,18 +158,18 @@
 
         <div name="history" class="tile-pages__page">
           <div class="" id="snapshot-item">
-            <span v-for="(temperatureHistoryValue, index) in temperatureHistoryValues" class="temperature-history-value">
-              <morph-list-view class="temperature-list" platform="android">
-                <morph-list-view-title platform="android">{{temperatureHistoryValue.date}}</morph-list-view-title>
+            <morph-list-view class="temperature-list">
+              <span v-for="(temperatureHistoryValue, index) in temperatureHistoryValues" class="temperature-history-value">
+                <morph-list-view-title>{{temperatureHistoryValue.date}}</morph-list-view-title>
 
-                <morph-list-view-item platform="android">
+                <morph-list-view-item>
                   <span slot="icon">
-                    <!-- <iron-icon icon="maps:directions-bus"></iron-icon> -->
                     <img src="../src/img/temperature-icon-ambient-square.svg" />
                   </span>
                    {{ temperatureHistoryValue.label }}
                   <span slot="footer">
                     <table class="snapshot-item__values view">
+
                       <tr class="snapshot-item__line">
                         <td class="snapshot-item__field-title" id="snapshot-temperature-title">
                           <span>Temperature</span>
@@ -182,10 +182,7 @@
                         </td>
                         <td class="snapshot-item__field-value snapshot-item__field-value--humidity">{{ temperatureHistoryValue.humidityValue }}</td>
                       </tr>
-                      <!-- <tr class="snapshot-item__line">
-                        <td class="snapshot-item__field-title">Humidity</td>
-                        <td class="snapshot-item__field-value snapshot-item__field-value--humidity">{{ snapshotHumidityOutput }}</td>
-                      </tr> -->
+
                     </table>
                   </span>
                   <span slot="secondary-content">
@@ -195,8 +192,8 @@
                 </morph-list-view-item>
 
                 
-              </morph-list-view>
-            </span>
+              </span>
+            </morph-list-view>
 
             <!-- <ul class="temperature-list">
               <li v-for="(temperatureHistoryValue, index) in temperatureHistoryValues" class="temperature-history-value" style="border: 1px 0px; border-bottom: 1px solid rgb(226, 213, 213);">
