@@ -39,6 +39,7 @@ const loadedSettings = Settings.Load(defaultSettings);
 // const router = new Navigo(null, true, '#');
 
 const STORAGE_KEY = 'hat-history-storage';
+// const HISTORY_LIST_STORAGE_KEY = 'hat-temperature-list-storage';
 
 const tile = new Vue({
   el: '#wrapper',
@@ -59,11 +60,13 @@ const tile = new Vue({
         textInput: '',
     },
     settings: loadedSettings,
-    temperatureHistoryValues: []
+    temperatureHistoryValues: [],
+    temperatureListData: []
   },
   created() {
     const json = localStorage.getItem(STORAGE_KEY);
     this.temperatureHistoryValues = json != null ? JSON.parse(json) : [];
+    this.temperatureListData = this.temperatureListDataOutput;
   },
   methods: {
     changeMeasureType: function() {
@@ -85,6 +88,10 @@ const tile = new Vue({
       this.snapshotValues.textInput = '';
       localStorage.setItem(STORAGE_KEY, JSON.stringify(this.temperatureHistoryValues));
     },
+
+    // saveTemperatureListData: function() {
+    //   localStorage.setItem(HISTORY_LIST_STORAGE_KEY, JSON.stringify(this.temperatureListDataOutput));
+    // },
 
     snapshotTimeObjectOutputFunction: function () {
       // return moment(this.snapshotValues.timestamp).toObject();
@@ -174,7 +181,27 @@ const tile = new Vue({
     },
     snapshotHumidityOutput: function() {
       return this.snapshotValues.humidity.toFixed(1);
-    }
+    },
+
+    // make the data arrange by common date
+    temperatureListDataOutput: function() {
+      const dateGroups = this.temperatureHistoryValues.reduce((dateGroups, events) => {
+        const date = events.date;
+        if (!dateGroups[date]) {
+          dateGroups[date] = [];
+        }
+        dateGroups[date].push(events);
+        return dateGroups;
+      }, {});
+      /// To add it in the array format
+      const groupArrays = Object.keys(dateGroups).map((date) => {
+        return {
+          date,
+          events: dateGroups[date]
+        };
+      });
+      return groupArrays;
+    }    
   },
 });
 
