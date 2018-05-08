@@ -158,8 +158,8 @@
 
         <div name="history" class="tile-pages__page">
           <div class="" id="snapshot-item">
-            <morph-list-view class="temperature-list">
-              <span v-for="(temperatureHistoryValue, index) in temperatureHistoryValues" class="temperature-history-value">
+            <morph-list-view class="temperature-list" v-for="(temperatureHistoryValue, index) in temperatureHistoryValues">
+              <!-- <span v-for="(temperatureHistoryValue, index) in temperatureHistoryValues" class="temperature-history-value"> -->
                 <morph-list-view-title>{{temperatureHistoryValue.date}}</morph-list-view-title>
 
                 <morph-list-view-item>
@@ -192,7 +192,7 @@
                 </morph-list-view-item>
 
                 
-              </span>
+              <!-- </span> --> <!-- span temperature-history-value -->
             </morph-list-view>
 
             <!-- <ul class="temperature-list">
