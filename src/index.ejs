@@ -156,17 +156,18 @@
           </div>
         </div> <!-- / page snapshot -->
 
-        <div name="history" class="tile-pages__page">
+        <div name="history" class="tile-pages__page history-screen">
           <div class="" id="snapshot-item">
-            <morph-list-view class="temperature-list" v-for="(temperatureHistoryValue, index) in temperatureHistoryValues">
+            <morph-list-view class="temperature-list" v-for="(temperatureListDataValue, index) in temperatureListDataValues" v-bind:key="temperatureListDataValue.date">
               <!-- <span v-for="(temperatureHistoryValue, index) in temperatureHistoryValues" class="temperature-history-value"> -->
-                <morph-list-view-title>{{temperatureHistoryValue.date}}</morph-list-view-title>
+                <morph-list-view-title>{{temperatureListDataValue.date}}</morph-list-view-title>
 
-                <morph-list-view-item>
-                  <span slot="icon">
+                <morph-list-view-item v-for="event in temperatureListDataValue.events" v-bind:key="event.time">
+                  <span class="icon-container" slot="icon">
                     <img src="../src/img/temperature-icon-ambient-square.svg" />
                   </span>
-                   {{ temperatureHistoryValue.label }}
+                   {{ event.label }}
+
                   <span slot="footer">
                     <table class="snapshot-item__values view">
 
@@ -174,21 +175,24 @@
                         <td class="snapshot-item__field-title" id="snapshot-temperature-title">
                           <span>Temperature</span>
                         </td>
-                        <td class="snapshot-item__field-value snapshot-item__field-value--temperature">{{ temperatureHistoryValue.temperatureValue }}</td>
+                        <td class="snapshot-item__field-value snapshot-item__field-value--temperature">{{ event.temperatureValue }}</td>
                       </tr>
+
                       <tr class="snapshot-item__line">
                         <td class="snapshot-item__field-title" id="snapshot-humidity-title">
                           <span>Humidity</span>
                         </td>
-                        <td class="snapshot-item__field-value snapshot-item__field-value--humidity">{{ temperatureHistoryValue.humidityValue }}</td>
+                        <td class="snapshot-item__field-value snapshot-item__field-value--humidity">{{ event.humidityValue }}</td>
                       </tr>
 
                     </table>
                   </span>
+
                   <span slot="secondary-content">
-                    {{ temperatureHistoryValue.time }}<br>
-                    <button class="nxp-btn-back destroy" style="border-radius: 5px; background: red; color: white; padding: 3px;" v-on:click="removeTemperatureHistoryItem(index)">Delete</button>
+                    {{ event.time }}<br>
+                    <!-- <button class="nxp-btn-back destroy" style="border-radius: 5px; background: red; color: white; padding: 3px;" v-on:click="removeTemperatureHistoryItem(index)">Delete</button> -->
                   </span>
+
                 </morph-list-view-item>
 
                 
