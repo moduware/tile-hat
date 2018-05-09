@@ -61,12 +61,12 @@ const tile = new Vue({
     },
     settings: loadedSettings,
     temperatureHistoryValues: [],
-    temperatureListData: []
+    temperatureListDataValues: []
   },
   created() {
     const json = localStorage.getItem(STORAGE_KEY);
     this.temperatureHistoryValues = json != null ? JSON.parse(json) : [];
-    this.temperatureListData = this.temperatureListDataOutput;
+    this.temperatureListDataValues = this.temperatureListDataOutput;
   },
   methods: {
     changeMeasureType: function() {
