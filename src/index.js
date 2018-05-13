@@ -185,19 +185,19 @@ const tile = new Vue({
 
     // make the data arrange by common date
     temperatureListDataOutput: function() {
-      const dateGroups = this.temperatureHistoryValues.reduce((dateGroups, events) => {
-        const date = events.date;
+      const dateGroups = this.temperatureHistoryValues.reduce((dateGroups, items) => {
+        const date = items.date;
         if (!dateGroups[date]) {
           dateGroups[date] = [];
         }
-        dateGroups[date].push(events);
+        dateGroups[date].push(items);
         return dateGroups;
       }, {});
       /// To add it in the array format
       const groupArrays = Object.keys(dateGroups).map((date) => {
         return {
           date,
-          events: dateGroups[date]
+          items: dateGroups[date]
         };
       });
       return groupArrays;
