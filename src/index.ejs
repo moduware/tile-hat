@@ -162,11 +162,11 @@
               <!-- <span v-for="(temperatureHistoryValue, index) in temperatureHistoryValues" class="temperature-history-value"> -->
                 <morph-list-view-title>{{temperatureListDataValue.date}}</morph-list-view-title>
 
-                <morph-list-view-item v-for="event in temperatureListDataValue.events" v-bind:key="event.time">
+                <morph-list-view-item v-for="item in temperatureListDataValue.items" v-bind:key="item.time">
                   <span class="icon-container" slot="icon">
                     <img src="../src/img/temperature-icon-ambient-square.svg" />
                   </span>
-                   {{ event.label }}
+                   {{ item.label }}
 
                   <span slot="footer">
                     <table class="snapshot-item__values view">
@@ -175,21 +175,21 @@
                         <td class="snapshot-item__field-title" id="snapshot-temperature-title">
                           <span>Temperature</span>
                         </td>
-                        <td class="snapshot-item__field-value snapshot-item__field-value--temperature">{{ event.temperatureValue }}</td>
+                        <td class="snapshot-item__field-value snapshot-item__field-value--temperature">{{ item.temperatureValue }}</td>
                       </tr>
 
                       <tr class="snapshot-item__line">
                         <td class="snapshot-item__field-title" id="snapshot-humidity-title">
                           <span>Humidity</span>
                         </td>
-                        <td class="snapshot-item__field-value snapshot-item__field-value--humidity">{{ event.humidityValue }}</td>
+                        <td class="snapshot-item__field-value snapshot-item__field-value--humidity">{{ item.humidityValue }}</td>
                       </tr>
 
                     </table>
                   </span>
 
                   <span slot="secondary-content">
-                    {{ event.time }}<br>
+                    {{ item.time }}<br>
                     <!-- <button class="nxp-btn-back destroy" style="border-radius: 5px; background: red; color: white; padding: 3px;" v-on:click="removeTemperatureHistoryItem(index)">Delete</button> -->
                   </span>
 
