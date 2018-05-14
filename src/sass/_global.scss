@@ -2,10 +2,6 @@
 	outline: none;
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
 }
-svg {
-	width: 100%;
-	height: auto;
-}
 img {
 	max-width: 100%;
 }
@@ -31,7 +27,7 @@ button {
 	overflow: hidden;
 }
 .unselectable {
-  @include user-select(none);
+	user-select: none;
 }
 #templates {
 	@extend .hidden;
