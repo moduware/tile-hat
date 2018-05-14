@@ -18,7 +18,7 @@
       </morph-tabbar>
 
       <morph-location :hash="currentPage" @hash-changed="currentPage = $event.target.hash" :last-navigation-direction="navigationDirection" @last-navigation-direction-changed="navigationDirection = $event.target.lastNavigationDirection"></morph-location>
-      <morph-pages class="tile-pages" :selected="currentPage" @selected-changed="currentPage = $event.target.selected" :page-change-animation-direction="navigationDirection" attr-for-selected="name" platform="ios" fallback-selection="instruction">
+      <morph-pages class="tile-pages" :selected="currentPage" @selected-changed="currentPage = $event.target.selected" :page-change-animation-direction="navigationDirection" attr-for-selected="name" fallback-selection="instruction">
         <div name="instruction" class="tile-pages__page instruction-screen">
           <div class="swiper-container">
             <div class="swiper-wrapper">
@@ -162,34 +162,52 @@
               <!-- <span v-for="(temperatureHistoryValue, index) in temperatureHistoryValues" class="temperature-history-value"> -->
                 <morph-list-view-title>{{temperatureListDataValue.date}}</morph-list-view-title>
 
-                <morph-list-view-item v-for="item in temperatureListDataValue.items" v-bind:key="item.time">
-                  <span class="icon-container" slot="icon">
+                <morph-list-view-item class="temperature-list-item" v-for="item in temperatureListDataValue.items" v-bind:key="item.time">
+                  <span class="temperature-list-item__icon-container" slot="icon">
                     <img src="../src/img/temperature-icon-ambient-square.svg" />
+                    <br>
+                    <svg width="14px" height="20px" viewBox="0 0 14 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                      <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <g transform="translate(-28.000000, -105.000000)" fill="#929292">
+                          <g transform="translate(23.000000, 103.000000)">
+                            <path d="M5,9 C5,14.25 11.3540039,21.2501831 11.3540039,21.2501831 C11.7107777,21.6642955 12.3007812,21.6567383 12.658543,21.2351991 C12.658543,21.2351991 19,14.25 19,9 C19,5.13 15.87,2 12,2 C8.13,2 5,5.13 5,9 Z M12,11.5 C10.62,11.5 9.5,10.38 9.5,9 C9.5,7.62 10.62,6.5 12,6.5 C13.38,6.5 14.5,7.62 14.5,9 C14.5,10.38 13.38,11.5 12,11.5 L12,11.5 Z"></path>
+                          </g>
+                        </g>
+                      </g>
+                    </svg>
                   </span>
-                   {{ item.label }}
-
-                  <span slot="footer">
-                    <table class="snapshot-item__values view">
-
-                      <tr class="snapshot-item__line">
-                        <td class="snapshot-item__field-title" id="snapshot-temperature-title">
-                          <span>Temperature:</span> <span class="snapshot-item__field-value snapshot-item__field-value--temperature">{{ item.temperatureValue }}</span>
-                        </td>
-                        <!-- <td class="snapshot-item__field-value snapshot-item__field-value--temperature">{{ item.temperatureValue }}</td> -->
-                      </tr>
-
-                      <tr class="snapshot-item__line">
-                        <td class="snapshot-item__field-title" id="snapshot-humidity-title">
-                          <span>Humidity:</span> <span class="snapshot-item__field-value snapshot-item__field-value--humidity">{{ item.humidityValue }}</span>
-                        </td>
-                        <!-- <td class="snapshot-item__field-value snapshot-item__field-value--humidity">{{ item.humidityValue }}</td> -->
-                      </tr>
-
-                    </table>
+                  <span slot="header" class="temperature-list-item__title">{{ item.label }}</span>
+                  
+                  <span class="temperature-list-item__content">
+                    Temperature:
+                    <span class="temperature-list-item__value temperature-list-item__value--temperature">{{ item.temperatureValue }}</span>
+                    
+                    <br>
+  
+                    Humidity:
+                    <span class="temperature-list-item__value temperature-list-item__value--humidity">{{ item.humidityValue }}</span>
                   </span>
 
-                  <span slot="secondary-content">
-                    {{ item.time }}<br>
+                  <span slot="footer" class="temperature-list-item__address">
+                    One Kowloon, 1 Wang Yuen Street, Kowloon Bay, Hong Kong
+                  </span>
+
+                      <!-- <tr class="temperature-list-item__line"> -->
+                        <!-- <td class="temperature-list-item__field"> -->
+                        <!-- </td> -->
+                      <!-- </tr> -->
+
+                      <!-- <tr class="temperature-list-item__line">
+                        <td class="temperature-list-item__field">
+                        </td>
+                      </tr> -->
+
+                  <!-- </span> -->
+
+                  <span slot="secondary-content" class="temperature-list-item__time">
+                    
+                    {{ item.time }}
+                    
                     <!-- <button class="nxp-btn-back destroy" style="border-radius: 5px; background: red; color: white; padding: 3px;" v-on:click="removeTemperatureHistoryItem(index)">Delete</button> -->
                   </span>
 

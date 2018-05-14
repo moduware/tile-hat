@@ -44,7 +44,7 @@ const STORAGE_KEY = 'hat-history-storage';
 const tile = new Vue({
   el: '#wrapper',
   data: {
-    currentPage: 'instruction',
+    currentPage: 'history',
     navigationDirection: 'forward',
     
     sensorValues: {
@@ -209,7 +209,7 @@ window.tile = tile;
 
 // Showing module instruction to user by default
 if(tile.settings.showInstruction) {
-  document.location.hash = 'instruction';
+  // document.location.hash = 'instruction';
 }
 
 // router.on({
