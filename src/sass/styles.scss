@@ -1,4 +1,4 @@
-@import '~bourbon/app/assets/stylesheets/_bourbon.scss';
+// @import '~bourbon/app/assets/stylesheets/_bourbon.scss';
 @import 'variables';
 @import 'global';
 @import 'fonts';
@@ -14,6 +14,7 @@
 @import 'elements/temperature-numbers';
 @import 'elements/swiper';
 @import 'elements/navigation-tabs';
+@import 'elements/temperature-list-item';
 
 
 // SCREENS

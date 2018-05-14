@@ -1,0 +1,56 @@
+.temperature-list-item {
+  font-family: Roboto;
+  color: #535353;
+}
+
+.temperature-list-item__title:empty::after {
+  content: 'Unlabeled';
+}
+
+.temperature-list-item__title {
+  margin-bottom: 5px;
+}
+
+.temperature-list-item__value,
+.temperature-list-item__title {
+  font-weight: bold;
+  color: black;
+}
+.temperature-list-item__content {
+  line-height: 1.5em;
+}
+
+.temperature-list-item__value--temperature::after {
+  content: '°';
+}
+
+.temperature-list-item__value--humidity::after {
+  content: '%';
+}
+
+.temperature-list-item__time,
+.temperature-list-item__address {
+  color: #929292;
+  font-size: 14px;
+  font-weight: 300;
+}
+
+.temperature-list-item__address {
+  margin-top: 8px;
+  text-overflow: initial;
+  white-space: initial;
+}
+
+.temperature-list-item__time {
+  margin-bottom: auto;
+  margin-top: 8px;
+  margin-right: 17px;
+}
+
+.temperature-list-item__icon-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: auto;
+  margin-right: 25px;
+}
