@@ -70,23 +70,21 @@ const tile = new Vue({
 
   filters: {
     capitalize: function (value) {
-      if (!value) return ''
-      value = value.toString()
-      return value.charAt(0).toUpperCase() + value.slice(1)
+      if (!value) return '';
+      value = value.toString();
+      return value.charAt(0).toUpperCase() + value.slice(1);
     },
     // Format date to show Today or Tomorrow
     dateFormat: function (date) {
-      var otherDates = moment(date).fromNow();
+      let jsDate = new Date(date);
+      let otherDates = moment(jsDate).fromNow();
       var callback = function () {
         return "[" + otherDates + "]";
       };
 
-      return moment(date).calendar(null, {
+      return moment(jsDate).calendar(null, {
         sameDay: '[Today]',
-        // nextDay : callback,
-        // nextWeek: callback,
         lastDay: '[Yesterday]',
-        // lastWeek: callback,
         sameElse: 'DD/MM/YYYY'
       });
     }
@@ -210,8 +208,8 @@ const tile = new Vue({
       return moment.unix(this.snapshotValues.timestamp).format('h:mm A');
     },
     snapshotDateOutput: function () {
-      return moment.unix(this.snapshotValues.timestamp).format('DD/MM/YYYY');
-      // return this.snapshotValues.timestamp;
+      // return moment.unix(this.snapshotValues.timestamp).format('DD/MM/YYYY');
+      return this.snapshotValues.timestamp;
 
     },
     snapshotTemperatureOutput: function() {
@@ -332,5 +330,5 @@ function createSnapshot() {
   } else {
     tile.snapshotValues.temperature = tile.sensorValues.objectTemperature;
   }
-  tile.snapshotValues.timestamp = moment().unix();
+  tile.snapshotValues.timestamp = moment();
 }
