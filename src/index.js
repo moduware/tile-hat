@@ -36,10 +36,7 @@ const defaultSettings = {
 };
 const loadedSettings = Settings.Load(defaultSettings);
 
-// const router = new Navigo(null, true, '#');
-
 const STORAGE_KEY = 'hat-history-storage';
-// const HISTORY_LIST_STORAGE_KEY = 'hat-temperature-list-storage';
 
 const tile = new Vue({
   el: '#wrapper',
@@ -67,8 +64,53 @@ const tile = new Vue({
     const json = localStorage.getItem(STORAGE_KEY);
     this.temperatureHistoryValues = json != null ? JSON.parse(json) : [];
     this.temperatureListDataValues = this.temperatureListDataOutput;
+    // var today = new Date();
+    // var yesterday = today.setDate(today.getDate() - 1);
   },
+
+  filters: {
+    capitalize: function (value) {
+      if (!value) return ''
+      value = value.toString()
+      return value.charAt(0).toUpperCase() + value.slice(1)
+    },
+    // Format date to show Today or Tomorrow
+    dateFormat: function (date) {
+      var otherDates = moment(date).fromNow();
+      var callback = function () {
+        return "[" + otherDates + "]";
+      };
+
+      return moment(date).calendar(null, {
+        sameDay: '[Today]',
+        // nextDay : callback,
+        // nextWeek: callback,
+        lastDay: '[Yesterday]',
+        // lastWeek: callback,
+        sameElse: 'DD/MM/YYYY'
+      });
+    }
+    
+  },
+
   methods: {
+    // // Format date to show Today or Tomorrow
+    // dateFormat: function (date) {
+    //   var otherDates = moment(date).fromNow();
+    //   var callback = function () {
+    //     return "[" + otherDates + "]";
+    //   };
+
+    //   return moment(date).calendar(null, {
+    //     sameDay: '[Today]',
+    //     // nextDay : callback,
+    //     // nextWeek: callback,
+    //     lastDay: '[Yesterday]',
+    //     // lastWeek: callback,
+    //     sameElse: 'DD/MM/YYYY'
+    //   });
+    // },
+
     changeMeasureType: function() {
       this.settings.measureType = this.settings.measureType == MeasureType.Ambient ? MeasureType.Object : MeasureType.Ambient;
     },
@@ -86,20 +128,18 @@ const tile = new Vue({
         type: this.snapshotValues.measureType
       });
       this.snapshotValues.textInput = '';
+      this.temperatureListDataValues = this.temperatureListDataOutput;
       localStorage.setItem(STORAGE_KEY, JSON.stringify(this.temperatureHistoryValues));
     },
-
-    // saveTemperatureListData: function() {
-    //   localStorage.setItem(HISTORY_LIST_STORAGE_KEY, JSON.stringify(this.temperatureListDataOutput));
-    // },
-
-    snapshotTimeObjectOutputFunction: function () {
+   
+    snapshotTimeObjectOutputFunction: function() {
       // return moment(this.snapshotValues.timestamp).toObject();
       let timestampObject = moment.unix(this.snapshotValues.timestamp);
     },
 
     removeTemperatureHistoryItem: function (index) {
       this.$delete(this.temperatureHistoryValues, index);
+      this.temperatureListDataValues = this.temperatureListDataOutput;
       localStorage.setItem(STORAGE_KEY, JSON.stringify(this.temperatureHistoryValues));
     }
   },
@@ -111,6 +151,7 @@ const tile = new Vue({
       deep: true
     }
   },
+
   computed: {
     temperatureValue: function() {
       let temperature;
@@ -170,6 +211,8 @@ const tile = new Vue({
     },
     snapshotDateOutput: function () {
       return moment.unix(this.snapshotValues.timestamp).format('DD/MM/YYYY');
+      // return this.snapshotValues.timestamp;
+
     },
     snapshotTemperatureOutput: function() {
       let temperature = this.snapshotValues.temperature;
@@ -211,24 +254,6 @@ window.tile = tile;
 if(tile.settings.showInstruction) {
   // document.location.hash = 'instruction';
 }
-
-// router.on({
-//     'instruction': function() {
-//         showPage('instruction-screen');
-//     },
-//     'settings': function() {
-//         showPage('settings-screen');
-//     },
-//     'snapshot': function() {
-//         showPage('snapshot-screen');
-//     },
-//     'history': function () {
-//         showPage('history-screen');
-//     },
-//     '*': function() {
-//         showPage('result-screen');
-//     }
-// }).resolve();
 
 document.location.hash = 'instruction';
 
