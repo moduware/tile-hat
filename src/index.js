@@ -84,7 +84,10 @@ const tile = new Vue({
 
       return moment(jsDate).calendar(null, {
         sameDay: '[Today]',
+        nextDay: 'DD/MM/YYYY',
+        nextWeek: 'DD/MM/YYYY',
         lastDay: '[Yesterday]',
+        lastWeek: 'DD/MM/YYYY',
         sameElse: 'DD/MM/YYYY'
       });
     }
@@ -92,29 +95,14 @@ const tile = new Vue({
   },
 
   methods: {
-    // // Format date to show Today or Tomorrow
-    // dateFormat: function (date) {
-    //   var otherDates = moment(date).fromNow();
-    //   var callback = function () {
-    //     return "[" + otherDates + "]";
-    //   };
-
-    //   return moment(date).calendar(null, {
-    //     sameDay: '[Today]',
-    //     // nextDay : callback,
-    //     // nextWeek: callback,
-    //     lastDay: '[Yesterday]',
-    //     // lastWeek: callback,
-    //     sameElse: 'DD/MM/YYYY'
-    //   });
-    // },
-
     changeMeasureType: function() {
       this.settings.measureType = this.settings.measureType == MeasureType.Ambient ? MeasureType.Object : MeasureType.Ambient;
     },
+
     disableInstruction: function() {
       this.settings.showInstruction = false;
     },
+
     saveTemperatureHistory: function() {
       this.temperatureHistoryValues.push({
         id: this.temperatureHistoryValues.length,
@@ -140,7 +128,9 @@ const tile = new Vue({
       this.temperatureListDataValues = this.temperatureListDataOutput;
       localStorage.setItem(STORAGE_KEY, JSON.stringify(this.temperatureHistoryValues));
     }
+
   },
+
   watch: {
     settings: {
       handler: function(newSettings, oldSettings) {
@@ -167,11 +157,13 @@ const tile = new Vue({
 
       return temperature;
     },
+
     temperatureOutput: function() {
       const temperature = this.temperatureValue.toFixed(1);
 
       return temperature;
     },
+
     temperatureUnitSelected: function () {
       let temperatureUnit;
       if (this.settings.units == TemperatureUnit.Celsius) {
@@ -181,15 +173,18 @@ const tile = new Vue({
       }
       return temperatureUnit;
     },
+
     humidityOutput: function() {
       return this.sensorValues.humidity.toFixed(1);
     },
+
     scaleUnitClass: function() {
       return {
         'temperature-scale__scale--celsius': this.settings.units == TemperatureUnit.Celsius,
         'temperature-scale__scale--fahrenheit': this.settings.units == TemperatureUnit.Fahrenheit
       };
     },
+
     scaleValue: function() {
       let scaleValue;
       if(this.settings.units == TemperatureUnit.Celsius) {
@@ -201,17 +196,21 @@ const tile = new Vue({
         transform: `translateY(${scaleValue}px)`
       };
     },
+
     isMeasuringObject: function() {
       return this.settings.measureType == MeasureType.Object;
     },
+
     snapshotTimeOutput: function() {
       return moment.unix(this.snapshotValues.timestamp).format('h:mm A');
     },
+
     snapshotDateOutput: function () {
       // return moment.unix(this.snapshotValues.timestamp).format('DD/MM/YYYY');
       return this.snapshotValues.timestamp;
 
     },
+
     snapshotTemperatureOutput: function() {
       let temperature = this.snapshotValues.temperature;
       // if user uses fahrenheit, converting value
@@ -220,6 +219,7 @@ const tile = new Vue({
       }
       return temperature.toFixed(1);
     },
+
     snapshotHumidityOutput: function() {
       return this.snapshotValues.humidity.toFixed(1);
     },
@@ -242,7 +242,8 @@ const tile = new Vue({
         };
       });
       return groupArrays;
-    }    
+    }
+
   },
 });
 
