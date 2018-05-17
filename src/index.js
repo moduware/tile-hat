@@ -102,7 +102,7 @@ const tile = new Vue({
     },
 
     saveTemperatureHistory: function() {
-      this.temperatureHistoryValues.push({
+      this.temperatureHistoryValues.unshift({
         id: this.temperatureHistoryValues.length,
         temperatureValue: this.snapshotTemperatureOutput,
         humidityValue: this.snapshotHumidityOutput,
@@ -121,7 +121,11 @@ const tile = new Vue({
       let timestampObject = moment.unix(this.snapshotValues.timestamp);
     },
 
-    removeTemperatureHistoryItem: function (index) {
+    removeTemperatureHistoryItem: function (id) {
+      // let index = this.temperatureHistoryValues.map(function(e) { return e.id; }).indexOf('id');
+      let index = this.temperatureHistoryValues.map(function (e) { console.log(e.id); return e.id; }).indexOf(id);
+      console.log('index', index);
+      
       this.$delete(this.temperatureHistoryValues, index);
       this.temperatureListDataValues = this.temperatureListDataGroupByDateOutput;
       localStorage.setItem(STORAGE_KEY, JSON.stringify(this.temperatureHistoryValues));
@@ -241,6 +245,10 @@ const tile = new Vue({
           items: dateGroups[date]
         };
       });
+      // groupArrays.sort(function (a, b) {
+      //   return a.date - b.date;
+      // }).reverse();
+      // console.log(groupArrays);
       return groupArrays;
     }
 
@@ -332,5 +340,5 @@ function createSnapshot() {
     tile.snapshotValues.temperature = tile.sensorValues.objectTemperature;
   }
   tile.snapshotValues.timestamp = moment();
-  // tile.snapshotValues.timestamp = moment().add('-13', 'day');
+  // tile.snapshotValues.timestamp = moment().add('-1', 'day');
 }

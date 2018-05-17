@@ -161,7 +161,7 @@
             <morph-list-view class="temperature-list" v-for="(temperatureListDataValue, index) in temperatureListDataValues" v-bind:key="temperatureListDataValue.date">
               <morph-list-view-title>{{temperatureListDataValue.date | dateFormat}}</morph-list-view-title>
 
-              <morph-list-view-item class="temperature-list-item" v-for="item in temperatureListDataValue.items" v-bind:key="item.time">
+              <morph-list-view-item class="temperature-list-item" v-for="item in temperatureListDataValue.items" v-bind:key="item.id">
                 <span class="temperature-list-item__icon-container" slot="icon">
                   <img src="../src/img/temperature-icon-ambient-square.svg" />
                   <br>
@@ -195,7 +195,7 @@
                   
                   {{ item.time }}
                   <br>
-                  <button class="nxp-btn-back destroy" style="border-radius: 5px; background: red; color: white; padding: 3px; opacity: 0.3;" v-on:click="removeTemperatureHistoryItem(index)">Delete</button>
+                  <!-- <button class="nxp-btn-back destroy" style="border-radius: 5px; background: red; color: white; padding: 3px; opacity: 0.3;" v-on:click="removeTemperatureHistoryItem(item.id)">Delete</button> -->
                 </span>
 
               </morph-list-view-item>
