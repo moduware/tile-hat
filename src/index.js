@@ -63,9 +63,7 @@ const tile = new Vue({
   created() {
     const json = localStorage.getItem(STORAGE_KEY);
     this.temperatureHistoryValues = json != null ? JSON.parse(json) : [];
-    this.temperatureListDataValues = this.temperatureListDataOutput;
-    // var today = new Date();
-    // var yesterday = today.setDate(today.getDate() - 1);
+    this.temperatureListDataValues = this.temperatureListDataGroupByDateOutput;
   },
 
   filters: {
@@ -114,7 +112,7 @@ const tile = new Vue({
         type: this.snapshotValues.measureType
       });
       this.snapshotValues.textInput = '';
-      this.temperatureListDataValues = this.temperatureListDataOutput;
+      this.temperatureListDataValues = this.temperatureListDataGroupByDateOutput;
       localStorage.setItem(STORAGE_KEY, JSON.stringify(this.temperatureHistoryValues));
     },
    
@@ -125,7 +123,7 @@ const tile = new Vue({
 
     removeTemperatureHistoryItem: function (index) {
       this.$delete(this.temperatureHistoryValues, index);
-      this.temperatureListDataValues = this.temperatureListDataOutput;
+      this.temperatureListDataValues = this.temperatureListDataGroupByDateOutput;
       localStorage.setItem(STORAGE_KEY, JSON.stringify(this.temperatureHistoryValues));
     }
 
@@ -225,7 +223,7 @@ const tile = new Vue({
     },
 
     // make the data arrange by common date
-    temperatureListDataOutput: function() {
+    temperatureListDataGroupByDateOutput: function() {
       const dateGroups = this.temperatureHistoryValues.reduce((dateGroups, items) => {
         const date = items.date;
         const jsDate = new Date(date);
@@ -234,7 +232,6 @@ const tile = new Vue({
           dateGroups[dayValue] = [];
         }
         dateGroups[dayValue].push(items);
-        console.log(dateGroups);
         return dateGroups;
       }, {});
       /// To add it in the array format
