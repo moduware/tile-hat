@@ -161,7 +161,7 @@
             <morph-list-view class="temperature-list" v-for="(temperatureListDataValue, index) in temperatureListDataValues" v-bind:key="temperatureListDataValue.date">
               <morph-list-view-title>{{temperatureListDataValue.date | dateFormat}}</morph-list-view-title>
 
-              <morph-list-view-item class="temperature-list-item" v-for="item in temperatureListDataValue.items" v-bind:key="item.id">
+              <morph-list-view-item class="temperature-list-item" v-for="item in temperatureListDataValue.items" v-bind:key="item.time">
                 <span class="temperature-list-item__icon-container" slot="icon">
                   <img src="../src/img/temperature-icon-ambient-square.svg" />
                   <br>

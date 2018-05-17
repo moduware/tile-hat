@@ -202,7 +202,7 @@ const tile = new Vue({
     },
 
     snapshotTimeOutput: function() {
-      return moment.unix(this.snapshotValues.timestamp).format('h:mm A');
+      return moment(this.snapshotValues.timestamp).format('h:mm A');
     },
 
     snapshotDateOutput: function () {
@@ -228,10 +228,13 @@ const tile = new Vue({
     temperatureListDataOutput: function() {
       const dateGroups = this.temperatureHistoryValues.reduce((dateGroups, items) => {
         const date = items.date;
-        if (!dateGroups[date]) {
-          dateGroups[date] = [];
+        const jsDate = new Date(date);
+        let dayValue = moment(jsDate).startOf('day');
+        if (!dateGroups[dayValue]) {
+          dateGroups[dayValue] = [];
         }
-        dateGroups[date].push(items);
+        dateGroups[dayValue].push(items);
+        console.log(dateGroups);
         return dateGroups;
       }, {});
       /// To add it in the array format
@@ -332,4 +335,5 @@ function createSnapshot() {
     tile.snapshotValues.temperature = tile.sensorValues.objectTemperature;
   }
   tile.snapshotValues.timestamp = moment();
+  // tile.snapshotValues.timestamp = moment().add('-13', 'day');
 }
