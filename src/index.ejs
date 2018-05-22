@@ -10,14 +10,7 @@
   </head>
   <body>
     <div id="wrapper" class="wrapper" style="opacity: 0;">
-      <template v-if="platform == 'android'">
-        <morph-tabbar class="navigation-tabs" :selected="currentPage" @selected-changed="currentPage = $event.target.selected" :class="{ hidden: currentPage == 'instruction' || currentPage == 'snapshot'}">
-          <morph-tabbar-item name="result" :not-selected-image="tabbarResultNotSelectedIcon" :selected-image="tabbarResultSelectedIcon"></morph-tabbar-item>
-          <morph-tabbar-item name="history" :not-selected-image="tabbarHistoryNotSelectedIcon" :selected-image="tabbarHistorySelectedIcon"></morph-tabbar-item>
-          <morph-tabbar-item name="settings" :not-selected-image="tabbarSettingsNotSelectedIcon" :selected-image="tabbarSettingsSelectedIcon"></morph-tabbar-item>
-        </morph-tabbar>
-      </template>
-      <template v-if="platform == 'ios'">
+      <template>
         <morph-tabbar class="navigation-tabs" :selected="currentPage" @selected-changed="currentPage = $event.target.selected" :class="{ hidden: currentPage == 'instruction' || currentPage == 'snapshot'}">
           <morph-tabbar-item name="result" :not-selected-image="tabbarResultNotSelectedIcon" :selected-image="tabbarResultSelectedIcon"></morph-tabbar-item>
           <morph-tabbar-item name="history" :not-selected-image="tabbarHistoryNotSelectedIcon" :selected-image="tabbarHistorySelectedIcon"></morph-tabbar-item>
@@ -171,7 +164,7 @@
 
               <morph-list-view-item class="temperature-list-item" v-for="item in temperatureListDataValue.items" v-bind:key="item.id">
                 <span class="temperature-list-item__icon-container" slot="icon">
-                  <img src="../src/img/temperature-icon-ambient-square.svg" />
+                  <img :src="icons.temperatureListIconSrc" />
                   <!-- <br>
                   <svg width="14px" height="20px" viewBox="0 0 14 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -209,23 +202,6 @@
               </morph-list-view-item>
 
             </morph-list-view>
-
-            <!-- <ul class="temperature-list">
-              <li v-for="(temperatureHistoryValue, index) in temperatureHistoryValues" class="temperature-history-value" style="border: 1px 0px; border-bottom: 1px solid rgb(226, 213, 213);">
-
-                <table class="snapshot-item__values view"> temperature-icon-ambient.svg
-                  <tr class="snapshot-item__line">
-                    <td class="snapshot-item__field-title" id="snapshot-temperature-title">
-                      <span>Ambient Temperature</span>
-                    </td>
-                    <td class="snapshot-item__field-value snapshot-item__field-value--temperature">{{ temperatureHistoryValue.temperatureValue }}</td>
-                  </tr>
-                </table>
-
-                <div class="snapshot-item__daytime" id="snapshotDayAndTime">{{ temperatureHistoryValue.timestamp }}</div>
-
-              </li>
-            </ul> -->
 
           </div>
         </div> <!-- / page history -->
