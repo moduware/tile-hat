@@ -2,4 +2,9 @@
   --android-background-color: transparent; 
   background: transparent;
   box-shadow: none;
+
+  body.platform-ios & {
+    --ios-background-color: transparent; 
+    order: 2;
+  }
 }
