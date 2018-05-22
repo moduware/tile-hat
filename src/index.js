@@ -23,6 +23,11 @@ import tabbarHistoryNotSelectedAndroidIconSrc from './img/android/timeline-icon-
 import tabbarHistorySelectediOSIconSrc from './img/ios/timeline-icon-active.svg';
 import tabbarHistoryNotSelectediOSIconSrc from './img/ios/timeline-icon-not-active.svg';
 
+import tabbarSettingsSelectedAndroidIconSrc from './img/android/settings-icon-active.svg';
+import tabbarSettingsNotSelectedAndroidIconSrc from './img/android/settings-icon-not-active.svg';
+import tabbarSettingsSelectediOSIconSrc from './img/ios/settings-icon-active.svg';
+import tabbarSettingsNotSelectediOSIconSrc from './img/ios/settings-icon-not-active.svg';
+
 import Settings from './lib/Settings';
 import * as Utils from './lib/Utils';
 import TemperatureUnit from './enums/TemperatureUnit';
@@ -175,6 +180,14 @@ const tile = new Vue({
 
     tabbarHistoryNotSelectedIcon: function () {
       return this.platform == 'android' ? tabbarHistoryNotSelectedAndroidIconSrc : tabbarHistoryNotSelectediOSIconSrc;
+    },
+
+    tabbarSettingsSelectedIcon: function () {
+      return this.platform == 'android' ? tabbarSettingsSelectedAndroidIconSrc : tabbarSettingsSelectediOSIconSrc;
+    },
+
+    tabbarSettingsNotSelectedIcon: function () {
+      return this.platform == 'android' ? tabbarSettingsNotSelectedAndroidIconSrc : tabbarSettingsNotSelectediOSIconSrc;
     },
 
     temperatureValue: function() {
