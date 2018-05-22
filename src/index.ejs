@@ -12,7 +12,7 @@
     <div id="wrapper" class="wrapper" style="opacity: 0;">
       <template v-if="platform == 'android'">
         <morph-tabbar class="navigation-tabs" :selected="currentPage" @selected-changed="currentPage = $event.target.selected" :class="{ hidden: currentPage == 'instruction' || currentPage == 'snapshot'}">
-          <morph-tabbar-item name="result" not-selected-image="../src/img/android/sensor-icon-not-active.svg" selected-image="../src/img/android/sensor-icon-active.svg"></morph-tabbar-item>
+          <morph-tabbar-item name="result" :not-selected-image="tabbarResultNotSelectedIcon" :selected-image="tabbarResultSelectedIcon"></morph-tabbar-item>
           <!-- <morph-tabbar-item name="result" v-bind:not-selected-image="'../src/img/' + platform + '/sensor-icon-not-active.svg'" :selected-image="'../src/img/' + platform + '/sensor-icon-active.svg'"></morph-tabbar-item> -->
           <morph-tabbar-item name="history" not-selected-image="../src/img/timeline-icon-not-active.svg" selected-image="../src/img/timeline-icon-active.svg"></morph-tabbar-item>
           <!-- <morph-tabbar-item name="play2" not-selected-image="../src/img/map-icon-not-active.svg" selected-image="../src/img/map-icon-active.svg"></morph-tabbar-item> -->
@@ -21,7 +21,7 @@
       </template>
       <template v-if="platform == 'ios'">
         <morph-tabbar class="navigation-tabs" :selected="currentPage" @selected-changed="currentPage = $event.target.selected" :class="{ hidden: currentPage == 'instruction' || currentPage == 'snapshot'}">
-          <morph-tabbar-item name="result" not-selected-image="../src/img/ios/sensor-icon-not-active.svg" selected-image="../src/img/ios/sensor-icon-active.svg"></morph-tabbar-item>
+          <morph-tabbar-item name="result" :not-selected-image="tabbarResultNotSelectedIcon" :selected-image="tabbarResultSelectedIcon"></morph-tabbar-item>
           <morph-tabbar-item name="history" not-selected-image="../src/img/timeline-icon-not-active.svg" selected-image="../src/img/timeline-icon-active.svg"></morph-tabbar-item>
           <!-- <morph-tabbar-item name="play2" not-selected-image="../src/img/map-icon-not-active.svg" selected-image="../src/img/map-icon-active.svg"></morph-tabbar-item> -->
           <morph-tabbar-item name="settings" not-selected-image="../src/img/settings-icon-not-active.svg" selected-image="../src/img/settings-icon-active.svg"></morph-tabbar-item>
@@ -175,7 +175,7 @@
               <morph-list-view-item class="temperature-list-item" v-for="item in temperatureListDataValue.items" v-bind:key="item.id">
                 <span class="temperature-list-item__icon-container" slot="icon">
                   <img src="../src/img/temperature-icon-ambient-square.svg" />
-                  <br>
+                  <!-- <br>
                   <svg width="14px" height="20px" viewBox="0 0 14 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                       <g transform="translate(-28.000000, -105.000000)" fill="#929292">
@@ -184,7 +184,7 @@
                         </g>
                       </g>
                     </g>
-                  </svg>
+                  </svg> -->
                 </span>
                 <span slot="header" class="temperature-list-item__title">{{ item.label | capitalize }}</span>
                 
@@ -198,9 +198,9 @@
                   <span class="temperature-list-item__value temperature-list-item__value--humidity">{{ item.humidityValue }}</span>
                 </span>
 
-                <span slot="footer" class="temperature-list-item__address">
+                <!-- <span slot="footer" class="temperature-list-item__address">
                   One Kowloon, 1 Wang Yuen Street, Kowloon Bay, Hong Kong
-                </span>
+                </span> -->
 
                 <span slot="secondary-content" class="temperature-list-item__time">
                   
