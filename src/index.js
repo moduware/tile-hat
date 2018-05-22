@@ -42,6 +42,7 @@ const tile = new Vue({
   el: '#wrapper',
   data: {
     currentPage: 'history',
+    platform: 'undefined',
     navigationDirection: 'forward',
     
     sensorValues: {
@@ -65,7 +66,7 @@ const tile = new Vue({
     this.temperatureHistoryValues = json != null ? JSON.parse(json) : [];
     this.temperatureListDataValues = this.temperatureListDataGroupByDateOutput;
   },
-
+ 
   filters: {
     capitalize: function (value) {
       if (!value) return '';
@@ -122,6 +123,7 @@ const tile = new Vue({
     },
 
     removeTemperatureHistoryItem: function (id) {
+      // TODO: pass item instead and say delete index of item
       // let index = this.temperatureHistoryValues.map(function(e) { return e.id; }).indexOf('id');
       let index = this.temperatureHistoryValues.map(function (e) { console.log(e.id); return e.id; }).indexOf(id);
       console.log('index', index);
@@ -275,6 +277,9 @@ const instructionSwiper = new Swiper('.swiper-container', {
 document.getElementById('wrapper').style.opacity = 1;
 
 WebViewTileHeader._detectCurrentPlatform();
+// get tile.platform after body.classList is set
+tile.platform = getPlatformValue();
+
 /* Header configuration */
 WebViewTileHeader.create('Temperature');
 WebViewTileHeader.customize({color: 'white', iconColor:'white', backgroundColor:'#FFB931', borderBottom:'none'});
@@ -341,4 +346,16 @@ function createSnapshot() {
   }
   tile.snapshotValues.timestamp = moment();
   // tile.snapshotValues.timestamp = moment().add('-1', 'day');
+}
+
+function getPlatformValue() {
+  let platform;
+  if (document.body.classList.contains("platform-android")) {
+    platform = "android";
+  } else if (document.body.classList.contains("platform-ios")) {
+    platform = "ios";
+  } else {
+    platform = "undefined";
+  }
+  return platform;
 }
