@@ -9,8 +9,14 @@ import Swiper from 'swiper';
 import Vue from 'vue';
 import 'material-design-lite/material.min.js';
 import WebViewTileHeader from 'webview-tile-header/WebViewTileHeader.js';
+WebViewTileHeader._detectCurrentPlatform();
 
 import headerSettingsIcon from './img/icon-settings.svg';
+
+import tabbarResultSelectedAndroidIconSrc from './img/android/sensor-icon-active.svg';
+import tabbarResultNotSelectedAndroidIconSrc from './img/android/sensor-icon-not-active.svg';
+import tabbarResultSelectediOSIconSrc from './img/ios/sensor-icon-active.svg';
+import tabbarResultNotSelectediOSIconSrc from './img/ios/sensor-icon-not-active.svg';
 
 import Settings from './lib/Settings';
 import * as Utils from './lib/Utils';
@@ -41,8 +47,8 @@ const STORAGE_KEY = 'hat-history-storage';
 const tile = new Vue({
   el: '#wrapper',
   data: {
-    currentPage: 'history',
-    platform: 'undefined',
+    currentPage: 'result',
+    // platform: 'undefined',
     navigationDirection: 'forward',
     
     sensorValues: {
@@ -145,6 +151,19 @@ const tile = new Vue({
   },
 
   computed: {
+    platform: function() {
+      // get tile.platform after body.classList is set
+      return getPlatformValue();
+    },
+
+    tabbarResultSelectedIcon: function () {
+      return this.platform == 'android' ? tabbarResultSelectedAndroidIconSrc : tabbarResultSelectediOSIconSrc;
+    },
+
+    tabbarResultNotSelectedIcon: function() {
+      return this.platform == 'android' ? tabbarResultNotSelectedAndroidIconSrc : tabbarResultNotSelectediOSIconSrc;
+    },
+
     temperatureValue: function() {
       let temperature;
       // taking required temperature
@@ -260,11 +279,9 @@ const tile = new Vue({
 window.tile = tile;
 
 // Showing module instruction to user by default
-if(tile.settings.showInstruction) {
-  // document.location.hash = 'instruction';
-}
-
-document.location.hash = 'instruction';
+// if(tile.settings.showInstruction) {
+//   document.location.hash = 'instruction';
+// }
 
 const instructionSwiper = new Swiper('.swiper-container', {
     direction: 'horizontal',
@@ -276,9 +293,6 @@ const instructionSwiper = new Swiper('.swiper-container', {
 /* Revealing UI */
 document.getElementById('wrapper').style.opacity = 1;
 
-WebViewTileHeader._detectCurrentPlatform();
-// get tile.platform after body.classList is set
-tile.platform = getPlatformValue();
 
 /* Header configuration */
 WebViewTileHeader.create('Temperature');
