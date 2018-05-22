@@ -28,6 +28,8 @@ import tabbarSettingsNotSelectedAndroidIconSrc from './img/android/settings-icon
 import tabbarSettingsSelectediOSIconSrc from './img/ios/settings-icon-active.svg';
 import tabbarSettingsNotSelectediOSIconSrc from './img/ios/settings-icon-not-active.svg';
 
+import temperatureListIconSrc from './img/temperature-icon-ambient-square.svg';
+
 import Settings from './lib/Settings';
 import * as Utils from './lib/Utils';
 import TemperatureUnit from './enums/TemperatureUnit';
@@ -75,8 +77,12 @@ const tile = new Vue({
     },
     settings: loadedSettings,
     temperatureHistoryValues: [],
-    temperatureListDataValues: []
+    temperatureListDataValues: [],
+    icons: {
+      temperatureListIconSrc
+    }
   },
+
   created() {
     const json = localStorage.getItem(STORAGE_KEY);
     this.temperatureHistoryValues = json != null ? JSON.parse(json) : [];
