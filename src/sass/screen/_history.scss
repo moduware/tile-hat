@@ -17,3 +17,8 @@ morph-list-view-item {
 	--display-inner-item-bottom-line: none;
 	--container-align-items: stretch;
 }
+
+morph-tabbar {
+	--ios-bar-color: transparent;
+	box-shadow: 0px -0.5px 0px 1px rgba(0, 0, 0, 0.3);
+}
