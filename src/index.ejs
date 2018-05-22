@@ -10,12 +10,23 @@
   </head>
   <body>
     <div id="wrapper" class="wrapper" style="opacity: 0;">
-      <morph-tabbar class="navigation-tabs" :selected="currentPage" @selected-changed="currentPage = $event.target.selected" :class="{ hidden: currentPage == 'instruction' || currentPage == 'snapshot'}">
-        <morph-tabbar-item name="result" not-selected-image="../src/img/sensor-icon-not-active.svg" selected-image="../src/img/sensor-icon-active.svg"></morph-tabbar-item>
-        <morph-tabbar-item name="history" not-selected-image="../src/img/timeline-icon-not-active.svg" selected-image="../src/img/timeline-icon-active.svg"></morph-tabbar-item>
-        <!-- <morph-tabbar-item name="play2" not-selected-image="../src/img/map-icon-not-active.svg" selected-image="../src/img/map-icon-active.svg"></morph-tabbar-item> -->
-        <morph-tabbar-item name="settings" not-selected-image="../src/img/settings-icon-not-active.svg" selected-image="../src/img/settings-icon-active.svg"></morph-tabbar-item>
-      </morph-tabbar>
+      <template v-if="platform == 'android'">
+        <morph-tabbar class="navigation-tabs" :selected="currentPage" @selected-changed="currentPage = $event.target.selected" :class="{ hidden: currentPage == 'instruction' || currentPage == 'snapshot'}">
+          <morph-tabbar-item name="result" not-selected-image="../src/img/android/sensor-icon-not-active.svg" selected-image="../src/img/android/sensor-icon-active.svg"></morph-tabbar-item>
+          <!-- <morph-tabbar-item name="result" v-bind:not-selected-image="'../src/img/' + platform + '/sensor-icon-not-active.svg'" :selected-image="'../src/img/' + platform + '/sensor-icon-active.svg'"></morph-tabbar-item> -->
+          <morph-tabbar-item name="history" not-selected-image="../src/img/timeline-icon-not-active.svg" selected-image="../src/img/timeline-icon-active.svg"></morph-tabbar-item>
+          <!-- <morph-tabbar-item name="play2" not-selected-image="../src/img/map-icon-not-active.svg" selected-image="../src/img/map-icon-active.svg"></morph-tabbar-item> -->
+          <morph-tabbar-item name="settings" not-selected-image="../src/img/settings-icon-not-active.svg" selected-image="../src/img/settings-icon-active.svg"></morph-tabbar-item>
+        </morph-tabbar>
+      </template>
+      <template v-if="platform == 'ios'">
+        <morph-tabbar class="navigation-tabs" :selected="currentPage" @selected-changed="currentPage = $event.target.selected" :class="{ hidden: currentPage == 'instruction' || currentPage == 'snapshot'}">
+          <morph-tabbar-item name="result" not-selected-image="../src/img/ios/sensor-icon-not-active.svg" selected-image="../src/img/ios/sensor-icon-active.svg"></morph-tabbar-item>
+          <morph-tabbar-item name="history" not-selected-image="../src/img/timeline-icon-not-active.svg" selected-image="../src/img/timeline-icon-active.svg"></morph-tabbar-item>
+          <!-- <morph-tabbar-item name="play2" not-selected-image="../src/img/map-icon-not-active.svg" selected-image="../src/img/map-icon-active.svg"></morph-tabbar-item> -->
+          <morph-tabbar-item name="settings" not-selected-image="../src/img/settings-icon-not-active.svg" selected-image="../src/img/settings-icon-active.svg"></morph-tabbar-item>
+        </morph-tabbar>
+      </template>
 
       <morph-location :hash="currentPage" @hash-changed="currentPage = $event.target.hash" :last-navigation-direction="navigationDirection" @last-navigation-direction-changed="navigationDirection = $event.target.lastNavigationDirection"></morph-location>
       <morph-pages class="tile-pages" :selected="currentPage" @selected-changed="currentPage = $event.target.selected" :page-change-animation-direction="navigationDirection" attr-for-selected="name" fallback-selection="instruction">
