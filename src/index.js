@@ -88,6 +88,10 @@ const tile = new Vue({
     this.temperatureHistoryValues = json != null ? JSON.parse(json) : [];
     this.temperatureListDataValues = this.temperatureListDataGroupByDateOutput;
   },
+
+  mounted: function () {
+    componentHandler.upgradeAllRegistered();
+  },
  
   filters: {
     capitalize: function (value) {
