@@ -1,6 +1,7 @@
 .settings-screen {
   display: block;
   font-size: 14px;
+  background-color: #eff0f4;
 
   input[type=radio] {
     display: none;
@@ -17,7 +18,7 @@
 
   .settings-container__title {  
     display: block;
-    color: white;
+    color: #333333;
     font-size: 13px;
     font-weight: 400;
     line-height: 23px;
