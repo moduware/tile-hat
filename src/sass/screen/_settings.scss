@@ -24,6 +24,9 @@
     line-height: 23px;
     text-transform: uppercase;
   }
+  .settings-container__title:first-child {
+    margin-top: 15px;
+  }
 
   .settings-container__label {
     position: relative;
