@@ -99,24 +99,6 @@
 
         <div name="settings" class="tile-pages__page settings-screen">
           <div class="settings-container">
-            <span class="settings-container__title">Measure</span>
-
-            <input type="radio" name="measureType" value="ambient" v-model="settings.measureType" id="ambientSetting">
-            <label class="settings-container__label" for="ambientSetting">Ambient temperature</label>
-
-            <input type="radio" name="measureType" value="object" v-model="settings.measureType" id="objectSetting" >
-            <label class="settings-container__label" for="objectSetting">Object temperature</label>
-          </div>
-          <div class="settings-container">
-            <span class="settings-container__title">Units</span>
-
-            <input type="radio" class="celsius" name="measureUnit" value="celsius" v-model="settings.units" id="celsiusSetting">
-            <label class="settings-container__label unit-celsius" for="celsiusSetting">Celsius</label>
-
-            <input type="radio" class="fahrenheit" name="measureUnit" value="fahrenheit" v-model="settings.units" id="fahrenheitSetting" >
-            <label class="settings-container__label unit-fahrenheit" for="fahrenheitSetting">Fahrenheit</label>
-          </div>
-          <div class="settings-container">
             <span class="settings-container__title">General</span>
 
             <!-- <input type="checkbox" class="celsius" name="instructionSetting" v-model="settings.showInstruction" id="instructionSetting"> -->
@@ -128,6 +110,27 @@
               </label>
             </label>
           </div>
+          
+          <div class="settings-container">
+            <span class="settings-container__title">Measure</span>
+
+            <input type="radio" name="measureType" value="ambient" v-model="settings.measureType" id="ambientSetting">
+            <label class="settings-container__label" for="ambientSetting">Ambient temperature</label>
+
+            <input type="radio" name="measureType" value="object" v-model="settings.measureType" id="objectSetting" >
+            <label class="settings-container__label" for="objectSetting">Object temperature</label>
+          </div>
+
+          <div class="settings-container">
+            <span class="settings-container__title">Units</span>
+
+            <input type="radio" class="celsius" name="measureUnit" value="celsius" v-model="settings.units" id="celsiusSetting">
+            <label class="settings-container__label unit-celsius" for="celsiusSetting">Celsius</label>
+
+            <input type="radio" class="fahrenheit" name="measureUnit" value="fahrenheit" v-model="settings.units" id="fahrenheitSetting" >
+            <label class="settings-container__label unit-fahrenheit" for="fahrenheitSetting">Fahrenheit</label>
+          </div>
+
         </div> <!-- / page settings -->
 
         <div name="snapshot" class="tile-pages__page snapshot-screen">
