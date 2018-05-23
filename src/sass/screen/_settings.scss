@@ -68,4 +68,12 @@
   .mdl-switch.is-checked .mdl-switch__track {
     background: rgba(255, 185, 49, 0.5);
   }
+
+  // custom mdl-radio buttons styles
+  .mdl-radio.is-checked .mdl-radio__inner-circle {
+    background: #ffb931;
+  }
+  .mdl-radio.is-checked .mdl-radio__outer-circle {
+    border: 2px solid #ffb931;
+  }
 }
