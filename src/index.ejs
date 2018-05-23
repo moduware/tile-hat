@@ -110,25 +110,60 @@
               </label>
             </label>
           </div>
-          
+
           <div class="settings-container">
             <span class="settings-container__title">Measure</span>
 
-            <input type="radio" name="measureType" value="ambient" v-model="settings.measureType" id="ambientSetting">
+            <!-- <input type="radio" name="measureType" value="ambient" v-model="settings.measureType" id="ambientSetting">
             <label class="settings-container__label" for="ambientSetting">Ambient temperature</label>
 
             <input type="radio" name="measureType" value="object" v-model="settings.measureType" id="objectSetting" >
-            <label class="settings-container__label" for="objectSetting">Object temperature</label>
+            <label class="settings-container__label" for="objectSetting">Object temperature</label> -->
+
+            <label class="settings-container__label" for="ambientSetting">
+              <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="ambientSetting">
+                <input type="radio" id="ambientSetting" class="mdl-radio__button" name="measureType" value="ambient" v-model="settings.measureType">
+                <span class="mdl-radio"></span>
+              </label>
+              Ambient temperature
+            </label>
+
+            <label class="settings-container__label" for="objectSetting">
+              <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="objectSetting">
+                <input type="radio" id="objectSetting" class="mdl-radio__button" name="measureType" value="object" v-model="settings.measureType">
+                <span class="mdl-radio"></span>
+              </label>
+               Object temperature
+            </label>
           </div>
 
           <div class="settings-container">
             <span class="settings-container__title">Units</span>
 
-            <input type="radio" class="celsius" name="measureUnit" value="celsius" v-model="settings.units" id="celsiusSetting">
-            <label class="settings-container__label unit-celsius" for="celsiusSetting">Celsius</label>
+            <!-- <label class="settings-container__label unit-celsius" for="celsiusSetting">
+              <span>Celsius</span>
+            </label>
+            <input type="radio" class="celsius" name="measureUnit" value="celsius" v-model="settings.units" id="celsiusSetting"> -->
 
-            <input type="radio" class="fahrenheit" name="measureUnit" value="fahrenheit" v-model="settings.units" id="fahrenheitSetting" >
-            <label class="settings-container__label unit-fahrenheit" for="fahrenheitSetting">Fahrenheit</label>
+            <label class="settings-container__label unit-celsius" for="celsiusSetting">
+              <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="celsiusSetting">
+                <input type="radio" id="celsiusSetting" class="mdl-radio__button celsius" name="measureUnit" value="celsius" v-model="settings.units">
+                <span class="mdl-radio"></span>
+              </label>
+               Celsius
+            </label>
+
+            <!-- <input type="radio" class="fahrenheit" name="measureUnit" value="fahrenheit" v-model="settings.units" id="fahrenheitSetting" > -->
+            <!-- <label class="settings-container__label unit-fahrenheit" for="fahrenheitSetting">Fahrenheit</label> -->
+
+            <label class="settings-container__label unit-fahrenheit" for="fahrenheitSetting">
+              <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="fahrenheitSetting">
+                <input type="radio" id="fahrenheitSetting" class="mdl-radio__button fahrenheit" name="measureUnit" value="fahrenheit" v-model="settings.units">
+                <span class="mdl-radio"></span>
+              </label>
+               Fahrenheit
+            </label>
+
           </div>
 
         </div> <!-- / page settings -->
