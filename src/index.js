@@ -90,6 +90,7 @@ const tile = new Vue({
   },
 
   mounted: function () {
+    // load material design lite properly in webpack
     componentHandler.upgradeAllRegistered();
   },
  
@@ -138,6 +139,9 @@ const tile = new Vue({
         label: this.snapshotValues.textInput.trim(),
         type: this.snapshotValues.measureType
       });
+      let historyTabbarItems = document.querySelector('morph-tabbar-item[name="history"]');
+      console.log(historyTabbarItems);
+      historyTabbarItems.click();
       this.snapshotValues.textInput = '';
       this.temperatureListDataValues = this.temperatureListDataGroupByDateOutput;
       localStorage.setItem(STORAGE_KEY, JSON.stringify(this.temperatureHistoryValues));
