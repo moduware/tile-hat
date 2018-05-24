@@ -95,6 +95,14 @@ module.exports = {
       { 
         from: 'bower_components/webcomponentsjs/webcomponents-loader.js', 
         to: 'bower_components/webcomponentsjs/webcomponents-loader.js'
+      },
+      { 
+        from: 'bower_components/webcomponentsjs/webcomponents-hi.js', 
+        to: 'bower_components/webcomponentsjs/webcomponents-hi.js'
+      },
+      { 
+        from: 'bower_components/webcomponentsjs/webcomponents-hi.js.map', 
+        to: 'bower_components/webcomponentsjs/webcomponents-hi.js.map'
       }
     ], {})
   ]
