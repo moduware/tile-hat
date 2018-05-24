@@ -116,6 +116,17 @@ const tile = new Vue({
         lastWeek: 'DD/MM/YYYY',
         sameElse: 'DD/MM/YYYY'
       });
+    },
+    formatTemperature: function (temperature, units) {
+      temperature = parseFloat(temperature);
+      if (units == TemperatureUnit.Fahrenheit) {
+        temperature = Utils.Celsius2Farenheit(temperature);
+      }
+      return temperature.toFixed(1);
+    },
+    formatHumidity: function (humidity) {
+      humidity = parseFloat(humidity);
+      return humidity.toFixed(1);
     }
     
   },
@@ -132,8 +143,8 @@ const tile = new Vue({
     saveTemperatureHistory: function() {
       this.temperatureHistoryValues.unshift({
         id: this.temperatureHistoryValues.length,
-        temperatureValue: this.snapshotTemperatureOutput,
-        humidityValue: this.snapshotHumidityOutput,
+        temperatureValue: this.snapshotValues.temperature, 
+        humidityValue: this.snapshotValues.humidity,
         time: this.snapshotTimeOutput,
         date: this.snapshotDateOutput,
         label: this.snapshotValues.textInput.trim(),

@@ -218,12 +218,12 @@
                 
                 <span class="temperature-list-item__content">
                   Temperature:
-                  <span class="temperature-list-item__value temperature-list-item__value--temperature">{{ item.temperatureValue }}</span>
+                  <span class="temperature-list-item__value temperature-list-item__value--temperature">{{ item.temperatureValue | formatTemperature(settings.units) }}</span>
                   
                   <br>
 
                   Humidity:
-                  <span class="temperature-list-item__value temperature-list-item__value--humidity">{{ item.humidityValue }}</span>
+                  <span class="temperature-list-item__value temperature-list-item__value--humidity">{{ item.humidityValue | formatHumidity }}</span>
                 </span>
 
                 <!-- <span slot="footer" class="temperature-list-item__address">
