@@ -89,6 +89,10 @@ module.exports = {
       { from: 'manifest.json', to: 'manifest.json' },
       { from: 'icon.svg', to: 'icon.svg' },
       { 
+        from: 'node_modules/webview-tile-header/WebViewTileHeader.js', 
+        to: 'node_modules/webview-tile-header/WebViewTileHeader.js'
+      },
+      { 
         from: 'bower_components/webcomponentsjs/custom-elements-es5-adapter.js', 
         to: 'bower_components/webcomponentsjs/custom-elements-es5-adapter.js'
       },

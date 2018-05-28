@@ -2,6 +2,11 @@
   flex-grow: 1;
 }
 
+.tile-pages__page--main {
+  --host-slotted-page-diplay: flex;
+  flex-direction: column;
+}
+
 .tile-pages__page:not(.iron-selected) {
   opacity: 0;
 }

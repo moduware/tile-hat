@@ -8,7 +8,8 @@ import moment from 'moment';
 import Swiper from 'swiper';
 import Vue from 'vue';
 import 'material-design-lite/material.min.js';
-import WebViewTileHeader from 'webview-tile-header/WebViewTileHeader.js';
+// import WebViewTileHeader from 'webview-tile-header/WebViewTileHeader.js';
+const WebViewTileHeader = NexpaqHeader;
 WebViewTileHeader._detectCurrentPlatform();
 
 import headerSettingsIcon from './img/icon-settings.svg';
@@ -60,7 +61,8 @@ const STORAGE_KEY = 'hat-history-storage';
 const tile = new Vue({
   el: '#wrapper',
   data: {
-    currentPage: 'result',
+    currentPage: 'main', // instruction / snapshot
+    currentTab: 'result', // history / settings
     // platform: 'undefined',
     navigationDirection: 'forward',
     
@@ -154,7 +156,8 @@ const tile = new Vue({
       });
       let historyTabbarItems = document.querySelector('morph-tabbar-item[name="history"]');
       console.log(historyTabbarItems);
-      historyTabbarItems.click();
+      this.currentTab = 'history';
+      // historyTabbarItems.click();
       this.snapshotValues.textInput = '';
       this.temperatureListDataValues = this.temperatureListDataGroupByDateOutput;
       localStorage.setItem(STORAGE_KEY, JSON.stringify(this.temperatureHistoryValues));
@@ -174,6 +177,16 @@ const tile = new Vue({
       this.$delete(this.temperatureHistoryValues, index);
       this.temperatureListDataValues = this.temperatureListDataGroupByDateOutput;
       localStorage.setItem(STORAGE_KEY, JSON.stringify(this.temperatureHistoryValues));
+    },
+
+    renderIosHeaderSaveButton: function(page, tab) {
+      if (this.platform != 'ios') return;
+      const headerSaveButton = document.getElementById('header-save-button');
+      if (page == 'main' && tab == 'result') {
+        headerSaveButton.classList.remove('hidden');
+      } else {
+        headerSaveButton.classList.add('hidden');
+      }
     }
 
   },
@@ -184,6 +197,12 @@ const tile = new Vue({
           Settings.Save(newSettings);
       },
       deep: true
+    },
+    currentPage: function(newPage, oldPage) {
+      this.renderIosHeaderSaveButton(newPage, this.currentTab);
+    },
+    currentTab: function(newTab, oldTab) {
+      this.renderIosHeaderSaveButton(this.currentPage, newTab);
     }
   },
 
@@ -378,21 +397,28 @@ if (tile.platform == 'android') {
 }
 document.getElementById('snapshot-button-cancel').addEventListener('click', snapshotButtonCancelClickHandler);
 
-document.addEventListener('NexpaqAPIReady', () => {
+function ApiReadyActions() {
   Nexpaq.API.Module.SendCommand(Nexpaq.Arguments[0], 'StartSensor', []);
   Nexpaq.API.addEventListener('BeforeExit', () => Nexpaq.API.Module.SendCommand(Nexpaq.Arguments[0], 'StopSensor', []));
-
+  
   Nexpaq.API.Module.addEventListener('DataReceived', function(event) {
     // we don't care about data not related to our module
     if(event.moduleUuid != Nexpaq.Arguments[0]) return;
     if(event.dataSource != 'SensorValue') return;
-
+  
     tile.sensorValues.ambientTemperature = parseFloat(event.variables.ambient_temperature);
     tile.sensorValues.objectTemperature = parseFloat(event.variables.object_temperature);
     tile.sensorValues.humidity = parseFloat(event.variables.humidity);
   }); 
+}
 
-});
+// TODO: switch to Moduware.API.IsReady after app 1.1.9 released
+if (window.ModuwareAPIIsReady) {
+  ApiReadyActions();
+} else {
+  document.addEventListener('NexpaqAPIReady', () => ApiReadyActions());
+}
+
 
 // function showPage(name) {
 //     const pages = Array.from(document.querySelectorAll('.tile-screen'));
@@ -409,7 +435,7 @@ function snapshotButtonCancelClickHandler() {
   const animationPromise2 = Utils.runCssAnimationByClass(snapshotItemElement, 'animation-disapear');
 
   Promise.all([animationPromise1, animationPromise2]).then(() => {
-    document.location.hash = 'result';
+    document.location.hash = 'main';
     setTimeout(() => {
       containerElement.classList.remove('animation-slidedown');
       snapshotItemElement.classList.remove('animation-disapear');
