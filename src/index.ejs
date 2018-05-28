@@ -94,7 +94,7 @@
             </div>
           </div>
           
-          <a href="#snapshot" class="action-button action-button--primary" id="button-snapshot">Save</a>
+          <a v-if="platform == 'android'" href="#snapshot" class="action-button action-button--primary" id="button-snapshot">Save</a>
         </div> <!-- / page result -->
 
         <div name="settings" class="tile-pages__page settings-screen">

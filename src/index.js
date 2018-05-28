@@ -354,10 +354,28 @@ WebViewTileHeader.hideShadow();
 
 /* Paging system */
 // WebViewTileHeader.addButton({image: headerSettingsIcon}, () => document.location.hash = 'settings');//Pages.showSettingsPage());
+// Add save button to header (right side)
+if (tile.platform == 'ios') {
+  WebViewTileHeader.addButton({
+    title: 'Save',
+    id: 'header-save-button'
+  }, () => headerSaveButtonHandler());
+}
+// let iosSnapshotSaveButton = document.getElementById('header-save-button');
+// iosSnapshotSaveButton.setAttribute("href", "#snapshot");
+// WebViewTileHeader.addButton({
+//   title: 'Save',
+//   number: 1,
+//   id: 'header-notifications-button'
+// });
+
 WebViewTileHeader.addEventListener('BackButtonClicked', () => {
   Nexpaq.API.Exit();
 });
-document.getElementById('button-snapshot').addEventListener('click', () => createSnapshot());
+
+if (tile.platform == 'android') {
+  document.getElementById('button-snapshot').addEventListener('click', () => createSnapshot());
+}
 document.getElementById('snapshot-button-cancel').addEventListener('click', snapshotButtonCancelClickHandler);
 
 document.addEventListener('NexpaqAPIReady', () => {
@@ -421,4 +439,9 @@ function getPlatformValue() {
     platform = "undefined";
   }
   return platform;
+}
+
+function headerSaveButtonHandler() {
+  createSnapshot();
+  document.location.hash = 'snapshot';
 }
