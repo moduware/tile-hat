@@ -332,9 +332,9 @@ const tile = new Vue({
 window.tile = tile;
 
 // Showing module instruction to user by default
-// if(tile.settings.showInstruction) {
-//   document.location.hash = 'instruction';
-// }
+if(tile.settings.showInstruction) {
+  document.location.hash = 'instruction';
+}
 
 const instructionSwiper = new Swiper('.swiper-container', {
     direction: 'horizontal',
@@ -355,11 +355,7 @@ WebViewTileHeader.hideShadow();
 /* Paging system */
 // WebViewTileHeader.addButton({image: headerSettingsIcon}, () => document.location.hash = 'settings');//Pages.showSettingsPage());
 WebViewTileHeader.addEventListener('BackButtonClicked', () => {
-    if(document.location.hash == '' || document.location.hash == '#instruction') {
-        Nexpaq.API.Exit();
-    } else {
-        history.back();
-    }
+  Nexpaq.API.Exit();
 });
 document.getElementById('button-snapshot').addEventListener('click', () => createSnapshot());
 document.getElementById('snapshot-button-cancel').addEventListener('click', snapshotButtonCancelClickHandler);
