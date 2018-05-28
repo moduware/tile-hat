@@ -6,6 +6,8 @@
 
 // PARTIALS
 @import 'partial/main';
+
+// ELEMENTS
 @import 'elements/tile-pages';
 @import 'elements/snapshot-item';
 @import 'elements/action-button';
@@ -15,7 +17,7 @@
 @import 'elements/swiper';
 @import 'elements/navigation-tabs';
 @import 'elements/temperature-list-item';
-
+@import 'elements/history-placeholder';
 
 // SCREENS
 @import 'screen/tile-screen';

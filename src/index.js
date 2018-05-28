@@ -29,6 +29,7 @@ import tabbarSettingsSelectediOSIconSrc from './img/ios/settings-icon-active.svg
 import tabbarSettingsNotSelectediOSIconSrc from './img/ios/settings-icon-not-active.svg';
 
 import temperatureListIconSrc from './img/temperature-icon-ambient-square.svg';
+import historyEmptyIconSrc from './img/history-empty-icon.svg';
 
 import Settings from './lib/Settings';
 import * as Utils from './lib/Utils';
@@ -79,7 +80,8 @@ const tile = new Vue({
     temperatureHistoryValues: [],
     temperatureListDataValues: [],
     icons: {
-      temperatureListIconSrc
+      temperatureListIconSrc,
+      historyEmptyIconSrc
     }
   },
 

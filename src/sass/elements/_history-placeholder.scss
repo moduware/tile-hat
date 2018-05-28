@@ -1,0 +1,38 @@
+.history-placeholder {
+  font-family: Roboto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.history-placeholder-icon {
+  margin-bottom: 35px;
+}
+
+.history-placeholder-title {
+  font-size: 17px;
+  line-height: 17px;
+  color: #000000;
+  margin-bottom: 8px;
+
+  body.platform-ios & {
+    // --ios-background-color: transparent;
+    color: #535353;
+  }
+}
+
+.history-placeholder-text {
+  font-size: 14px;
+  line-height: 18px;
+  color: #929292;
+  display: inline-block;
+  text-align: center;
+
+  body.platform-ios & {
+    // --ios-background-color: transparent;
+    color: #7A7A7A;
+  }
+}
