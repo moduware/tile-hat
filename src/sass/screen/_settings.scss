@@ -53,23 +53,65 @@
     display: inline-block;
   }
 
+  // custom mdl-radio buttons styles
   .mdl-switch {
     position: absolute;
     width: 50px;
     right: 0;
     top: 50%;
     transform: translateY(-50%);
+
+    body.platform-ios & {
+      width: 52px;
+      height: 32px;
+      margin: 0 16px 0 0;
+    }
   }
+
+  .mdl-switch .mdl-switch__thumb {
+
+    body.platform-ios & {
+      background: white;
+      left: 2px;
+      width: 28px;
+      height: 28px;
+    }
+  }
+
 
   .mdl-switch.is-checked .mdl-switch__thumb {
     background: #ffb931;
+
+    body.platform-ios & {
+      transform: translate(20px, 0);
+    }
   }
+
+  .mdl-switch .mdl-switch__track {
+
+    body.platform-ios & {
+      box-sizing: border-box;
+      border-radius: 16px;
+      background-color: white;
+      border: 2px solid #bfbfbf;
+      top: 0px;
+      height: 32px;
+      width: 52px;
+    }
+  }
+
 
   .mdl-switch.is-checked .mdl-switch__track {
     background: rgba(255, 185, 49, 0.5);
+
+    body.platform-ios & {
+      box-sizing: border-box;
+      border-radius: 16px;
+      background-color: #4cd964;
+      border: none;
+    }
   }
 
-  // custom mdl-radio buttons styles
   .mdl-radio__inner-circle,
   .mdl-radio__ripple-container .mdl-ripple,
   .mdl-radio.is-checked .mdl-radio__inner-circle {
@@ -78,4 +120,19 @@
   .mdl-radio.is-checked .mdl-radio__outer-circle {
     border: 2px solid #ffb931;
   }
+
+  .mdl-switch__ripple-container.mdl-js-ripple-effect {
+
+    body.platform-ios & {
+      display: none;
+    }
+  }
+
+  .mdl-switch__input{
+    // remove ripple effect on ios platform
+    body.platform-ios & {
+      visibility: hidden !important;
+    }
+  }
+
 }
