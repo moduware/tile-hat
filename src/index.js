@@ -31,6 +31,8 @@ import tabbarSettingsNotSelectediOSIconSrc from './img/ios/settings-icon-not-act
 
 import temperatureListIconSrc from './img/temperature-icon-ambient-square.svg';
 import historyEmptyIconSrc from './img/history-empty-icon.svg';
+import instructionAmbientIconSrc from './img/instruction-ambient.png';
+import instructionObjectIconSrc from './img/instruction-object.png';
 
 import Settings from './lib/Settings';
 import * as Utils from './lib/Utils';
@@ -83,7 +85,9 @@ const tile = new Vue({
     temperatureListDataValues: [],
     icons: {
       temperatureListIconSrc,
-      historyEmptyIconSrc
+      historyEmptyIconSrc,
+      instructionAmbientIconSrc,
+      instructionObjectIconSrc
     }
   },
 
@@ -180,6 +184,7 @@ const tile = new Vue({
     },
 
     renderIosHeaderSaveButton: function(page, tab) {
+      console.log('renderIosHeaderSaveButton page: %s \n and tab: %s', page, tab);
       if (this.platform != 'ios') return;
       const headerSaveButton = document.getElementById('header-save-button');
       if (page == 'main' && tab == 'result') {
@@ -199,9 +204,11 @@ const tile = new Vue({
       deep: true
     },
     currentPage: function(newPage, oldPage) {
+      console.log('currentPage newPage: %s \n and oldPage: %s', newPage, oldPage);
       this.renderIosHeaderSaveButton(newPage, this.currentTab);
     },
     currentTab: function(newTab, oldTab) {
+      console.log('currentTab newTab: %s \n and oldTab: %s', newTab, oldTab);
       this.renderIosHeaderSaveButton(this.currentPage, newTab);
     }
   },
@@ -353,6 +360,8 @@ window.tile = tile;
 // Showing module instruction to user by default
 if(tile.settings.showInstruction) {
   document.location.hash = 'instruction';
+} else {
+  document.location.hash = 'main';
 }
 
 const instructionSwiper = new Swiper('.swiper-container', {
@@ -380,15 +389,13 @@ if (tile.platform == 'ios') {
     id: 'header-save-button'
   }, () => headerSaveButtonHandler());
 }
-// let iosSnapshotSaveButton = document.getElementById('header-save-button');
-// iosSnapshotSaveButton.setAttribute("href", "#snapshot");
-// WebViewTileHeader.addButton({
-//   title: 'Save',
-//   number: 1,
-//   id: 'header-notifications-button'
-// });
 
 WebViewTileHeader.addEventListener('BackButtonClicked', () => {
+  // if (document.location.hash == '' || document.location.hash == '#instruction') {
+  //   Nexpaq.API.Exit();
+  // } else {
+  //   history.back();
+  // }
   Nexpaq.API.Exit();
 });
 
