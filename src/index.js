@@ -67,7 +67,8 @@ const tile = new Vue({
     currentTab: 'result', // history / settings
     // platform: 'undefined',
     navigationDirection: 'forward',
-    
+    currentSlide: '',
+    swiperPage: 'one',
     sensorValues: {
         ambientTemperature: 0,
         objectTemperature: 0,
@@ -184,7 +185,6 @@ const tile = new Vue({
     },
 
     renderIosHeaderSaveButton: function(page, tab) {
-      console.log('renderIosHeaderSaveButton page: %s \n and tab: %s', page, tab);
       if (this.platform != 'ios') return;
       const headerSaveButton = document.getElementById('header-save-button');
       if (page == 'main' && tab == 'result') {
@@ -192,6 +192,14 @@ const tile = new Vue({
       } else {
         headerSaveButton.classList.add('hidden');
       }
+    },
+
+    updateSwiperPage: function(page) {                    
+      this.swiperPage = page;
+    },
+
+    nextInstructionSlide: function() {
+      instructionSwiper.slideNext();
     }
 
   },
@@ -204,16 +212,17 @@ const tile = new Vue({
       deep: true
     },
     currentPage: function(newPage, oldPage) {
-      console.log('currentPage newPage: %s \n and oldPage: %s', newPage, oldPage);
       this.renderIosHeaderSaveButton(newPage, this.currentTab);
     },
     currentTab: function(newTab, oldTab) {
-      console.log('currentTab newTab: %s \n and oldTab: %s', newTab, oldTab);
       this.renderIosHeaderSaveButton(this.currentPage, newTab);
     }
   },
 
   computed: {
+    swiperPageValue: function() {
+      return this.swiperPage;
+    },
     platform: function() {
       // get tile.platform after body.classList is set
       return getPlatformValue();
@@ -345,10 +354,6 @@ const tile = new Vue({
           items: dateGroups[date]
         };
       });
-      // groupArrays.sort(function (a, b) {
-      //   return a.date - b.date;
-      // }).reverse();
-      // console.log(groupArrays);
       return groupArrays;
     }
 
@@ -365,10 +370,25 @@ if(tile.settings.showInstruction) {
 }
 
 const instructionSwiper = new Swiper('.swiper-container', {
-    direction: 'horizontal',
-    pagination: {
-        el: '.swiper-pagination'
-    }
+  direction: 'horizontal',
+  pagination: {
+      el: '.swiper-pagination'
+  }
+});
+
+instructionSwiper.on('slideChange', function () {
+  const swiperSlideActive = document.querySelector('.swiper-slide.swiper-slide-active');
+  if (instructionSwiper.isBeginning) {
+    tile.currentSlide = 'one';
+    tile.$nextTick(function () {
+      this.updateSwiperPage(tile.currentSlide);
+    });
+  } else if (instructionSwiper.isEnd) {
+    tile.currentSlide = 'two';
+    tile.$nextTick(function () {
+      this.updateSwiperPage(tile.currentSlide);
+    });
+  }
 });
 
 /* Revealing UI */
@@ -380,8 +400,6 @@ WebViewTileHeader.create('Temperature');
 WebViewTileHeader.customize({color: 'white', iconColor:'white', backgroundColor:'#FFB931', borderBottom:'none'});
 WebViewTileHeader.hideShadow();
 
-/* Paging system */
-// WebViewTileHeader.addButton({image: headerSettingsIcon}, () => document.location.hash = 'settings');//Pages.showSettingsPage());
 // Add save button to header (right side)
 if (tile.platform == 'ios') {
   WebViewTileHeader.addButton({
@@ -425,14 +443,6 @@ if (window.ModuwareAPIIsReady) {
 } else {
   document.addEventListener('NexpaqAPIReady', () => ApiReadyActions());
 }
-
-
-// function showPage(name) {
-//     const pages = Array.from(document.querySelectorAll('.tile-screen'));
-//     pages.map(
-//         page => page.classList.contains(name) ? page.classList.remove('hidden') : page.classList.add('hidden')
-//     );
-// }
 
 function snapshotButtonCancelClickHandler() {
   const containerElement = document.getElementById('snapshot-buttons-container');
