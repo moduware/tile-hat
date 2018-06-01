@@ -67,7 +67,7 @@ const tile = new Vue({
     currentTab: 'result', // history / settings
     // platform: 'undefined',
     navigationDirection: 'forward',
-    currentSlide: '',
+    currentSlide: 'one',
     swiperPage: 'one',
     sensorValues: {
         ambientTemperature: 0,
@@ -221,7 +221,8 @@ const tile = new Vue({
 
   computed: {
     swiperPageValue: function() {
-      return this.swiperPage;
+      this.swiperPage = this.currentSlide;
+      return this.swiperPage ;
     },
     platform: function() {
       // get tile.platform after body.classList is set
@@ -380,14 +381,8 @@ instructionSwiper.on('slideChange', function () {
   const swiperSlideActive = document.querySelector('.swiper-slide.swiper-slide-active');
   if (instructionSwiper.isBeginning) {
     tile.currentSlide = 'one';
-    tile.$nextTick(function () {
-      this.updateSwiperPage(tile.currentSlide);
-    });
   } else if (instructionSwiper.isEnd) {
     tile.currentSlide = 'two';
-    tile.$nextTick(function () {
-      this.updateSwiperPage(tile.currentSlide);
-    });
   }
 });
 

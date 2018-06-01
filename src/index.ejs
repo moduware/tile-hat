@@ -71,8 +71,8 @@
             <div class="swiper-pagination"></div>
           </div>
           <div class="button-container">
-            <a v-if="this.swiperPage == 'one'" class="action-button action-button--primary" @click="nextInstructionSlide">Next</a>
-            <a v-else-if="this.swiperPage == 'two'" class="action-button action-button--primary" href="#main">Got it!</a>
+            <a v-if="this.swiperPageValue == 'one'" class="action-button action-button--primary" @click="nextInstructionSlide">Next</a>
+            <a v-else-if="this.swiperPageValue == 'two'" class="action-button action-button--primary" href="#main">Got it!</a>
             <a class="action-button action-button--link" href="#main" @click="disableInstruction">Don't Show Again</a>
           </div>
         </div> <!-- / page instruction -->
