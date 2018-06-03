@@ -11,7 +11,7 @@
     .swiper-slide {
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: flex-end;
         text-align: center;
         font-size: 14px;
         color: white;
@@ -22,9 +22,9 @@
     .slide-image-container {
         display: flex;
         justify-content: center;
-        align-items: flex-end;
-        margin-bottom: 50px;
-        min-height: 150px;
+        // align-items: flex-end;
+        // margin-bottom: 50px;
+        // min-height: 150px;
     }
 
     .slide-image {

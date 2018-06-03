@@ -22,7 +22,8 @@
             <div class="swiper-wrapper">
               <div class="swiper-slide">
                 <div class="slide-image-container">
-                  <svg class="slide-image" width="273px" height="35px" viewBox="0 0 273 35" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                  <img :src="icons.instructionAmbientIconSrc" />
+                  <!-- <svg class="slide-image" width="273px" height="35px" viewBox="0 0 273 35" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                       <g transform="translate(-44.000000, -285.000000)">
                         <g transform="translate(44.000000, 285.000000)">
@@ -34,15 +35,19 @@
                         </g>
                       </g>
                     </g>
-                  </svg>
+                  </svg> -->
                 </div>
                 <p class="slide-note">
                   When measuring ambient temperature, place the device away from extraneous influences and allow it to stabilise.
                 </p>
               </div>
               <div class="swiper-slide">
-                <div class="slide-image-container">  
-                  <svg class="slide-image" width="273px" height="142px" viewBox="0 0 273 142" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <p class="slide-note">
+                  IMPORTANT: Don't use module as a thermometer
+                </p>
+                <div class="slide-image-container">
+                  <img :src="icons.instructionObjectIconSrc" />
+                  <!-- <svg class="slide-image" width="273px" height="142px" viewBox="0 0 273 142" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                       <g transform="translate(-39.000000, -178.000000)">
                         <g transform="translate(39.000000, 156.000000)">
@@ -56,7 +61,7 @@
                         </g>
                       </g>
                     </g>
-                  </svg>
+                  </svg> -->
                 </div>
                 <p class="slide-note">
                   When measuring the temperature of an object, don't disconnect the module. Simply place the temperature sensor up against the intended object.
@@ -66,7 +71,8 @@
             <div class="swiper-pagination"></div>
           </div>
           <div class="button-container">
-            <a class="action-button action-button--primary" href="#main">Okay</a>
+            <a v-if="this.swiperPageValue == 'one'" class="action-button action-button--primary" @click="nextInstructionSlide">Next</a>
+            <a v-else-if="this.swiperPageValue == 'two'" class="action-button action-button--primary" href="#main">Got it!</a>
             <a class="action-button action-button--link" href="#main" @click="disableInstruction">Don't Show Again</a>
           </div>
         </div> <!-- / page instruction -->
@@ -132,7 +138,7 @@
             
               <a v-if="platform == 'android'" href="#snapshot" class="action-button action-button--primary" id="button-snapshot">Save</a>
             </div>
-            <!-- / page result -->
+            <!-- / tab result -->
 
             <div name="settings" class="tile-pages__page settings-screen">
               <div class="settings-container">
@@ -148,15 +154,19 @@
                 </label>
               </div>
             
-              <div class="settings-container">
+              <div v-if="platform == 'ios'" class="settings-container">
                 <span class="settings-container__title">Measure</span>
             
-                <!-- <input type="radio" name="measureType" value="ambient" v-model="settings.measureType" id="ambientSetting">
-                        <label class="settings-container__label" for="ambientSetting">Ambient temperature</label>
-            
-                        <input type="radio" name="measureType" value="object" v-model="settings.measureType" id="objectSetting" >
-                        <label class="settings-container__label" for="objectSetting">Object temperature</label> -->
-            
+                <input type="radio" name="measureType" value="ambient" v-model="settings.measureType" id="ambientSetting">
+                <label class="settings-container__label" for="ambientSetting">Ambient temperature</label>
+    
+                <input type="radio" name="measureType" value="object" v-model="settings.measureType" id="objectSetting" >
+                <label class="settings-container__label" for="objectSetting">Object temperature</label>
+              </div>
+
+              <div v-if="platform == 'android'" class="settings-container">
+                <span class="settings-container__title">Measure</span>
+
                 <label class="settings-container__label" for="ambientSetting">
                   <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="ambientSetting">
                     <input type="radio" id="ambientSetting" class="mdl-radio__button" name="measureType" value="ambient" v-model="settings.measureType">
@@ -174,13 +184,18 @@
                 </label>
               </div>
             
-              <div class="settings-container">
+              <div v-if="platform == 'ios'" class="settings-container">
                 <span class="settings-container__title">Units</span>
             
-                <!-- <label class="settings-container__label unit-celsius" for="celsiusSetting">
-                          <span>Celsius</span>
-                        </label>
-                        <input type="radio" class="celsius" name="measureUnit" value="celsius" v-model="settings.units" id="celsiusSetting"> -->
+                <input type="radio" class="celsius" name="measureUnit" value="celsius" v-model="settings.units" id="celsiusSetting" >
+                <label class="settings-container__label unit-celsius" for="celsiusSetting">Celsius</label>
+                
+                <input type="radio" class="fahrenheit" name="measureUnit" value="fahrenheit" v-model="settings.units" id="fahrenheitSetting" >
+                <label class="settings-container__label unit-fahrenheit" for="fahrenheitSetting">Fahrenheit</label>
+              </div>
+
+              <div v-if="platform == 'android'" class="settings-container">
+                <span class="settings-container__title">Units</span>
             
                 <label class="settings-container__label unit-celsius" for="celsiusSetting">
                   <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="celsiusSetting">
@@ -189,10 +204,7 @@
                   </label>
                   Celsius
                 </label>
-            
-                <!-- <input type="radio" class="fahrenheit" name="measureUnit" value="fahrenheit" v-model="settings.units" id="fahrenheitSetting" > -->
-                <!-- <label class="settings-container__label unit-fahrenheit" for="fahrenheitSetting">Fahrenheit</label> -->
-            
+                
                 <label class="settings-container__label unit-fahrenheit" for="fahrenheitSetting">
                   <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="fahrenheitSetting">
                     <input type="radio" id="fahrenheitSetting" class="mdl-radio__button fahrenheit" name="measureUnit" value="fahrenheit" v-model="settings.units">
@@ -200,7 +212,6 @@
                   </label>
                   Fahrenheit
                 </label>
-            
               </div>
             
             </div>
@@ -256,9 +267,9 @@
               </morph-list-view>
             
             </div>
-            <!-- / page history -->
+            <!-- / tab history -->
           </morph-pages>
-        </div>
+        </div> <!-- / main page -->
       </morph-pages>
     </div> <!-- / wrapper -->
 
