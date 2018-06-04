@@ -12,27 +12,8 @@ import 'material-design-lite/material.min.js';
 const WebViewTileHeader = NexpaqHeader;
 WebViewTileHeader._detectCurrentPlatform();
 
-import headerSettingsIcon from './img/icon-settings.svg';
-
-import tabbarResultSelectedAndroidIconSrc from './img/android/sensor-icon-active.svg';
-import tabbarResultNotSelectedAndroidIconSrc from './img/android/sensor-icon-not-active.svg';
-import tabbarResultSelectediOSIconSrc from './img/ios/sensor-icon-active.svg';
-import tabbarResultNotSelectediOSIconSrc from './img/ios/sensor-icon-not-active.svg';
-
-import tabbarHistorySelectedAndroidIconSrc from './img/android/timeline-icon-active.svg';
-import tabbarHistoryNotSelectedAndroidIconSrc from './img/android/timeline-icon-not-active.svg';
-import tabbarHistorySelectediOSIconSrc from './img/ios/timeline-icon-active.svg';
-import tabbarHistoryNotSelectediOSIconSrc from './img/ios/timeline-icon-not-active.svg';
-
-import tabbarSettingsSelectedAndroidIconSrc from './img/android/settings-icon-active.svg';
-import tabbarSettingsNotSelectedAndroidIconSrc from './img/android/settings-icon-not-active.svg';
-import tabbarSettingsSelectediOSIconSrc from './img/ios/settings-icon-active.svg';
-import tabbarSettingsNotSelectediOSIconSrc from './img/ios/settings-icon-not-active.svg';
-
-import temperatureListIconSrc from './img/temperature-icon-ambient-square.svg';
-import historyEmptyIconSrc from './img/history-empty-icon.svg';
-import instructionAmbientIconSrc from './img/instruction-ambient.png';
-import instructionObjectIconSrc from './img/instruction-object.png';
+import media from './media';
+import tabbarIcons from './lib/tabbar-icons';
 
 import Settings from './lib/Settings';
 import * as Utils from './lib/Utils';
@@ -60,10 +41,12 @@ const loadedSettings = Settings.Load(defaultSettings);
 
 const STORAGE_KEY = 'hat-history-storage';
 
+let instructionSwiper = null;
+
 const tile = new Vue({
   el: '#wrapper',
   data: {
-    currentPage: 'main', // instruction / snapshot
+    currentPage: null,//'main', // instruction / snapshot
     currentTab: 'result', // history / settings
     // platform: 'undefined',
     navigationDirection: 'forward',
@@ -85,11 +68,12 @@ const tile = new Vue({
     temperatureHistoryValues: [],
     temperatureListDataValues: [],
     icons: {
-      temperatureListIconSrc,
-      historyEmptyIconSrc,
-      instructionAmbientIconSrc,
-      instructionObjectIconSrc
-    }
+      temperatureListIconSrc: media.temperatureListIconSrc,
+      historyEmptyIconSrc: media.historyEmptyIconSrc,
+      instructionAmbientIconSrc: media.instructionAmbientIconSrc,
+      instructionObjectIconSrc: media.instructionObjectIconSrc
+    },
+    tabbarIcons
   },
 
   created() {
@@ -101,6 +85,24 @@ const tile = new Vue({
   mounted: function () {
     // load material design lite properly in webpack
     componentHandler.upgradeAllRegistered();
+    const swiperElement = document.querySelector('.swiper-container');
+    // TODO: get rid of this shitty swiper
+    window.Swiper = Swiper;
+    instructionSwiper = new Swiper(swiperElement, {
+      direction: 'horizontal',
+      pagination: {
+        el: '.swiper-pagination'
+      }
+    });
+
+    instructionSwiper.on('slideChange', function () {
+      const swiperSlideActive = document.querySelector('.swiper-slide.swiper-slide-active');
+      if (instructionSwiper.isBeginning) {
+        tile.currentSlide = 'one';
+      } else if (instructionSwiper.isEnd) {
+        tile.currentSlide = 'two';
+      }
+    });
   },
  
   filters: {
@@ -229,30 +231,6 @@ const tile = new Vue({
       return getPlatformValue();
     },
 
-    tabbarResultSelectedIcon: function () {
-      return this.platform == 'android' ? tabbarResultSelectedAndroidIconSrc : tabbarResultSelectediOSIconSrc;
-    },
-
-    tabbarResultNotSelectedIcon: function() {
-      return this.platform == 'android' ? tabbarResultNotSelectedAndroidIconSrc : tabbarResultNotSelectediOSIconSrc;
-    },
-
-    tabbarHistorySelectedIcon: function () {
-      return this.platform == 'android' ? tabbarHistorySelectedAndroidIconSrc : tabbarHistorySelectediOSIconSrc;
-    },
-
-    tabbarHistoryNotSelectedIcon: function () {
-      return this.platform == 'android' ? tabbarHistoryNotSelectedAndroidIconSrc : tabbarHistoryNotSelectediOSIconSrc;
-    },
-
-    tabbarSettingsSelectedIcon: function () {
-      return this.platform == 'android' ? tabbarSettingsSelectedAndroidIconSrc : tabbarSettingsSelectediOSIconSrc;
-    },
-
-    tabbarSettingsNotSelectedIcon: function () {
-      return this.platform == 'android' ? tabbarSettingsNotSelectedAndroidIconSrc : tabbarSettingsNotSelectediOSIconSrc;
-    },
-
     temperatureValue: function() {
       let temperature;
       // taking required temperature
@@ -369,22 +347,6 @@ if(tile.settings.showInstruction) {
 } else {
   document.location.hash = 'main';
 }
-
-const instructionSwiper = new Swiper('.swiper-container', {
-  direction: 'horizontal',
-  pagination: {
-      el: '.swiper-pagination'
-  }
-});
-
-instructionSwiper.on('slideChange', function () {
-  const swiperSlideActive = document.querySelector('.swiper-slide.swiper-slide-active');
-  if (instructionSwiper.isBeginning) {
-    tile.currentSlide = 'one';
-  } else if (instructionSwiper.isEnd) {
-    tile.currentSlide = 'two';
-  }
-});
 
 /* Revealing UI */
 document.getElementById('wrapper').style.opacity = 1;

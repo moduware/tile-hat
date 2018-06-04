@@ -109,9 +109,9 @@
         <div name="main" class="tile-pages__page tile-pages__page--main">
           <template>
             <morph-tabbar class="navigation-tabs" :selected="currentTab" @selected-changed="currentTab = $event.target.selected">
-              <morph-tabbar-item name="result" :not-selected-image="tabbarResultNotSelectedIcon" :selected-image="tabbarResultSelectedIcon"></morph-tabbar-item>
-              <morph-tabbar-item name="history" :not-selected-image="tabbarHistoryNotSelectedIcon" :selected-image="tabbarHistorySelectedIcon"></morph-tabbar-item>
-              <morph-tabbar-item name="settings" :not-selected-image="tabbarSettingsNotSelectedIcon" :selected-image="tabbarSettingsSelectedIcon"></morph-tabbar-item>
+              <morph-tabbar-item name="result" :not-selected-image="tabbarIcons[platform].tabbarResultNotSelected" :selected-image="tabbarIcons[platform].tabbarResultSelected"></morph-tabbar-item>
+              <morph-tabbar-item name="history" :not-selected-image="tabbarIcons[platform].tabbarHistoryNotSelected" :selected-image="tabbarIcons[platform].tabbarHistorySelected"></morph-tabbar-item>
+              <morph-tabbar-item name="settings" :not-selected-image="tabbarIcons[platform].tabbarSettingsNotSelected" :selected-image="tabbarIcons[platform].tabbarSettingsSelected"></morph-tabbar-item>
             </morph-tabbar>
           </template>
           <morph-pages class="tile-tabs" :selected="currentTab" @selected-changed="currentTab = $event.target.selected" :page-change-animation-direction="navigationDirection" attr-for-selected="name"
