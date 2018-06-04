@@ -377,8 +377,6 @@ const instructionSwiper = new Swiper('.swiper-container', {
   }
 });
 
-window.instructionSwiper = instructionSwiper;
-
 instructionSwiper.on('slideChange', function () {
   const swiperSlideActive = document.querySelector('.swiper-slide.swiper-slide-active');
   if (instructionSwiper.isBeginning) {
