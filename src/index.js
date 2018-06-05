@@ -88,21 +88,28 @@ const tile = new Vue({
     const swiperElement = document.querySelector('.swiper-container');
     // TODO: get rid of this shitty swiper
     window.Swiper = Swiper;
-    instructionSwiper = new Swiper(swiperElement, {
-      direction: 'horizontal',
-      pagination: {
-        el: '.swiper-pagination'
-      }
+
+    this.$nextTick(function () {
+      // Code that will run only after the
+      // entire view has been rendered
+      instructionSwiper = new Swiper(swiperElement, {
+        direction: 'horizontal',
+        pagination: {
+          el: '.swiper-pagination'
+        }
+      });
+
+      instructionSwiper.on('slideChange', function () {
+        const swiperSlideActive = document.querySelector('.swiper-slide.swiper-slide-active');
+        if (instructionSwiper.isBeginning) {
+          tile.currentSlide = 'one';
+        } else if (instructionSwiper.isEnd) {
+          tile.currentSlide = 'two';
+        }
+      });
+
     });
 
-    instructionSwiper.on('slideChange', function () {
-      const swiperSlideActive = document.querySelector('.swiper-slide.swiper-slide-active');
-      if (instructionSwiper.isBeginning) {
-        tile.currentSlide = 'one';
-      } else if (instructionSwiper.isEnd) {
-        tile.currentSlide = 'two';
-      }
-    });
   },
  
   filters: {
@@ -366,12 +373,12 @@ if (tile.platform == 'ios') {
 }
 
 WebViewTileHeader.addEventListener('BackButtonClicked', () => {
-  // if (document.location.hash == '' || document.location.hash == '#instruction') {
-  //   Nexpaq.API.Exit();
-  // } else {
-  //   history.back();
-  // }
-  Nexpaq.API.Exit();
+  if (document.location.hash == '#snapshot') {
+    document.location.hash = 'main';
+  } else {
+    // history.back();
+    Nexpaq.API.Exit();
+  }
 });
 
 if (tile.platform == 'android') {
