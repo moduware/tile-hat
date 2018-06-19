@@ -22,6 +22,7 @@
     "morph-tabbar-item": "https://github.com/moduware/morph-tabbar-item.git#master",
     "morph-list-view": "https://github.com/moduware/morph-list-view.git#master",
     "morph-list-view-item": "https://github.com/moduware/morph-list-view-item.git#master",
-    "morph-list-view-title": "https://github.com/moduware/morph-list-view-title.git#master"
+    "morph-list-view-title": "https://github.com/moduware/morph-list-view-title.git#master",
+    "morph-swipeout": "https://github.com/moduware/morph-swipeout.git#master"
   }
 }
