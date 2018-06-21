@@ -23,6 +23,9 @@ import MeasureType from './enums/MeasureType';
 import '../bower_components/morph-tabbar/morph-tabbar.html'; 
 import '../bower_components/morph-tabbar-item/morph-tabbar-item.html';
 
+import '../bower_components/morph-swipeout/morph-swipeout.html';
+import '../bower_components/morph-button/morph-button.html';
+
 import '../bower_components/morph-pages/morph-location.html';
 import '../bower_components/morph-pages/morph-pages.html';
 
