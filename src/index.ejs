@@ -273,7 +273,7 @@
                   </morph-list-view-item>
 
                   <span slot="right-buttons" on-click="buttonClickHandler">
-                    <morph-button color="red" filled flat item-delete>Delete</morph-button>
+                    <morph-button color="red" filled flat item-delete v-on:click="removeTemperatureHistoryItem(item.id)">Delete</morph-button>
                   </span>
                 </morph-swipeout>
 

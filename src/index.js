@@ -172,7 +172,6 @@ const tile = new Vue({
         type: this.snapshotValues.measureType
       });
       let historyTabbarItems = document.querySelector('morph-tabbar-item[name="history"]');
-      console.log(historyTabbarItems);
       this.currentTab = 'history';
       // historyTabbarItems.click();
       this.snapshotValues.textInput = '';
@@ -188,14 +187,14 @@ const tile = new Vue({
     removeTemperatureHistoryItem: function (id) {
       // TODO: pass item instead and say delete index of item
       // let index = this.temperatureHistoryValues.map(function(e) { return e.id; }).indexOf('id');
-      let index = this.temperatureHistoryValues.map(function (e) { console.log(e.id); return e.id; }).indexOf(id);
-      console.log('index', index);
       
-      this.$delete(this.temperatureHistoryValues, index);
-      this.temperatureListDataValues = this.temperatureListDataGroupByDateOutput;
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(this.temperatureHistoryValues));
+      setTimeout(() => {
+        let index = this.temperatureHistoryValues.map(function (e) { console.log(e.id); return e.id; }).indexOf(id);
+        this.$delete(this.temperatureHistoryValues, index);
+        this.temperatureListDataValues = this.temperatureListDataGroupByDateOutput;
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(this.temperatureHistoryValues));
+      }, 500);
     },
-
     renderIosHeaderSaveButton: function(page, tab) {
       if (this.platform != 'ios') return;
       const headerSaveButton = document.getElementById('header-save-button');
