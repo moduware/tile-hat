@@ -226,43 +226,58 @@
             
               <morph-list-view class="temperature-list" v-for="(temperatureListDataValue, index) in temperatureListDataValues" v-bind:key="temperatureListDataValue.date">
                 <morph-list-view-title>{{temperatureListDataValue.date | dateFormat}}</morph-list-view-title>
-            
-                <morph-list-view-item class="temperature-list-item" v-for="item in temperatureListDataValue.items" v-bind:key="item.id">
-                  <span class="temperature-list-item__icon-container" slot="icon">
-                    <img :src="icons.temperatureListIconSrc" />
-                    <!-- <br>
-                            <svg width="14px" height="20px" viewBox="0 0 14 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                              <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                <g transform="translate(-28.000000, -105.000000)" fill="#929292">
-                                  <g transform="translate(23.000000, 103.000000)">
-                                    <path d="M5,9 C5,14.25 11.3540039,21.2501831 11.3540039,21.2501831 C11.7107777,21.6642955 12.3007812,21.6567383 12.658543,21.2351991 C12.658543,21.2351991 19,14.25 19,9 C19,5.13 15.87,2 12,2 C8.13,2 5,5.13 5,9 Z M12,11.5 C10.62,11.5 9.5,10.38 9.5,9 C9.5,7.62 10.62,6.5 12,6.5 C13.38,6.5 14.5,7.62 14.5,9 C14.5,10.38 13.38,11.5 12,11.5 L12,11.5 Z"></path>
-                                  </g>
-                                </g>
-                              </g>
-                            </svg> -->
+
+                <!-- <morph-swipeout>
+                
+                  <span slot="left-buttons">
+                    <morph-button color="red" filled big flat item-delete swipeout-prompt-text="Are you sure you want to delete this item?">Delete</morph-button>
                   </span>
-                  <span slot="header" class="temperature-list-item__title">{{ item.label | capitalize }}</span>
-            
-                  <span class="temperature-list-item__content">
-                    Temperature:
-                    <span class="temperature-list-item__value temperature-list-item__value--temperature">{{ item.temperatureValue | formatTemperature(settings.units) }}</span>
-            
-                    <br> Humidity:
-                    <span class="temperature-list-item__value temperature-list-item__value--humidity">{{ item.humidityValue | formatHumidity }}</span>
+                
+                  Swipeout Container
+                
+                  <span slot="right-buttons" on-click="buttonClickHandler">
+                    <morph-button color="red" filled big flat item-delete>Delete</morph-button>
                   </span>
-            
-                  <!-- <span slot="footer" class="temperature-list-item__address">
-                            One Kowloon, 1 Wang Yuen Street, Kowloon Bay, Hong Kong
-                          </span> -->
-            
-                  <span slot="secondary-content" class="temperature-list-item__time">
-            
-                    {{ item.time }}
-                    <br>
-                    <!-- <button class="nxp-btn-back destroy" style="border-radius: 5px; background: red; color: white; padding: 3px; opacity: 0.3;" v-on:click="removeTemperatureHistoryItem(item.id)">Delete</button> -->
+                
+                </morph-swipeout> -->
+                <morph-swipeout class="temperature-list-item" v-for="item in temperatureListDataValue.items" v-bind:key="item.id">
+                  <span slot="left-buttons">
+                    <morph-button color="red" filled flat item-delete swipeout-prompt-text="Are you sure you want to delete this item?">Delete</morph-button>
                   </span>
-            
-                </morph-list-view-item>
+
+                  <morph-list-view-item class="temperature-list-item">
+                    <span class="temperature-list-item__icon-container" slot="icon">
+                      <img :src="icons.temperatureListIconSrc" />
+                    </span>
+                    <span slot="header" class="temperature-list-item__title">{{ item.label | capitalize }}</span>
+              
+                    <span class="temperature-list-item__content">
+                      Temperature:
+                      <span class="temperature-list-item__value temperature-list-item__value--temperature">{{ item.temperatureValue | formatTemperature(settings.units) }}</span>
+              
+                      <br> Humidity:
+                      <span class="temperature-list-item__value temperature-list-item__value--humidity">{{ item.humidityValue | formatHumidity }}</span>
+                    </span>
+              
+                    <!-- <span slot="footer" class="temperature-list-item__address">
+                              One Kowloon, 1 Wang Yuen Street, Kowloon Bay, Hong Kong
+                            </span> -->
+              
+                    <span slot="secondary-content" class="temperature-list-item__time">
+              
+                      {{ item.time }}
+                      <br>
+                      <!-- <button class="nxp-btn-back destroy" style="border-radius: 5px; background: red; color: white; padding: 3px; opacity: 0.3;" v-on:click="removeTemperatureHistoryItem(item.id)">Delete</button> -->
+                    </span>
+              
+                  </morph-list-view-item>
+
+                  <span slot="right-buttons" on-click="buttonClickHandler">
+                    <morph-button color="red" filled flat item-delete>Delete</morph-button>
+                  </span>
+                </morph-swipeout>
+
+
             
               </morph-list-view>
             
