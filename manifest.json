@@ -3,8 +3,8 @@
   "name": "Temperature and Humidity",
   "description": "Moduware T&H tile module interface",
 
-  "version": "1.3.0",
-  "changes": "Add ability to save values and review them",
+  "version": "1.3.1",
+  "changes": "UI updates and bug fixes",
   "minumumAppVersion": "1.1.8",
   "modules": [
     "nexpaq.module.hat"
