@@ -242,7 +242,7 @@
                 </morph-swipeout> -->
                 <morph-swipeout class="temperature-list-item" v-for="item in temperatureListDataValue.items" v-bind:key="item.id">
                   <span slot="left-buttons">
-                    <morph-button color="red" filled flat item-delete swipeout-prompt-text="Are you sure you want to delete this item?">Delete</morph-button>
+                    <morph-button class="swiper-integration-class" color="red" filled flat item-delete swipeout-prompt-text="Are you sure you want to delete this item?">Delete</morph-button>
                   </span>
 
                   <morph-list-view-item class="temperature-list-item">
@@ -273,7 +273,7 @@
                   </morph-list-view-item>
 
                   <span slot="right-buttons">
-                    <morph-button color="red" filled flat item-delete v-on:click="removeTemperatureHistoryItem(item.id)">Delete</morph-button>
+                    <morph-button class="swiper-integration-class" color="red" filled flat item-delete v-on:click="removeTemperatureHistoryItem(item.id)">Delete</morph-button>
                   </span>
                 </morph-swipeout>
 
