@@ -16,7 +16,7 @@
   <body>
     <div id="wrapper" class="wrapper" style="opacity: 0;">
       <morph-location :hash="currentPage" @hash-changed="currentPage = $event.target.hash" :last-navigation-direction="navigationDirection" @last-navigation-direction-changed="navigationDirection = $event.target.lastNavigationDirection"></morph-location>
-      <morph-pages class="tile-pages" :selected="currentPage" @selected-changed="currentPage = $event.target.selected" :page-change-animation-direction="navigationDirection" attr-for-selected="name">
+      <morph-pages class="tile-pages" :selected="currentPage" @selected-changed="currentPage = $event.target.selected" :page-change-animation-direction="navigationDirection" attr-for-selected="name" no-swipeback no-animation>
         <div name="instruction" class="tile-pages__page instruction-screen">
           <div class="swiper-container">
             <div class="swiper-wrapper">
@@ -115,7 +115,7 @@
             </morph-tabbar>
           </template>
           <morph-pages class="tile-tabs" :selected="currentTab" @selected-changed="currentTab = $event.target.selected" :page-change-animation-direction="navigationDirection" attr-for-selected="name"
-          fallback-selection="result"> 
+          fallback-selection="result" no-swipeback no-animation> 
             <div name="result" class="tile-pages__page result-screen">
               <div class="result-screen__content">
                 <div class="result-screen__left-side">
