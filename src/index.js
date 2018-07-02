@@ -189,7 +189,7 @@ const tile = new Vue({
       // let index = this.temperatureHistoryValues.map(function(e) { return e.id; }).indexOf('id');
       
       setTimeout(() => {
-        let index = this.temperatureHistoryValues.map(function (e) { console.log(e.id); return e.id; }).indexOf(id);
+        let index = this.temperatureHistoryValues.map(function (e) { return e.id; }).indexOf(id);
         this.$delete(this.temperatureHistoryValues, index);
         this.temperatureListDataValues = this.temperatureListDataGroupByDateOutput;
         localStorage.setItem(STORAGE_KEY, JSON.stringify(this.temperatureHistoryValues));
