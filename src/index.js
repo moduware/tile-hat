@@ -186,7 +186,6 @@ const tile = new Vue({
 
     removeTemperatureHistoryItem: function (id) {
       // TODO: pass item instead and say delete index of item
-      // let index = this.temperatureHistoryValues.map(function(e) { return e.id; }).indexOf('id');
       
       setTimeout(() => {
         let index = this.temperatureHistoryValues.map(function (e) { return e.id; }).indexOf(id);
