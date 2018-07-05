@@ -171,30 +171,21 @@ const tile = new Vue({
         label: this.snapshotValues.textInput.trim(),
         type: this.snapshotValues.measureType
       });
-      let historyTabbarItems = document.querySelector('morph-tabbar-item[name="history"]');
+      
       this.currentTab = 'history';
-      // historyTabbarItems.click();
       this.snapshotValues.textInput = '';
       this.temperatureListDataValues = this.temperatureListDataGroupByDateOutput;
       localStorage.setItem(STORAGE_KEY, JSON.stringify(this.temperatureHistoryValues));
     },
-   
-    snapshotTimeObjectOutputFunction: function() {
-      // return moment(this.snapshotValues.timestamp).toObject();
-      let timestampObject = moment.unix(this.snapshotValues.timestamp);
-    },
 
     removeTemperatureHistoryItem: function (item) {
-      // TODO: pass item instead and say delete index of item
-      
       setTimeout(() => {
-        // let index = this.temperatureHistoryValues.map(function (e) { return e.id; }).indexOf(id);
-        // this.$delete(this.temperatureHistoryValues, index);
         this.$delete(this.temperatureHistoryValues, this.temperatureHistoryValues.indexOf(item));
         this.temperatureListDataValues = this.temperatureListDataGroupByDateOutput;
         localStorage.setItem(STORAGE_KEY, JSON.stringify(this.temperatureHistoryValues));
       }, 500);
     },
+
     renderIosHeaderSaveButton: function(page, tab) {
       if (this.platform != 'ios') return;
       const headerSaveButton = document.getElementById('header-save-button');
