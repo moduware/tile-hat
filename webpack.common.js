@@ -104,6 +104,14 @@ module.exports = {
         from: 'bower_components/webcomponentsjs/webcomponents-hi.js', 
         to: 'bower_components/webcomponentsjs/webcomponents-hi.js'
       },
+      {
+        from: 'bower_components/webcomponentsjs/webcomponents-hi-sd-ce.js',
+        to: 'bower_components/webcomponentsjs/webcomponents-hi-sd-ce.js'
+      },
+      {
+        from: 'bower_components/webcomponentsjs/webcomponents-hi-sd-ce.js.map',
+        to: 'bower_components/webcomponentsjs/webcomponents-hi-sd-ce.js.map'
+      },
       { 
         from: 'bower_components/webcomponentsjs/webcomponents-hi.js.map', 
         to: 'bower_components/webcomponentsjs/webcomponents-hi.js.map'
