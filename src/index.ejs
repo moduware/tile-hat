@@ -212,7 +212,7 @@
               </div>
             
               <morph-list-view class="temperature-list" v-for="(temperatureListDataValue, index) in temperatureListDataValues" v-bind:key="temperatureListDataValue.date">
-                <morph-list-view-title>{{temperatureListDataValue.date | dateFormat}}</morph-list-view-title>
+                <morph-list-view-title class="temperature-list-title">{{temperatureListDataValue.date | dateFormat}}</morph-list-view-title>
 
                 <morph-swipeout class="temperature-list-item" v-for="item in temperatureListDataValue.items" v-bind:key="item.id">
 
