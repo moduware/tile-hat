@@ -74,7 +74,7 @@ module.exports = {
         exclude: /node_modules\/(?!(dom7|swiper)\/).*/,
         loader: 'babel-loader',
         options: {
-          presets: ['babel-preset-env']
+          presets: ['babel-preset-env', '@babel/preset-stage-3']
         }
       }
     ]

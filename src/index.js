@@ -1,3 +1,4 @@
+import "babel-polyfill";
 import 'reset-css/reset.css';
 import 'material-design-lite/material.min.css';
 import 'swiper/dist/css/swiper.min.css';
@@ -5,7 +6,8 @@ import './sass/styles.scss';
 
 // import Navigo from 'navigo';
 import moment from 'moment';
-import Swiper from 'swiper';
+// import Swiper from 'swiper';
+import Swiper from 'swiper/dist/js/swiper.js';
 import Vue from 'vue';
 import 'material-design-lite/material.min.js';
 // import WebViewTileHeader from 'webview-tile-header/WebViewTileHeader.js';

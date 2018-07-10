@@ -9,10 +9,19 @@
   },
   "author": "Alex Chernov",
   "license": "ISC",
+  "babel": {
+    "plugins": [
+      "transform-regenerator"
+    ]
+  },
   "devDependencies": {
-    "babel-core": "^6.26.0",
-    "babel-loader": "^7.1.4",
-    "babel-preset-env": "^1.6.1",
+    "@babel/core": "^7.0.0-beta.52",
+    "@babel/preset-env": "^7.0.0-beta.52",
+    "@babel/preset-stage-3": "^7.0.0-beta.52",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-loader": "^8.0.0-beta",
+    "babel-plugin-transform-regenerator": "^6.26.0",
+    "babel-preset-env": "^2.0.0-alpha.20",
     "bourbon": "^4.3.4",
     "copy-webpack-plugin": "^4.5.1",
     "css-loader": "^0.28.11",
@@ -35,5 +44,8 @@
     "webview-tile-header": "git+https://github.com/moduware/webview-tile-header.git",
     "zip-webpack-plugin": "^3.0.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "babel-polyfill": "^6.26.0",
+    "babel-register": "7.0.0-beta.3"
+  }
 }
