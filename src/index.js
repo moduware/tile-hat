@@ -204,8 +204,24 @@ const tile = new Vue({
 
     nextInstructionSlide: function() {
       instructionSwiper.slideNext();
-    }
-
+    },
+    
+    iosDeviceVersionArray: function() {
+      if (this.getIsIosDeviceValue) {
+        var v = (navigator.appVersion).match(/OS (\d+)_(\d+)_?(\d+)?/);
+        return [parseInt(v[1], 10), parseInt(v[2], 10), parseInt(v[3] || 0, 10)];
+      }
+    },
+    
+    getIsIosDeviceValue: function () {
+      let iosDevice;
+      if (/iP(hone|od|ad)/.test(navigator.platform)) {
+        iosDevice = true;
+      } else {
+        iosDevice = false;
+      }
+      return iosDevice;
+    },
   },
 
   watch: {
@@ -224,6 +240,24 @@ const tile = new Vue({
   },
 
   computed: {
+    swiperComponentSupport: function() {
+      let swipeoutComponentSupport = false;
+      if (!this.isIosDevice){
+        swipeoutComponentSupport = true;
+      } else if (this.isIosDevice) {
+        const iosDeviceMajorReleaseVersion = this.iosDeviceVersionArray()[0];
+        if (iosDeviceMajorReleaseVersion >= 11) {
+          swipeoutComponentSupport = true;
+        }
+      }
+      return swipeoutComponentSupport;
+    },
+
+    isIosDevice: function() {
+      return this.getIsIosDeviceValue();
+    },
+
+
     swiperPageValue: function() {
       this.swiperPage = this.currentSlide;
       return this.swiperPage ;
