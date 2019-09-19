@@ -93,22 +93,22 @@ module.exports = {
         from: 'node_modules/webview-tile-header/WebViewTileHeader.js', 
         to: 'node_modules/webview-tile-header/WebViewTileHeader.js'
       },
-      // { 
-      //   from: 'bower_components/webcomponentsjs/custom-elements-es5-adapter.js', 
-      //   to: 'bower_components/webcomponentsjs/custom-elements-es5-adapter.js'
-      // },
-      // { 
-      //   from: 'bower_components/webcomponentsjs/webcomponents-loader.js', 
-      //   to: 'bower_components/webcomponentsjs/webcomponents-loader.js'
-      // },
-      // { 
-      //   from: 'bower_components/webcomponentsjs/webcomponents-hi.js', 
-      //   to: 'bower_components/webcomponentsjs/webcomponents-hi.js'
-      // },
-      // { 
-      //   from: 'bower_components/webcomponentsjs/webcomponents-hi.js.map', 
-      //   to: 'bower_components/webcomponentsjs/webcomponents-hi.js.map'
-      // }
+      { 
+        from: 'bower_components/webcomponentsjs/custom-elements-es5-adapter.js', 
+        to: 'bower_components/webcomponentsjs/custom-elements-es5-adapter.js'
+      },
+      { 
+        from: 'bower_components/webcomponentsjs/webcomponents-loader.js', 
+        to: 'bower_components/webcomponentsjs/webcomponents-loader.js'
+      },
+      { 
+        from: 'bower_components/webcomponentsjs/webcomponents-hi.js', 
+        to: 'bower_components/webcomponentsjs/webcomponents-hi.js'
+      },
+      { 
+        from: 'bower_components/webcomponentsjs/webcomponents-hi.js.map', 
+        to: 'bower_components/webcomponentsjs/webcomponents-hi.js.map'
+      }
     ], {})
   ]
 };
