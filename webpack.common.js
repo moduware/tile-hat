@@ -10,8 +10,9 @@ module.exports = {
   },
   resolve: {
     modules: [
-      path.resolve(__dirname, 'node_modules'),
-      path.resolve(__dirname, 'bower_components')
+      path.resolve(__dirname, 'node_modules')
+      // path.resolve(__dirname, 'node_modules'),
+      // path.resolve(__dirname, 'bower_components')
     ],
     alias: {
       'vue$': 'vue/dist/vue.esm.js' // 'vue/dist/vue.common.js' for webpack 1
@@ -92,22 +93,22 @@ module.exports = {
         from: 'node_modules/webview-tile-header/WebViewTileHeader.js', 
         to: 'node_modules/webview-tile-header/WebViewTileHeader.js'
       },
-      { 
-        from: 'bower_components/webcomponentsjs/custom-elements-es5-adapter.js', 
-        to: 'bower_components/webcomponentsjs/custom-elements-es5-adapter.js'
-      },
-      { 
-        from: 'bower_components/webcomponentsjs/webcomponents-loader.js', 
-        to: 'bower_components/webcomponentsjs/webcomponents-loader.js'
-      },
-      { 
-        from: 'bower_components/webcomponentsjs/webcomponents-hi.js', 
-        to: 'bower_components/webcomponentsjs/webcomponents-hi.js'
-      },
-      { 
-        from: 'bower_components/webcomponentsjs/webcomponents-hi.js.map', 
-        to: 'bower_components/webcomponentsjs/webcomponents-hi.js.map'
-      }
+      // { 
+      //   from: 'bower_components/webcomponentsjs/custom-elements-es5-adapter.js', 
+      //   to: 'bower_components/webcomponentsjs/custom-elements-es5-adapter.js'
+      // },
+      // { 
+      //   from: 'bower_components/webcomponentsjs/webcomponents-loader.js', 
+      //   to: 'bower_components/webcomponentsjs/webcomponents-loader.js'
+      // },
+      // { 
+      //   from: 'bower_components/webcomponentsjs/webcomponents-hi.js', 
+      //   to: 'bower_components/webcomponentsjs/webcomponents-hi.js'
+      // },
+      // { 
+      //   from: 'bower_components/webcomponentsjs/webcomponents-hi.js.map', 
+      //   to: 'bower_components/webcomponentsjs/webcomponents-hi.js.map'
+      // }
     ], {})
   ]
 };
