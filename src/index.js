@@ -9,7 +9,7 @@ import Swiper from 'swiper';
 import Vue from 'vue';
 import 'material-design-lite/material.min.js';
 // import WebViewTileHeader from 'webview-tile-header/WebViewTileHeader.js';
-const WebViewTileHeader = NexpaqHeader;
+// const WebViewTileHeader = NexpaqHeader;
 WebViewTileHeader._detectCurrentPlatform();
 
 import media from './media';
@@ -20,18 +20,15 @@ import * as Utils from './lib/Utils';
 import TemperatureUnit from './enums/TemperatureUnit';
 import MeasureType from './enums/MeasureType';
 
-import '../bower_components/morph-tabbar/morph-tabbar.html'; 
-import '../bower_components/morph-tabbar-item/morph-tabbar-item.html';
-
-import '../bower_components/morph-swipeout/morph-swipeout.html';
-import '../bower_components/morph-button/morph-button.html';
-
-import '../bower_components/morph-pages/morph-location.html';
-import '../bower_components/morph-pages/morph-pages.html';
-
-import '../bower_components/morph-list-view/morph-list-view.html';
-import '../bower_components/morph-list-view-item/morph-list-view-item.html';
-import '../bower_components/morph-list-view-title/morph-list-view-title.html';
+import '../node_modules/@moduware/morph-tabbar/morph-tabbar.js'; 
+import '../node_modules/@moduware/morph-tabbar-item/morph-tabbar-item.js';
+import '../node_modules/@moduware/morph-swipeout/morph-swipeout.js';
+import '../node_modules/@moduware/morph-button/morph-button.js';
+import '../node_modules/@moduware/morph-pages/morph-location.js';
+import '../node_modules/@moduware/morph-pages/morph-pages.js';
+import '../node_modules/@moduware/morph-list-view/morph-list-view.js';
+import '../node_modules/@moduware/morph-list-view-item/morph-list-view-item.js';
+import '../node_modules/@moduware/morph-list-view-title/morph-list-view-title.js';
 
 
 Settings.setPrefix('hat_tile_v1_');
