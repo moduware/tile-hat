@@ -7,6 +7,8 @@ import './sass/styles.scss';
 import moment from 'moment';
 import Swiper from 'swiper';
 import Vue from 'vue';
+import VueI18n from 'vue-i18n'
+
 import 'material-design-lite/material.min.js';
 // import WebViewTileHeader from 'webview-tile-header/WebViewTileHeader.js';
 // const WebViewTileHeader = NexpaqHeader;
@@ -45,8 +47,40 @@ const STORAGE_KEY = 'hat-history-storage';
 
 let instructionSwiper = null;
 
+Vue.use(VueI18n);
+
+const messages = {
+  en: {
+    main: {
+      instruction: 'When measuring ambient temperature, place the device away from extraneous influences and allow it to stabilise.',
+      warning: `IMPORTANT: Don't use module as a thermometer`,
+      measuring: `When measuring the temperature of an object, don't disconnect the module. Simply place the temperature sensor up against the intended object.`
+    }
+  },
+  zh: {
+    main: {
+      instruction: 'When measuring ambient temperature, place the device away from extraneous influences and allow it to stabilise. (Chinese)',
+      warning: `IMPORTANT: Don't use module as a thermometer (Chinese)`,
+      measuring: `When measuring the temperature of an object, don't disconnect the module. Simply place the temperature sensor up against the intended object. (Chinese)`
+    }
+  }
+  
+}
+
+// Create VueI18n instance with options
+const i18n = new VueI18n({
+  locale: 'zh', // set locale
+  messages, // set locale messages
+});
+
+// Create a Vue instance with `i18n` option
+// new Vue({
+//   i18n
+// }).$mount('#wrapper')
+
 const tile = new Vue({
   el: '#wrapper',
+  i18n,
   data: {
     currentPage: null,//'main', // instruction / snapshot
     currentTab: 'result', // history / settings
@@ -104,8 +138,10 @@ const tile = new Vue({
       instructionSwiper.on('slideChange', function () {
         const swiperSlideActive = document.querySelector('.swiper-slide.swiper-slide-active');
         if (instructionSwiper.isBeginning) {
+          console.log('instructionSwiper isBeginning === true', instructionSwiper);
           tile.currentSlide = 'one';
         } else if (instructionSwiper.isEnd) {
+          console.log('instructionSwiper isEnd === true', instructionSwiper);
           tile.currentSlide = 'two';
         }
       });
@@ -210,6 +246,11 @@ const tile = new Vue({
 
     nextInstructionSlide: function() {
       instructionSwiper.slideNext();
+    },
+
+    goToMainPage: function() {
+      this.currentPage = 'main';
+      console.log('currentPage:', this.currentPage);
     }
 
   },

@@ -3,15 +3,21 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.html",
-
   "scripts": {
     "start": "npx webpack --config webpack.dev.js",
     "build": "npx webpack --config webpack.prod.js"
   },
-
   "author": "Alex Chernov",
   "license": "ISC",
   "devDependencies": {
+    "@moduware/morph-button": "git+https://github.com/moduware/morph-button.git#master",
+    "@moduware/morph-list-view": "git+https://github.com/moduware/morph-list-view.git#master",
+    "@moduware/morph-list-view-item": "git+https://github.com/moduware/morph-list-view-item.git#master",
+    "@moduware/morph-list-view-title": "^2.0.0",
+    "@moduware/morph-pages": "git+https://github.com/moduware/morph-pages.git#master",
+    "@moduware/morph-swipeout": "git+https://github.com/moduware/morph-swipeout.git#master",
+    "@moduware/morph-tabbar": "git+https://github.com/moduware/morph-tabbar.git#master",
+    "@moduware/morph-tabbar-item": "git+https://github.com/moduware/morph-tabbar-item.git#master",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.4",
     "babel-preset-env": "^1.6.1",
@@ -31,20 +37,12 @@
     "style-loader": "^0.20.3",
     "swiper": "^4.3.2",
     "vue": "^2.5.16",
+    "vue-i18n": "^8.14.1",
     "webpack": "^4.20.2",
     "webpack-cli": "^3.1.1",
     "webpack-merge": "^4.1.2",
     "webview-tile-header": "git+https://github.com/moduware/webview-tile-header.git",
-    "zip-webpack-plugin": "^3.0.0",
-    "@moduware/morph-tabbar": "git+https://github.com/moduware/morph-tabbar.git#master",
-    "@moduware/morph-pages": "git+https://github.com/moduware/morph-pages.git#master",
-    "@moduware/morph-tabbar-item": "git+https://github.com/moduware/morph-tabbar-item.git#master",
-    "@moduware/morph-list-view": "git+https://github.com/moduware/morph-list-view.git#master",
-    "@moduware/morph-list-view-item": "git+https://github.com/moduware/morph-list-view-item.git#master",
-    "@moduware/morph-list-view-title": "^2.0.0",
-    "@moduware/morph-swipeout": "git+https://github.com/moduware/morph-swipeout.git#master",
-    "@moduware/morph-button": "git+https://github.com/moduware/morph-button.git#master"
+    "zip-webpack-plugin": "^3.0.0"
   },
-
   "dependencies": {}
 }
