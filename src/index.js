@@ -207,6 +207,7 @@ const tile = new Vue({
         type: this.snapshotValues.measureType
       });
       let historyTabbarItems = document.querySelector('morph-tabbar-item[name="history"]');
+      this.currentPage = 'main';
       this.currentTab = 'history';
       // historyTabbarItems.click();
       this.snapshotValues.textInput = '';
@@ -251,6 +252,11 @@ const tile = new Vue({
     navigateTab: function(tab) {
       console.log('Navigating tabs', tab);
       this.currentTab = tab;
+    },
+
+    saveResult: function() {
+      console.log('save result to snapshot page or go to snapshot page')
+      this.currentPage = 'snapshot';
     },
 
     goToMainPage: function() {
