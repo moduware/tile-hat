@@ -2,8 +2,12 @@
   flex-grow: 1;
 }
 
+.page {
+  position: static;
+}
+
 .tile-pages__page--main {
-  --host-slotted-page-diplay: flex;
+  --host-slotted-page-display: flex;
   flex-direction: column;
 }
 
