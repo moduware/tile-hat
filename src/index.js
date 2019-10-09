@@ -27,9 +27,9 @@ import '../node_modules/@moduware/morph-tabbar-item/morph-tabbar-item.js';
 import '../node_modules/@moduware/morph-swipeout/morph-swipeout.js';
 import '../node_modules/@moduware/morph-button/morph-button.js';
 // import '../node_modules/@moduware/morph-pages/morph-location.js';
-import '../bower_components/morph-pages/morph-location.html';
-// import '../node_modules/@moduware/morph-pages/morph-pages.js';
-import '../bower_components/morph-pages/morph-pages.html';
+// import '../bower_components/morph-pages/morph-location.html';
+import '../node_modules/@moduware/morph-pages/morph-pages.js';
+// import '../bower_components/morph-pages/morph-pages.html';
 import '../node_modules/@moduware/morph-list-view/morph-list-view.js';
 import '../node_modules/@moduware/morph-list-view-item/morph-list-view-item.js';
 import '../node_modules/@moduware/morph-list-view-title/morph-list-view-title.js';
@@ -246,6 +246,11 @@ const tile = new Vue({
 
     nextInstructionSlide: function() {
       instructionSwiper.slideNext();
+    },
+
+    navigateTab: function(tab) {
+      console.log('Navigating tabs', tab);
+      this.currentTab = tab;
     },
 
     goToMainPage: function() {
