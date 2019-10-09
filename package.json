@@ -5,6 +5,7 @@
   "main": "index.html",
   "scripts": {
     "start": "npx webpack --config webpack.dev.js",
+    "dev": "webpack-dev-server --inline --hot",
     "build": "npx webpack --config webpack.prod.js"
   },
   "author": "Alex Chernov",
@@ -14,7 +15,7 @@
     "@moduware/morph-list-view": "git+https://github.com/moduware/morph-list-view.git#master",
     "@moduware/morph-list-view-item": "git+https://github.com/moduware/morph-list-view-item.git#master",
     "@moduware/morph-list-view-title": "^2.0.0",
-    "@moduware/morph-pages": "git+https://github.com/moduware/morph-pages.git#master",
+    "@moduware/morph-pages": "git+https://github.com/moduware/morph-pages.git#lit-element",
     "@moduware/morph-swipeout": "git+https://github.com/moduware/morph-swipeout.git#master",
     "@moduware/morph-tabbar": "git+https://github.com/moduware/morph-tabbar.git#master",
     "@moduware/morph-tabbar-item": "git+https://github.com/moduware/morph-tabbar-item.git#master",
