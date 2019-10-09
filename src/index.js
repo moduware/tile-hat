@@ -82,7 +82,7 @@ const tile = new Vue({
   el: '#wrapper',
   i18n,
   data: {
-    currentPage: null,//'main', // instruction / snapshot
+    currentPage: 'instruction',//'main', // instruction / snapshot
     currentTab: 'result', // history / settings
     // platform: 'undefined',
     navigationDirection: 'forward',

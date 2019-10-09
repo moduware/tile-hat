@@ -27,9 +27,9 @@
       
       <!-- <morph-location :hash="currentPage" @hash-changed="currentPage = $event.target.hash" :last-navigation-direction="navigationDirection" @last-navigation-direction-changed="navigationDirection = $event.target.lastNavigationDirection"></morph-location> -->
       <!-- <morph-pages class="tile-pages" :selected="currentPage" @selected-changed="currentPage = $event.target.selected" :page-change-animation-direction="navigationDirection" attr-for-selected="name" no-swipeback no-animation> -->
-      <morph-pages class="tile-pages" current-page="main" :selected="currentPage" @selected-changed="currentPage = $event.target.selected" :page-change-animation-direction="navigationDirection" attr-for-selected="name" no-swipeback no-animation>
+      <morph-pages class="tile-pages" :current-page="currentPage" :selected="currentPage"   attr-for-selected="name" >
         
-        <div name="instruction" class="page tile-pages__page instruction-screen iron-selected">
+        <div name="instruction" class="page tile-pages__page instruction-screen" :class="{ 'page--current' : currentPage === 'instruction'}">
           <div class="swiper-container">
             <div class="swiper-wrapper">
               <div class="swiper-slide">
@@ -63,7 +63,7 @@
         </div> 
         <!-- / page instruction -->
 
-        <div name="snapshot" class="page tile-pages__page snapshot-screen iron-selected">
+        <div name="snapshot" class="page tile-pages__page snapshot-screen" :class="{ 'page--current' : currentPage === 'snapshot'}" >
           <div class="snapshot-item" id="snapshot-item">
             <input type="text" v-model="snapshotValues.textInput" id="snapshot-title" class="snapshot-item__title" placeholder="Add label"
               onfocus="this.placeholder=''" onblur="this.placeholder='Add Label'">
@@ -92,7 +92,7 @@
         </div>
         <!-- / page snapshot -->
         
-        <div name="main" class="page tile-pages__page tile-pages__page--main iron-selected">
+        <div name="main" class="page tile-pages__page tile-pages__page--main" :class="{ 'page--current' : currentPage === 'main'}" >
           <template>
             <morph-tabbar class="navigation-tabs" :selected="currentTab" @selected-changed="currentTab = $event.target.selected">
               <morph-tabbar-item name="result" @click="navigateTab('result')" :not-selected-image="tabbarIcons[platform].tabbarResultNotSelected" :selected-image="tabbarIcons[platform].tabbarResultSelected"></morph-tabbar-item>
@@ -104,7 +104,7 @@
           fallback-selection="result" no-swipeback no-animation>  -->
           <morph-pages class="tile-tabs" :current-page="currentTab" :selected="currentTab" :page-change-animation-direction="navigationDirection" attr-for-selected="name"
           fallback-selection="result" > 
-            <div name="result" class="page tile-pages__page result-screen" :class="{ 'iron-selected' : currentTab === 'result'}" >
+            <div name="result" class="page tile-pages__page result-screen" :class="{ 'page--current' : currentTab === 'result'}" >
               <div class="result-screen__content">
                 <div class="result-screen__left-side">
                   <div class="temperature-scale">
@@ -128,7 +128,7 @@
             </div>
             <!-- / tab result -->
 
-            <div name="settings" class="page tile-pages__page settings-screen" :class="{ 'iron-selected' : currentTab === 'settings'}">
+            <div name="settings" class="page tile-pages__page settings-screen" :class="{ 'page--current' : currentTab === 'settings'}">
               <div class="settings-container">
                 <span class="settings-container__title">General</span>
             
@@ -205,7 +205,7 @@
             </div>
             <!-- / tab settings -->
 
-            <div name="history" class="page tile-pages__page history-screen" :class="{ 'iron-selected' : currentTab === 'history'}">
+            <div name="history" class="page tile-pages__page history-screen" :class="{ 'page--current' : currentTab === 'history'}">
               <div class="history-placeholder" v-if="!temperatureListDataValues.length">
                 <img class="history-placeholder-icon" :src="icons.historyEmptyIconSrc" />
                 <div class="history-placeholder-title">No saved mesaurements yet...</div>
