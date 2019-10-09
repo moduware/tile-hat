@@ -12,5 +12,9 @@
 }
 
 .tile-pages__page:not(.iron-selected) {
+  // opacity: 0;
+}
+
+.tile-pages__page:not(.page--current) {
   opacity: 0;
 }
