@@ -2,19 +2,24 @@
   flex-grow: 1;
 }
 
-.page {
-  position: static;
-}
-
 .tile-pages__page--main {
   --host-slotted-page-display: flex;
   flex-direction: column;
 }
 
-.tile-pages__page:not(.iron-selected) {
-  // opacity: 0;
+.page--current {
+  display: flex;
+  flex-direction: column;
 }
 
 .tile-pages__page:not(.page--current) {
   opacity: 0;
 }
+
+// .page {
+  // position: static;
+// }
+
+// .tile-pages__page:not(.iron-selected) {
+  // opacity: 0;
+// }
