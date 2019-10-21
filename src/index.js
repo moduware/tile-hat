@@ -7,6 +7,12 @@ import './sass/styles.scss';
 import moment from 'moment';
 import Swiper from 'swiper';
 import Vue from 'vue';
+import {
+  ENGLISH_TRANSLATIONS
+} from './translation/en';
+import {
+  CHINESE_TRANSLATIONS
+} from './translation/zh';
 import VueI18n from 'vue-i18n'
 
 import 'material-design-lite/material.min.js';
@@ -49,29 +55,40 @@ let instructionSwiper = null;
 
 Vue.use(VueI18n);
 
-const messages = {
-  en: {
-    main: {
-      instruction: 'When measuring ambient temperature, place the device away from extraneous influences and allow it to stabilise.',
-      warning: `IMPORTANT: Don't use module as a thermometer`,
-      measuring: `When measuring the temperature of an object, don't disconnect the module. Simply place the temperature sensor up against the intended object.`
-    }
-  },
-  zh: {
-    main: {
-      instruction: 'When measuring ambient temperature, place the device away from extraneous influences and allow it to stabilise. (Chinese)',
-      warning: `IMPORTANT: Don't use module as a thermometer (Chinese)`,
-      measuring: `When measuring the temperature of an object, don't disconnect the module. Simply place the temperature sensor up against the intended object. (Chinese)`
-    }
-  }
-  
+const TRANSLATIONS = {
+  en: ENGLISH_TRANSLATIONS,
+  zh: CHINESE_TRANSLATIONS
 }
+
+// const messages = {
+//   en: {
+//     main: {
+//       instruction: 'When measuring ambient temperature, place the device away from extraneous influences and allow it to stabilise.',
+//       warning: `IMPORTANT: Don't use module as a thermometer`,
+//       measuring: `When measuring the temperature of an object, don't disconnect the module. Simply place the temperature sensor up against the intended object.`
+//     }
+//   },
+//   zh: {
+//     main: {
+//       instruction: 'When measuring ambient temperature, place the device away from extraneous influences and allow it to stabilise. (Chinese)',
+//       warning: `IMPORTANT: Don't use module as a thermometer (Chinese)`,
+//       measuring: `When measuring the temperature of an object, don't disconnect the module. Simply place the temperature sensor up against the intended object. (Chinese)`
+//     }
+//   }
+  
+// }
 
 // Create VueI18n instance with options
 const i18n = new VueI18n({
   locale: 'zh', // set locale
-  messages, // set locale messages
+  fallbackLocale: 'en',
+  messages: TRANSLATIONS, // set locale messages
 });
+
+// const i18n = new VueI18n({
+//   locale: 'zh', // set locale
+//   messages, // set locale messages
+// });
 
 // Create a Vue instance with `i18n` option
 // new Vue({

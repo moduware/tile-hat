@@ -37,35 +37,35 @@
                   <img :src="icons.instructionAmbientIconSrc" />
                 </div>
                 <p class="slide-note">
-                  {{ $t("main.instruction")}}
+                  {{ $t("slide.instruction.ambient")}}
                 </p>
               </div>
               <div class="swiper-slide">
                 <p class="slide-note slide-note__heading">
-                  {{ $t("main.warning")}}
+                  {{ $t("slide.instruction.important")}}
                 </p>
                 <div class="slide-image-container">
                   <img :src="icons.instructionObjectIconSrc" />
                 </div>
                 <p class="slide-note">
-                  {{ $t("main.measuring")}}
+                  {{ $t("slide.instruction.object")}}
                 </p>
               </div>
             </div>
             <div class="swiper-pagination"></div>
           </div>
           <div class="button-container">
-            <a v-if="this.swiperPageValue == 'one'" class="action-button action-button--primary" @click="nextInstructionSlide">Next</a>
+            <a v-if="this.swiperPageValue == 'one'" class="action-button action-button--primary" @click="nextInstructionSlide">{{ $t("slide.button.next")}}</a>
             <!-- <a v-else-if="this.swiperPageValue == 'two'" class="action-button action-button--primary" href="#main">Got it!</a> -->
-            <a v-else-if="this.swiperPageValue == 'two'" class="action-button action-button--primary" @click="goToMainPage">Got it!</a>
-            <a class="action-button action-button--link" href="#main" @click="disableInstruction">Don't Show Again</a>
+            <a v-else-if="this.swiperPageValue == 'two'" class="action-button action-button--primary" @click="goToMainPage">{{ $t("slide.button.gotIt") }}</a>
+            <a class="action-button action-button--link" href="#main" @click="disableInstruction">{{ $t("slide.noShow") }}</a>
           </div>
         </div> 
         <!-- / page instruction -->
 
         <div name="snapshot" class="page tile-pages__page snapshot-screen" :class="{ 'page--current' : currentPage === 'snapshot'}" >
           <div class="snapshot-item" id="snapshot-item">
-            <input type="text" v-model="snapshotValues.textInput" id="snapshot-title" class="snapshot-item__title" placeholder="Add label"
+            <input type="text" v-model="snapshotValues.textInput" id="snapshot-title" class="snapshot-item__title" placeholder="{{ $t("snapshot.label") }}"
               onfocus="this.placeholder=''" onblur="this.placeholder='Add Label'">
         
             <div class="snapshot-item__daytime" id="snapshotDayAndTime">{{ snapshotTimeOutput }}</div>
@@ -73,21 +73,21 @@
             <table class="snapshot-item__values">
               <tr class="snapshot-item__line">
                 <td class="snapshot-item__field-title" id="snapshot-temperature-title">
-                  <span v-if="snapshotValues.measureType == 'ambient'">Temperature</span>
-                  <span v-if="snapshotValues.measureType == 'object'">Temperature</span>
+                  <span v-if="snapshotValues.measureType == 'ambient'">{{ $t("snapshot.temperature") }}</span>
+                  <span v-if="snapshotValues.measureType == 'object'">{{ $t("snapshot.temperature") }}</span>
                 </td>
                 <td class="snapshot-item__field-value snapshot-item__field-value--temperature">{{ snapshotTemperatureOutput }}</td>
               </tr>
               <tr class="snapshot-item__line">
-                <td class="snapshot-item__field-title">Humidity</td>
+                <td class="snapshot-item__field-title">{{ $t("snapshot.humidity") }}</td>
                 <td class="snapshot-item__field-value snapshot-item__field-value--humidity">{{ snapshotHumidityOutput }}</td>
               </tr>
             </table>
             <!-- <div class="snapshot-item__location" id="snapshotDayAndTime">One Kowloon, 1 Wang Yuen Street, Kowloon Bay, Hong Kong</div> -->
           </div>
           <div class="button-container" id="snapshot-buttons-container">
-            <button class="action-button" id="snapshot-button-cancel">Cancel</button>
-            <a class="action-button action-button--primary" id="history-snapshot" href="#main" @click="saveTemperatureHistory()">Save</a>
+            <button class="action-button" id="snapshot-button-cancel">{{ $t("snapshot.button.cancel") }}</button>
+            <a class="action-button action-button--primary" id="history-snapshot" href="#main" @click="saveTemperatureHistory()">{{ $t("snapshot.button.save") }}</a>
           </div>
         </div>
         <!-- / page snapshot -->
@@ -117,24 +117,24 @@
                     <span class="temperature-numbers__temparature-value" id="temperature-value">{{ temperatureOutput }}</span>
                     <span class="temperature-numbers__temparature-unit" id="temperature-unit">{{ temperatureUnitSelected }}</span>
                     <div class="temperature-numbers__humidity">
-                      <span class="temperature-numbers__humidity-title">Humidity</span>
+                      <span class="temperature-numbers__humidity-title">{{ $t("main.humidity") }}</span>
                       <span class="temperature-numbers__humidity-value" id="humidity-value">{{ humidityOutput }}</span>
                     </div>
                   </div>
                 </div>
               </div>
             
-              <a v-if="platform == 'android'" href="#snapshot" class="action-button action-button--primary" id="button-snapshot" @click="saveResult">Save</a>
+              <a v-if="platform == 'android'" href="#snapshot" class="action-button action-button--primary" id="button-snapshot" @click="saveResult">{{ $t("main.button.save") }}</a>
             </div>
             <!-- / tab result -->
 
             <div name="settings" class="page tile-pages__page settings-screen" :class="{ 'page--current' : currentTab === 'settings'}">
               <div class="settings-container">
-                <span class="settings-container__title">General</span>
+                <span class="settings-container__title">{{ $t("settings.general.title") }}</span>
             
                 <!-- <input type="checkbox" class="celsius" name="instructionSetting" v-model="settings.showInstruction" id="instructionSetting"> -->
                 <label class="settings-container__label" for="instructionSetting">
-                  Show instruction
+                  {{ $t("settings.general.message") }}
                   <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="instructionSetting">
                     <input type="checkbox" id="instructionSetting" class="mdl-switch__input" v-model="settings.showInstruction">
                     <span class="mdl-switch__label"></span>
@@ -143,24 +143,24 @@
               </div>
             
               <div v-if="platform == 'ios'" class="settings-container">
-                <span class="settings-container__title">Measure</span>
+                <span class="settings-container__title">{{ $t("settings.measure.title") }}</span>
             
                 <input type="radio" name="measureType" value="ambient" v-model="settings.measureType" id="ambientSetting">
-                <label class="settings-container__label" for="ambientSetting">Ambient temperature</label>
+                <label class="settings-container__label" for="ambientSetting">{{ $t("settings.measure.ambient") }}</label>
     
                 <input type="radio" name="measureType" value="object" v-model="settings.measureType" id="objectSetting" >
-                <label class="settings-container__label" for="objectSetting">Object temperature</label>
+                <label class="settings-container__label" for="objectSetting">{{ $t("settings.measure.object") }}</label>
               </div>
 
               <div v-if="platform == 'android'" class="settings-container">
-                <span class="settings-container__title">Measure</span>
+                <span class="settings-container__title">{{ $t("settings.measure.title") }}</span>
 
                 <label class="settings-container__label" for="ambientSetting">
                   <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="ambientSetting">
                     <input type="radio" id="ambientSetting" class="mdl-radio__button" name="measureType" value="ambient" v-model="settings.measureType">
                     <span class="mdl-radio"></span>
                   </label>
-                  Ambient temperature
+                  {{ $t("settings.measure.ambient") }}
                 </label>
             
                 <label class="settings-container__label" for="objectSetting">
@@ -168,29 +168,29 @@
                     <input type="radio" id="objectSetting" class="mdl-radio__button" name="measureType" value="object" v-model="settings.measureType">
                     <span class="mdl-radio"></span>
                   </label>
-                  Object temperature
+                  {{ $t("settings.measure.object") }}
                 </label>
               </div>
             
               <div v-if="platform == 'ios'" class="settings-container">
-                <span class="settings-container__title">Units</span>
+                <span class="settings-container__title">{{ $t("settings.units.title") }}</span>
             
                 <input type="radio" class="celsius" name="measureUnit" value="celsius" v-model="settings.units" id="celsiusSetting" >
-                <label class="settings-container__label unit-celsius" for="celsiusSetting">Celsius</label>
+                <label class="settings-container__label unit-celsius" for="celsiusSetting">{{ $t("settings.units.celcius") }}</label>
                 
                 <input type="radio" class="fahrenheit" name="measureUnit" value="fahrenheit" v-model="settings.units" id="fahrenheitSetting" >
-                <label class="settings-container__label unit-fahrenheit" for="fahrenheitSetting">Fahrenheit</label>
+                <label class="settings-container__label unit-fahrenheit" for="fahrenheitSetting">{{ $t("settings.units.fahrenheit") }}</label>
               </div>
 
               <div v-if="platform == 'android'" class="settings-container">
-                <span class="settings-container__title">Units</span>
+                <span class="settings-container__title">{{ $t("settings.units.title") }}</span>
             
                 <label class="settings-container__label unit-celsius" for="celsiusSetting">
                   <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="celsiusSetting">
                     <input type="radio" id="celsiusSetting" class="mdl-radio__button celsius" name="measureUnit" value="celsius" v-model="settings.units">
                     <span class="mdl-radio"></span>
                   </label>
-                  Celsius
+                  {{ $t("settings.units.celcius") }}
                 </label>
                 
                 <label class="settings-container__label unit-fahrenheit" for="fahrenheitSetting">
@@ -198,7 +198,7 @@
                     <input type="radio" id="fahrenheitSetting" class="mdl-radio__button fahrenheit" name="measureUnit" value="fahrenheit" v-model="settings.units">
                     <span class="mdl-radio"></span>
                   </label>
-                  Fahrenheit
+                  {{ $t("settings.units.fahrenheit") }}
                 </label>
               </div>
             
@@ -208,8 +208,8 @@
             <div name="history" class="page tile-pages__page history-screen" :class="{ 'page--current' : currentTab === 'history'}">
               <div class="history-placeholder" v-if="!temperatureListDataValues.length">
                 <img class="history-placeholder-icon" :src="icons.historyEmptyIconSrc" />
-                <div class="history-placeholder-title">No saved mesaurements yet...</div>
-                <span class="history-placeholder-text">Timeline will display the history of your measurements</span>
+                <div class="history-placeholder-title">{{ $t("history.placeholder.title") }}</div>
+                <span class="history-placeholder-text">{{ $t("history.placeholder.message") }}</span>
               </div>
             
               <morph-list-view class="temperature-list" v-for="(temperatureListDataValue, index) in temperatureListDataValues" v-bind:key="temperatureListDataValue.date">
@@ -237,10 +237,10 @@
                     <span slot="header" class="temperature-list-item__title">{{ item.label | capitalize }}</span>
               
                     <span class="temperature-list-item__content">
-                      Temperature:
+                      {{ $t("history.list.temperature") }}:
                       <span class="temperature-list-item__value temperature-list-item__value--temperature">{{ item.temperatureValue | formatTemperature(settings.units) }}</span>
               
-                      <br> Humidity:
+                      <br> {{ $t("history.list.humidity") }}:
                       <span class="temperature-list-item__value temperature-list-item__value--humidity">{{ item.humidityValue | formatHumidity }}</span>
                     </span>
               
@@ -258,7 +258,7 @@
                   </morph-list-view-item>
 
                   <span slot="right-buttons">
-                    <morph-button class="swiper-integration-class" color="red" filled flat item-delete v-on:click="removeTemperatureHistoryItem(item.id)">Delete</morph-button>
+                    <morph-button class="swiper-integration-class" color="red" filled flat item-delete v-on:click="removeTemperatureHistoryItem(item.id)">{{ $t("history.list.delete") "}}</morph-button>
                   </span>
                 </morph-swipeout>
 
