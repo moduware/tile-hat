@@ -291,9 +291,11 @@ const tile = new Vue({
       deep: true
     },
     currentPage: function(newPage, oldPage) {
+      console.log('page HERE', newPage);
       this.renderIosHeaderSaveButton(newPage, this.currentTab);
     },
     currentTab: function(newTab, oldTab) {
+      console.log('WEEEYYYY HELLO THETEETERE');
       this.renderIosHeaderSaveButton(this.currentPage, newTab);
     }
   },
@@ -436,10 +438,13 @@ WebViewTileHeader.hideShadow();
 
 // Add save button to header (right side)
 if (tile.platform == 'ios') {
+  // const title = tile.$t("main.button.save");
   WebViewTileHeader.addButton({
     title: 'Save',
     id: 'header-save-button'
   }, () => headerSaveButtonHandler());
+  tile.renderIosHeaderSaveButton();
+  // console.log('HEY EHEY', tile.$t("main.button.save"));
 }
 
 WebViewTileHeader.addEventListener('BackButtonClicked', () => {

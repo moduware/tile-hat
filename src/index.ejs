@@ -65,8 +65,8 @@
 
         <div name="snapshot" class="page tile-pages__page snapshot-screen" :class="{ 'page--current' : currentPage === 'snapshot'}" >
           <div class="snapshot-item" id="snapshot-item">
-            <input type="text" v-model="snapshotValues.textInput" id="snapshot-title" class="snapshot-item__title" placeholder="{{ $t("snapshot.label") }}"
-              onfocus="this.placeholder=''" onblur="this.placeholder='Add Label'">
+            <input type="text" v-model="snapshotValues.textInput" id="snapshot-title" class="snapshot-item__title" v-bind:placeholder="$t('snapshot.label')"
+              onfocus="this.placeholder=''" onblur="this.placeholder=`...` ">
         
             <div class="snapshot-item__daytime" id="snapshotDayAndTime">{{ snapshotTimeOutput }}</div>
         
@@ -258,7 +258,7 @@
                   </morph-list-view-item>
 
                   <span slot="right-buttons">
-                    <morph-button class="swiper-integration-class" color="red" filled flat item-delete v-on:click="removeTemperatureHistoryItem(item.id)">{{ $t("history.list.delete") "}}</morph-button>
+                    <morph-button class="swiper-integration-class" color="red" filled flat item-delete v-on:click="removeTemperatureHistoryItem(item.id)">{{ $t("history.list.delete")}}</morph-button>
                   </span>
                 </morph-swipeout>
 
