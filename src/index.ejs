@@ -234,7 +234,8 @@
                     <span class="temperature-list-item__icon-container" slot="icon">
                       <img :src="icons.temperatureListIconSrc" />
                     </span>
-                    <span slot="header" class="temperature-list-item__title">{{ item.label | capitalize }}</span>
+                    <span v-if="item.label" slot="header" class="temperature-list-item__title">{{ item.label | capitalize }}</span>
+                    <span v-else slot="header" class="temperature-list-item__title">{{ $t("history.list.unlabeled") }}</span>
               
                     <span class="temperature-list-item__content">
                       {{ $t("history.list.temperature") }}:

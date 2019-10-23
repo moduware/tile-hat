@@ -3,9 +3,9 @@
   color: #535353;
 }
 
-.temperature-list-item__title:empty::after {
-  content: 'Unlabeled';
-}
+// .temperature-list-item__title:empty::after {
+//   content: 'Unlabeled';
+// }
 
 .temperature-list-item__title {
   margin-bottom: 5px;

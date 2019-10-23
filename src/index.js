@@ -60,40 +60,12 @@ const TRANSLATIONS = {
   zh: CHINESE_TRANSLATIONS
 }
 
-// const messages = {
-//   en: {
-//     main: {
-//       instruction: 'When measuring ambient temperature, place the device away from extraneous influences and allow it to stabilise.',
-//       warning: `IMPORTANT: Don't use module as a thermometer`,
-//       measuring: `When measuring the temperature of an object, don't disconnect the module. Simply place the temperature sensor up against the intended object.`
-//     }
-//   },
-//   zh: {
-//     main: {
-//       instruction: 'When measuring ambient temperature, place the device away from extraneous influences and allow it to stabilise. (Chinese)',
-//       warning: `IMPORTANT: Don't use module as a thermometer (Chinese)`,
-//       measuring: `When measuring the temperature of an object, don't disconnect the module. Simply place the temperature sensor up against the intended object. (Chinese)`
-//     }
-//   }
-  
-// }
-
 // Create VueI18n instance with options
 const i18n = new VueI18n({
-  locale: 'zh', // set locale
+  locale: 'en', // set locale
   fallbackLocale: 'en',
   messages: TRANSLATIONS, // set locale messages
 });
-
-// const i18n = new VueI18n({
-//   locale: 'zh', // set locale
-//   messages, // set locale messages
-// });
-
-// Create a Vue instance with `i18n` option
-// new Vue({
-//   i18n
-// }).$mount('#wrapper')
 
 const tile = new Vue({
   el: '#wrapper',
@@ -223,12 +195,14 @@ const tile = new Vue({
         label: this.snapshotValues.textInput.trim(),
         type: this.snapshotValues.measureType
       });
+      console.log('this.temperatureHistoryValues', this.temperatureHistoryValues);
       let historyTabbarItems = document.querySelector('morph-tabbar-item[name="history"]');
       this.currentPage = 'main';
       this.currentTab = 'history';
       // historyTabbarItems.click();
       this.snapshotValues.textInput = '';
       this.temperatureListDataValues = this.temperatureListDataGroupByDateOutput;
+      console.log('this.temperatureListDataValues', this.temperatureListDataValues);
       localStorage.setItem(STORAGE_KEY, JSON.stringify(this.temperatureHistoryValues));
     },
    
@@ -480,7 +454,7 @@ function ApiReadyActions() {
 if (window.ModuwareAPIIsReady) {
   ApiReadyActions();
 } else {
-  document.addEventListener('NexpaqAPIReady', () => ApiReadyActions());
+  document.addEventListener('WebViewApiReady', () => ApiReadyActions());
 }
 
 function snapshotButtonCancelClickHandler() {

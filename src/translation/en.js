@@ -38,6 +38,7 @@ export const ENGLISH_TRANSLATIONS = {
       message: "Timeline will display the history of your measurements"
     },
     list: {
+      unlabeled: "Unlabeled",
       temperature: "Temperature",
       humidity: "Humidity",
       today: "Today",

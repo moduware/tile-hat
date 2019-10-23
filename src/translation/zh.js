@@ -36,6 +36,7 @@ export const CHINESE_TRANSLATIONS = {
       message: "时间轴将显示您的测量历史"
     },
     list: {
+      unlabeled: "未贴标签",
       temperature: "温度",
       humidity: "湿度",
       today: "今天",
