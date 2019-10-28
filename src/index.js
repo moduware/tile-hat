@@ -53,6 +53,8 @@ const STORAGE_KEY = 'hat-history-storage';
 
 let instructionSwiper = null;
 
+let languageLocale = 'en';
+
 Vue.use(VueI18n);
 
 const TRANSLATIONS = {
@@ -60,9 +62,13 @@ const TRANSLATIONS = {
   zh: CHINESE_TRANSLATIONS
 }
 
+if (Nexpaq.Arguments) {
+  languageLocale = Nexpaq.Arguments['language'];
+}
+
 // Create VueI18n instance with options
 const i18n = new VueI18n({
-  locale: 'en', // set locale
+  locale: languageLocale, // set locale
   fallbackLocale: 'en',
   messages: TRANSLATIONS, // set locale messages
 });
