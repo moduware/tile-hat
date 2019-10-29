@@ -62,10 +62,6 @@ const TRANSLATIONS = {
   zh: CHINESE_TRANSLATIONS
 }
 
-if (Nexpaq.Arguments) {
-  languageLocale = Nexpaq.Arguments['language'];
-}
-
 // Create VueI18n instance with options
 const i18n = new VueI18n({
   locale: languageLocale, // set locale
@@ -410,10 +406,14 @@ if(tile.settings.showInstruction) {
 /* Revealing UI */
 document.getElementById('wrapper').style.opacity = 1;
 
-
-/* Header configuration */
-WebViewTileHeader.create('Temperature');
-WebViewTileHeader.customize({color: 'white', iconColor:'white', backgroundColor:'#FFB931', borderBottom:'none'});
+// Header configuration
+WebViewTileHeader.create();
+WebViewTileHeader.customize({
+  color: "white",
+  iconColor: "white",
+  backgroundColor: "#FFB931",
+  borderBottom: "none"
+});
 WebViewTileHeader.hideShadow();
 
 // Add save button to header (right side)
@@ -454,13 +454,20 @@ function ApiReadyActions() {
     tile.sensorValues.objectTemperature = parseFloat(event.variables.object_temperature);
     tile.sensorValues.humidity = parseFloat(event.variables.humidity);
   }); 
+  if (Moduware) {
+    // change the language locale based on Moduware.Arguments.language
+    tile.$root.$i18n.locale = Moduware.Arguments.language;
+    const locale = tile.$root.$i18n.locale;
+    /* Set Header title base on the language locale */
+    WebViewTileHeader.setTitle(`${tile.$root.$i18n.messages[locale].main.temperature}`);
+  }
 }
 
 // TODO: switch to Moduware.API.IsReady after app 1.1.9 released
 if (window.ModuwareAPIIsReady) {
   ApiReadyActions();
 } else {
-  document.addEventListener('WebViewApiReady', () => ApiReadyActions());
+  document.addEventListener('WebViewApiReady', () => ApiReadyActions(), { once: true });
 }
 
 function snapshotButtonCancelClickHandler() {
