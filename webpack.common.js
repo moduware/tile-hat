@@ -92,7 +92,12 @@ module.exports = {
       { 
         from: 'node_modules/webview-tile-header/WebViewTileHeader.js', 
         to: 'node_modules/webview-tile-header/WebViewTileHeader.js'
-      }
+      },
+      { 
+        from: 'node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js', 
+        to: 'node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js'
+      },
+
      
     ], {})
   ]
