@@ -19,6 +19,7 @@
     "@moduware/morph-swipeout": "git+https://github.com/moduware/morph-swipeout.git#master",
     "@moduware/morph-tabbar": "git+https://github.com/moduware/morph-tabbar.git#master",
     "@moduware/morph-tabbar-item": "git+https://github.com/moduware/morph-tabbar-item.git#master",
+    "@webcomponents/webcomponentsjs": "^2.3.0",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.4",
     "babel-preset-env": "^1.6.1",
