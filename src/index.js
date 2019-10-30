@@ -407,7 +407,8 @@ if(tile.settings.showInstruction) {
 document.getElementById('wrapper').style.opacity = 1;
 
 // Header configuration
-WebViewTileHeader.create();
+const headerTitle = tile.$t("main.temperature");
+WebViewTileHeader.create(headerTitle);
 WebViewTileHeader.customize({
   color: "white",
   iconColor: "white",
