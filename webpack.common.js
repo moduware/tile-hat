@@ -97,6 +97,10 @@ module.exports = {
         from: 'node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js', 
         to: 'node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js'
       },
+      { 
+        from: 'node_modules/@webcomponents/webcomponentsjs/bundles/**.*', 
+        to: 'node_modules/@webcomponents/webcomponentsjs/bundles/**.*'
+      },
 
      
     ], {})
