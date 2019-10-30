@@ -197,14 +197,12 @@ const tile = new Vue({
         label: this.snapshotValues.textInput.trim(),
         type: this.snapshotValues.measureType
       });
-      console.log('this.temperatureHistoryValues', this.temperatureHistoryValues);
       let historyTabbarItems = document.querySelector('morph-tabbar-item[name="history"]');
       this.currentPage = 'main';
       this.currentTab = 'history';
       // historyTabbarItems.click();
       this.snapshotValues.textInput = '';
       this.temperatureListDataValues = this.temperatureListDataGroupByDateOutput;
-      console.log('this.temperatureListDataValues', this.temperatureListDataValues);
       localStorage.setItem(STORAGE_KEY, JSON.stringify(this.temperatureHistoryValues));
     },
    
@@ -254,7 +252,6 @@ const tile = new Vue({
 
     goToMainPage: function() {
       this.currentPage = 'main';
-      console.log('currentPage:', this.currentPage);
     }
 
   },
@@ -267,11 +264,9 @@ const tile = new Vue({
       deep: true
     },
     currentPage: function(newPage, oldPage) {
-      console.log('page HERE', newPage);
       this.renderIosHeaderSaveButton(newPage, this.currentTab);
     },
     currentTab: function(newTab, oldTab) {
-      console.log('WEEEYYYY HELLO THETEETERE');
       this.renderIosHeaderSaveButton(this.currentPage, newTab);
     }
   },
@@ -430,6 +425,7 @@ if (tile.platform == 'ios') {
 
 WebViewTileHeader.addEventListener('BackButtonClicked', () => {
   if (document.location.hash == '#snapshot') {
+    tile.currentPage = "main";
     document.location.hash = 'main';
   } else {
     // history.back();
@@ -479,6 +475,7 @@ function snapshotButtonCancelClickHandler() {
   const animationPromise2 = Utils.runCssAnimationByClass(snapshotItemElement, 'animation-disapear');
 
   Promise.all([animationPromise1, animationPromise2]).then(() => {
+    tile.currentPage = "main"; 
     document.location.hash = 'main';
     setTimeout(() => {
       containerElement.classList.remove('animation-slidedown');
