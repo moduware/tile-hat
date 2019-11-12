@@ -1,7 +1,7 @@
 export const CHINESE_TRANSLATIONS = {
   slide: {
     instruction: {
-      ambient: "测量环境温度时，请将设备放置在不受外界影响的地方，并使其稳定。",
+      ambient: "测量环境温度时，请将设备放置在不受外界影响的地方，并等待环境温度稳定。",
       important: "重要说明：请勿将模块用作温度计",
       object: "测量物体的温度时，请勿断开模块的连接。 只需将温度传感器放在目标物体上即可。"
     },
@@ -32,8 +32,8 @@ export const CHINESE_TRANSLATIONS = {
 
   history: {
     placeholder: {
-      title: "尚无保存的测量值...",
-      message: "时间轴将显示您的测量历史"
+      title: "尚无保存的测量值",
+      message: "可以在时间轴上查看您的测量记录"
     },
     list: {
       unlabeled: "未贴标签",
