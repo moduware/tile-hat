@@ -33,7 +33,7 @@ export const CHINESE_TRANSLATIONS = {
   history: {
     placeholder: {
       title: "尚无保存的测量值",
-      message: "可以在时间轴上查看您的测量记录"
+      message: "您可以在时间轴上查看测量记录"
     },
     list: {
       unlabeled: "未贴标签",
