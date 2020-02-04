@@ -1,0 +1,32 @@
+{
+	"entrypoint": "index.html",
+	"basePath": "./",
+	"shell": "src/components/my-app.js",
+	"sources": [
+		"images/**/*"
+	],
+	"extraDependencies": [
+		"manifest.json",
+		"icon.svg",
+		"node_modules/@webcomponents/webcomponentsjs/**"
+	],
+	"builds": [
+		{
+			"name": "nexpaq.tile.led",
+			"js": {
+				"compile": "es5",
+				"minify": false,
+				"transformModulesToAmd": true
+			},
+			"css": {
+				"minify": false
+			},
+			"html": {
+				"minify": false
+			},
+			"bundle": true
+		}
+	],
+	"moduleResolution": "node",
+	"npm": true
+}

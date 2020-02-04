@@ -1,27 +1,28 @@
-# tile-hat
-Tile for Humidity &amp; Temperature module
+# tile-template
+template for tile development
 
-To build from scratch run these commands:
-```bash
-# install dependencies
-npm install
-# prepocess styles
-gulp styles
-# collect build files (dev mode compatible)
-gulp build
-# archive files for release
-gulp zip
+## Getting Started
+
+To copy the tile template into your existing directory or folder run this commond on your terminal
+
+```
+git clone --depth 1 https://github.com/moduware/tile-template.git temp && rm -rf temp/.git && mv temp/* temp/.gitignore . && rm -rf temp
 ```
 
-As result you will get tile.zip file in root directory containing latest tile package ready for publishing.
+To install all dependency run:
 
-[Live Preview][preview]
+```
+npm install
+```
 
-[preview]: https://material.io/resizer/#device=handset&url=https%3A%2F%2Fnexpaq.github.io%2Ftile-hat%2F&width=360
+To start server and view locally run: 
 
-## TODO:
-- Instruction screen
-- Animate screens
-- Location in snapshot (dep: App webview location support)
-- Saving screenshot to timeline (dep: App timeline api)
-- [ Snapshots graph? ]
+```
+npm start
+```
+
+To build files for production run:
+
+```
+npm run build
+```
