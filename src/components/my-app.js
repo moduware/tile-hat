@@ -187,9 +187,11 @@ class MyApp extends connect(store)(LitElement) {
 			</moduware-header>
       <!-- Main content -->
       <main role="main" class="main-content">
-        <home-page class="page" ?active="${this._page === 'home-page'}"></home-page>
-        <page-one class="page" ?active="${this._page === 'page-one'}"></page-one>
-        <page-two class="page" ?active="${this._page === 'page-two'}"></page-two>
+        <instructions-page class="page" ?active="${this._page === 'instructions-page'}"></instructions-page>
+        <temperature-page class="page" ?active="${this._page === 'temperature-page'}"></temperature-page>
+				<saved-readings-page class="page" ?active="${this._page === 'saved-readings-page'}"></saved-readings-page>
+				<settings-page class="page" ?active="${this._page === 'settings-page'}"></settings-page>
+        <add-reading-page class="page" ?active="${this._page === 'add-reading-page'}"></add-reading-page>
         <error-page class="page" ?active="${this._page === 'error-page'}"></error-page>
       </main>
     `;
@@ -215,7 +217,7 @@ class MyApp extends connect(store)(LitElement) {
 
 	firstUpdated() {
 		store.dispatch(loadLanguageTranslation());
-		store.dispatch(navigate("/home-page"));
+		store.dispatch(navigate("/instructions-page"));
 		store.dispatch(initializeModuwareApiAsync());
 	}
 

@@ -20,7 +20,7 @@ import { registerTranslateConfig, use, translate, get } from "@appnest/lit-trans
 import * as translation from '../translations/language.js';
 
 
-class PageTwo extends connect(store)(PageViewElement) {
+class SavedReadingsPage extends connect(store)(PageViewElement) {
 	static get properties() {
 		return {
 			_page: { type: String },
@@ -55,8 +55,13 @@ class PageTwo extends connect(store)(PageViewElement) {
 
 	render() {
 		return html`
-      <section>
-				<h2>${get('page-two.title')}</h2>
+			<section>
+				<button @click="${() => store.dispatch(navigate('/temperature-page'))}">Temperature</button> 
+				&nbsp; 
+				<button @click="${() => store.dispatch(navigate('/saved-readings-page'))}">Saved Readings</button> 
+				&nbsp; 
+				<button @click="${() => store.dispatch(navigate('/settings-page'))}">Settings</button> 
+				<h2>Saved Readings</h2>
       </section>
     `;
 	}
@@ -67,4 +72,4 @@ class PageTwo extends connect(store)(PageViewElement) {
 	}
 }
 
-window.customElements.define('page-two', PageTwo);
+window.customElements.define('saved-readings-page', SavedReadingsPage);

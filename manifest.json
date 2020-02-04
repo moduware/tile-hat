@@ -1,19 +1,14 @@
 {
-	"id": "nexpaq.tile.led",
-	"name": "LED",
-	"description": "LED module interface",
-	"versions": {
-		"stable": "1.2.6",
-		"alpha": "1.2.7"
-	},
-	"version": "1.2.6",
-	"changes": "ColorPriority for better colors: brighter and more accurate",
+	"id": "nexpaq.tile.hat.develop-pwa",
+	"name": "Temperature and Humidity develop-pwa",
+	"description": "Moduware T&H tile module interface",
+	"version": "1.3.2",
+	"changes": "Add swipe delete of history list items",
 	"minumumAppVersion": "1.1.8",
 	"modules": [
-		"nexpaq.module.led",
-		"moduware.module.led"
+		"nexpaq.module.hat"
 	],
-	"title": "LED",
-	"color": "#40CF9A",
+	"title": "Temperature",
+	"color": "#FFB930",
 	"textColor": "white"
 }

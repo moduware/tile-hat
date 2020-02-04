@@ -19,8 +19,8 @@ import './icons.js';
 import { registerTranslateConfig, use, translate, get } from "@appnest/lit-translate";
 import * as translation from '../translations/language.js';
 
-class HomePage extends connect(store)(PageViewElement) {
 
+class SettingsPage extends connect(store)(PageViewElement) {
 	static get properties() {
 		return {
 			_page: { type: String },
@@ -55,10 +55,14 @@ class HomePage extends connect(store)(PageViewElement) {
 
 	render() {
 		return html`
-      <section>
-				<h2>${get('home-page.title')}</h2>
-				<button @click="${() => store.dispatch(navigate('/page-one'))}">${get('page-one.title')}</button>
-				<button @click="${() => store.dispatch(navigate('/page-two'))}">${translate('page-two.title')}</button>
+			<section>
+				<button @click="${() => store.dispatch(navigate('/temperature-page'))}">Temperature</button> 
+				&nbsp; 
+				<button @click="${() => store.dispatch(navigate('/saved-readings-page'))}">Saved Readings</button> 
+				&nbsp; 
+				<button @click="${() => store.dispatch(navigate('/settings-page'))}">Settings</button> 
+				<h2>Settings</h2>
+      </section>
       </section>
     `;
 	}
@@ -67,7 +71,6 @@ class HomePage extends connect(store)(PageViewElement) {
 		this._page = state.app.page;
 		this._language = state.app.language;
 	}
-
 }
 
-window.customElements.define('home-page', HomePage);
+window.customElements.define('settings-page', SettingsPage);

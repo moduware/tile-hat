@@ -19,11 +19,12 @@ import './icons.js';
 import { registerTranslateConfig, use, translate, get } from "@appnest/lit-translate";
 import * as translation from '../translations/language.js';
 
-class PageOne extends connect(store)(PageViewElement) {
+
+class AddReadingPage extends connect(store)(PageViewElement) {
 	static get properties() {
 		return {
 			_page: { type: String },
-			_language: { type: String },
+			_language: { type: String }
 		};
 	}
 
@@ -38,19 +39,12 @@ class PageOne extends connect(store)(PageViewElement) {
 		];
 	}
 
-	render() {
-		return html`
-      <section>
-				<h2>${get('page-one.title')}</h2>
-      </section>
-    `;
-	}
-
 	updated(changedProperties) {
 		if (changedProperties.has('_language')) {
 			use(this._language);
 		}
 	}
+
 	async connectedCallback() {
 		registerTranslateConfig({
 			loader: (lang) => Promise.resolve(translation[lang])
@@ -58,10 +52,21 @@ class PageOne extends connect(store)(PageViewElement) {
 
 		super.connectedCallback();
 	}
+
+	render() {
+		return html`
+			<section>
+				 
+				<h2>Add Reading</h2>
+				<button @click="${() => store.dispatch(navigate('/temperature-page'))}">Back</button>
+      </section>
+    `;
+	}
+
 	stateChanged(state) {
 		this._page = state.app.page;
 		this._language = state.app.language;
 	}
 }
 
-window.customElements.define('page-one', PageOne);
+window.customElements.define('add-reading-page', AddReadingPage);

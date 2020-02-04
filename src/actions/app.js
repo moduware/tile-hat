@@ -31,13 +31,13 @@ export const moduwareApiReady = () => async dispatch => {
 	dispatch({ type: MODUWARE_API_READY });
 	dispatch(loadLanguageTranslation());
 
-	// Moduware.v1.Bluetooth.addEventListener('ConnectionLost', () => {
-	// 	dispatch(connectionLost());
-	// });
+	Moduware.API.addEventListener('HardwareBackButtonPressed', () => {
+		dispatch(hardwareBackButtonPressed());
+	});
 }
 
 export const navigate = (path) => (dispatch) => {
-	const page = path === '/' ? 'home-page' : path.slice(1);
+	const page = path === '/' ? 'instructions-page' : path.slice(1);
 	dispatch(loadPage(page));
 };
 
@@ -49,17 +49,23 @@ export const loadLanguageTranslation = () => async dispatch => {
 
 const loadPage = (page) => (dispatch) => {
 	switch (page) {
-		case 'home-page':
-			import('../components/home-page.js').then((module) => {
+		case 'instructions-page':
+			import('../components/instructions-page.js').then((module) => {
 				// Put code in here that you want to run every time when
 				// navigating to view1 after my-view1.js is loaded.
 			});
 			break;
-		case 'page-one':
-			import('../components/page-one.js');
+		case 'temperature-page':
+			import('../components/temperature-page.js');
 			break;
-		case 'page-two':
-			import('../components/page-two.js');
+		case 'saved-readings-page':
+			import('../components/saved-readings-page.js');
+			break;
+		case 'settings-page':
+			import('../components/settings-page.js');
+			break;
+		case 'add-reading-page':
+			import('../components/add-reading-page.js');
 			break;
 		default:
 			page = 'error-page';
@@ -76,11 +82,21 @@ const updatePage = (page) => {
 	};
 };
 
+export const hardwareBackButtonPressed = () => (dispatch, getState) => {
+	if (Moduware) {
+		if (getState().app.page === 'add-reading-page') {
+			dispatch(navigate('/temperature-page'))
+		} else {
+			Moduware.API.Exit();
+		}
+	}
+}
+
 export const headerBackButtonClicked = () => (dispatch, getState) => {
 	console.log('Webview header back button clicked!');
 	if (Moduware) {
-		if (getState().app.page === 'page-one' || getState().app.page === 'page-two' || getState().app.page === 'error-page') {
-			dispatch(navigate('/home-page'))
+		if (getState().app.page === 'add-reading-page') {
+			dispatch(navigate('/temperature-page'))
 		} else {
 			Moduware.API.Exit();
 		}
