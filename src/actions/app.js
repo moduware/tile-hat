@@ -7,7 +7,9 @@ The complete set of contributors may be found at http://polymer.github.io/CONTRI
 Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 */
+import { getPlatform } from '@moduware/lit-utils';
 
+export const GET_PLATFORM = 'GET_PLATFORM';
 export const UPDATE_PAGE = 'UPDATE_PAGE';
 export const MODUWARE_API_READY = 'MODUWARE_API_READY';
 export const LOAD_LANGUAGE_TRANSLATION = 'LOAD_LANGUAGE_TRANSLATION';
@@ -24,6 +26,14 @@ export const initializeModuwareApiAsync = () => async dispatch => {
 
 	await promise;
 	dispatch(moduwareApiReady());
+}
+
+export const getPlatformInfo = () => {
+	var platform = getPlatform();
+	return {
+		type: GET_PLATFORM,
+		platform
+	};
 }
 
 export const moduwareApiReady = () => async dispatch => {

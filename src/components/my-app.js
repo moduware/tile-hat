@@ -12,7 +12,7 @@ import { LitElement, html, css } from 'lit-element';
 import { setPassiveTouchGestures } from '@polymer/polymer/lib/utils/settings.js';
 import { connect } from 'pwa-helpers/connect-mixin.js';
 import { store } from '../store.js';
-import { navigate, headerBackButtonClicked, initializeModuwareApiAsync, loadLanguageTranslation } from '../actions/app.js';
+import { navigate, headerBackButtonClicked, initializeModuwareApiAsync, loadLanguageTranslation, getPlatformInfo } from '../actions/app.js';
 import '@polymer/app-layout/app-drawer/app-drawer.js';
 import '@polymer/app-layout/app-header/app-header.js';
 import '@polymer/app-layout/app-scroll-effects/effects/waterfall.js';
@@ -28,6 +28,10 @@ class MyApp extends connect(store)(LitElement) {
 
 	static get properties() {
 		return {
+      platform: {
+				type: String,
+				reflect: true
+			},
 			appTitle: { type: String },
 			_page: { type: String },
 			_language: { type: String },
@@ -221,7 +225,7 @@ class MyApp extends connect(store)(LitElement) {
       <!-- Main content -->
       <main role="main" class="main-content">
         <!--<morph-tabbar class="navigation-tabs" @selected-changed="currentPage = $event.target.selected" :class="{ hidden: currentPage == 'instruction' || currentPage == 'snapshot'}">-->
-        <morph-tabbar class="navigation-tabs hidden" selected="result">
+        <morph-tabbar class="navigation-tabs ${this._page === 'instructions-page' ? 'hidden' : ''}" selected="result">
           <morph-tabbar-item name="result" not-selected-image="images/android/sensor-icon-not-active.svg" selected-image="images/android/sensor-icon-active.svg"></morph-tabbar-item>
           <morph-tabbar-item name="history" not-selected-image="images/android/timeline-icon-not-active.svg" selected-image="images/android/timeline-icon-active.svg"></morph-tabbar-item>
           <morph-tabbar-item name="settings" not-selected-image="images/android/settings-icon-not-active.svg" selected-image="images/android/settings-icon-active.svg"></morph-tabbar-item>
@@ -241,6 +245,7 @@ class MyApp extends connect(store)(LitElement) {
 
 	constructor() {
 		super();
+    store.dispatch(getPlatformInfo());
 		// To force all event listeners for gestures to be passive.
 		// See https://www.polymer-project.org/3.0/docs/devguide/settings#setting-passive-touch-gestures
 		setPassiveTouchGestures(true);
@@ -273,6 +278,7 @@ class MyApp extends connect(store)(LitElement) {
 	}
 
 	stateChanged(state) {
+    this.platform = state.app.platform;
 		this._page = state.app.page;
 		this._language = state.app.language;
 	}
