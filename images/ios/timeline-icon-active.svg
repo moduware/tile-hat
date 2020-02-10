@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="21px" viewBox="0 0 24 21" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>Graphics / Tab Bar Icons / Dark / Timeleine</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Graphics-/-Tab-Bar-Icons-/-Dark-/-Timeleine" transform="translate(-3.000000, -2.000000)">
+            <g>
+                <rect id="Rectangle-2" x="0" y="0" width="30" height="26"></rect>
+                <path d="M6,4 C4.8954305,4 4,4.8954305 4,6 L4,9 L26,9 L26,6 C26,4.8954305 25.1045695,4 24,4 L6,4 Z M6,3 L24,3 C25.6568542,3 27,4.34314575 27,6 L27,20 C27,21.6568542 25.6568542,23 24,23 L6,23 C4.34314575,23 3,21.6568542 3,20 L3,6 C3,4.34314575 4.34314575,3 6,3 Z M6,12 L6,17 L11,17 L11,12 L6,12 Z" id="Combined-Shape" fill="#7F5C18" fill-rule="nonzero"></path>
+                <polygon id="Line-2" fill="#7F5C18" fill-rule="nonzero" points="9 6 8 6 8 2 9 2"></polygon>
+                <polygon id="Line-2-Copy" fill="#7F5C18" fill-rule="nonzero" points="22 6 21 6 21 2 22 2"></polygon>
+            </g>
+        </g>
+    </g>
+</svg>

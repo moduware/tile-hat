@@ -19,12 +19,12 @@
     "test:regenerate_screenshots": "mocha test/integration/screenshots-baseline/regenerate.js --timeout=15000"
   },
   "dependencies": {
-    "lit-translate": "^1.1.20",
     "@appnest/lit-translate": "^1.1.16",
     "@polymer/app-layout": "^3.0.0",
     "@polymer/polymer": "^3.1.0",
     "@webcomponents/webcomponentsjs": "^2.2.4",
     "lit-element": "^2.0.1",
+    "lit-translate": "^1.1.20",
     "pwa-helpers": "^0.9.0",
     "redux": "^4.0.0",
     "redux-logger": "^3.0.6",
@@ -33,6 +33,8 @@
     "webview-tile-header": "git+https://github.com/moduware/webview-tile-header.git#lit"
   },
   "devDependencies": {
+    "@moduware/morph-tabbar": "github:moduware/morph-tabbar",
+    "@moduware/morph-tabbar-item": "github:moduware/morph-tabbar-item",
     "@polymer/test-fixture": "^4.0.2",
     "axe-core": "^3.0.0",
     "chai": "^4.1.2",
@@ -46,6 +48,7 @@
     "polyserve": "^0.27.0",
     "prpl-server": "^1.4.0",
     "puppeteer": "^1.5.0",
+    "swiper": "^5.3.0",
     "wct-mocha": "^1.0.1"
   }
 }

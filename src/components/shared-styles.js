@@ -55,4 +55,34 @@ export const SharedStyles = css`
     font-size: 30px;
     line-height: 64px;
   }
+
+.action-button {
+  display: block;
+  width: 100%;
+  line-height: 56px;
+  border-radius: 4px;
+  font-size: 20px;
+  font-weight: 400;
+  color: #FFFFFF;
+  background-color: rgba(0,0,0,0.4);
+  text-decoration: none;
+  text-align: center;
+  margin-bottom: 10px;
+  margin-top: 10px;
+
+}
+body.platform-ios .action-button {
+  background-color: rgba(0,0,0,0.2);
+}
+
+.action-button.action-button--primary.action-button--primary {
+  color: #46320A;
+  background-color: white;
+}
+
+.action-button.action-button--link.action-button--link {
+  color: white;
+  background-color: transparent;
+  font-size: 16px;
+}
 `;

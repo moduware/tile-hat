@@ -17,8 +17,10 @@ import '@polymer/app-layout/app-drawer/app-drawer.js';
 import '@polymer/app-layout/app-header/app-header.js';
 import '@polymer/app-layout/app-scroll-effects/effects/waterfall.js';
 import '@polymer/app-layout/app-toolbar/app-toolbar.js';
+import '@moduware/morph-tabbar/morph-tabbar.js';
+import '@moduware/morph-tabbar-item/morph-tabbar-item.js';
 import './icons.js';
-import 'webview-tile-header/webview-tile-header'
+import 'webview-tile-header/webview-tile-header';
 import { registerTranslateConfig, use, translate, get } from "@appnest/lit-translate";
 import * as translation from '../translations/language.js';
 
@@ -37,6 +39,7 @@ class MyApp extends connect(store)(LitElement) {
 			css`
         :host {
           display: block;
+          background-color: #FFB931;
 
           --app-drawer-width: 256px;
 
@@ -130,20 +133,25 @@ class MyApp extends connect(store)(LitElement) {
 
         /* Workaround for IE11 displaying <main> as inline */
         main {
-          display: block;
+          display: flex;
+          align-items: stretch;
+          flex-direction: column;
+          justify-content: stretch;
+          box-sizing: border-box;
         }
 
         .main-content {
-          padding-top: 64px;
+          padding-top: 55px; /* 43px for iOS */
           min-height: 100vh;
         }
 
         .page {
-          display: none;
+          width: 100%;
+          flex-grow: 1;
         }
 
-        .page[active] {
-          display: block;
+        .page:not([active]) {
+          display: none; /* better as allows different display values for page like flex */
         }
 
         footer {
@@ -174,6 +182,31 @@ class MyApp extends connect(store)(LitElement) {
             padding-right: 0px;
           }
         }
+
+        /* Alex styles */
+        .navigation-tabs {
+          --android-background-color: transparent;
+          background: transparent;
+          box-shadow: none;
+
+        }
+
+        [platform="ios"] .navigation-tabs {
+          --ios-background-color: transparent;
+          order: 2;
+          box-shadow: 0px -1px 0px 0px rgba(0, 0, 0, 0.3);
+        }
+        moduware-header {
+          --style-background-color: transparent;
+          --style-shadow-android: transparent;
+          color: white;
+        }
+
+      .hidden {
+        display: none !important;
+      }
+
+
       `
 		];
 	}
@@ -181,18 +214,27 @@ class MyApp extends connect(store)(LitElement) {
 	render() {
 		return html`
       <!-- Webview Header -->
-      <moduware-header	
+      <moduware-header
         @back-button-click="${() => store.dispatch(headerBackButtonClicked())}"
 				title="${translate('header.title')}">
 			</moduware-header>
       <!-- Main content -->
       <main role="main" class="main-content">
+        <!--<morph-tabbar class="navigation-tabs" @selected-changed="currentPage = $event.target.selected" :class="{ hidden: currentPage == 'instruction' || currentPage == 'snapshot'}">-->
+        <morph-tabbar class="navigation-tabs hidden" selected="result">
+          <morph-tabbar-item name="result" not-selected-image="images/android/sensor-icon-not-active.svg" selected-image="images/android/sensor-icon-active.svg"></morph-tabbar-item>
+          <morph-tabbar-item name="history" not-selected-image="images/android/timeline-icon-not-active.svg" selected-image="images/android/timeline-icon-active.svg"></morph-tabbar-item>
+          <morph-tabbar-item name="settings" not-selected-image="images/android/settings-icon-not-active.svg" selected-image="images/android/settings-icon-active.svg"></morph-tabbar-item>
+        </morph-tabbar>
+
         <instructions-page class="page" ?active="${this._page === 'instructions-page'}"></instructions-page>
         <temperature-page class="page" ?active="${this._page === 'temperature-page'}"></temperature-page>
 				<saved-readings-page class="page" ?active="${this._page === 'saved-readings-page'}"></saved-readings-page>
 				<settings-page class="page" ?active="${this._page === 'settings-page'}"></settings-page>
         <add-reading-page class="page" ?active="${this._page === 'add-reading-page'}"></add-reading-page>
         <error-page class="page" ?active="${this._page === 'error-page'}"></error-page>
+
+
       </main>
     `;
 	}
