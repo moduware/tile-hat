@@ -75,7 +75,7 @@ button {
   margin-top: 10px;
 
 }
-body.platform-ios .action-button {
+:host([platform="ios"]) .action-button {
   background-color: rgba(0,0,0,0.2);
 }
 
