@@ -267,7 +267,7 @@ class MyApp extends connect(store)(LitElement) {
 	firstUpdated() {
 		store.dispatch(loadLanguageTranslation());
     //store.dispatch(navigate("/instructions-page"));
-		store.dispatch(navigate("/temperature-page"));
+		store.dispatch(navigate("/settings-page"));
 		store.dispatch(initializeModuwareApiAsync());
 	}
 
