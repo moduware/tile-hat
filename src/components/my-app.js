@@ -195,10 +195,11 @@ class MyApp extends connect(store)(LitElement) {
 
         }
 
-        [platform="ios"] .navigation-tabs {
+        :host([platform="ios"]) .navigation-tabs {
           --ios-background-color: transparent;
           order: 2;
           box-shadow: 0px -1px 0px 0px rgba(0, 0, 0, 0.3);
+          order: 10;
         }
         moduware-header {
           --style-background-color: transparent;
@@ -227,9 +228,9 @@ class MyApp extends connect(store)(LitElement) {
       <main role="main" class="main-content">
         <!--<morph-tabbar class="navigation-tabs" @selected-changed="currentPage = $event.target.selected" :class="{ hidden: currentPage == 'instruction' || currentPage == 'snapshot'}">-->
         <morph-tabbar class="navigation-tabs ${this._page === 'instructions-page' ? 'hidden' : ''}" selected="result">
-          <morph-tabbar-item name="result" not-selected-image="images/android/sensor-icon-not-active.svg" selected-image="images/android/sensor-icon-active.svg" @click="${() => store.dispatch(navigate('/temperature-page'))}"></morph-tabbar-item>
-          <morph-tabbar-item name="history" not-selected-image="images/android/timeline-icon-not-active.svg" selected-image="images/android/timeline-icon-active.svg" @click="${() => store.dispatch(navigate('/saved-readings-page'))}"></morph-tabbar-item>
-          <morph-tabbar-item name="settings" not-selected-image="images/android/settings-icon-not-active.svg" selected-image="images/android/settings-icon-active.svg" @click="${() => store.dispatch(navigate('/settings-page'))}"></morph-tabbar-item>
+          <morph-tabbar-item name="result" not-selected-image="images/${this.platform}/sensor-icon-not-active.svg" selected-image="images/${this.platform}/sensor-icon-active.svg" @click="${() => store.dispatch(navigate('/temperature-page'))}"></morph-tabbar-item>
+          <morph-tabbar-item name="history" not-selected-image="images/${this.platform}/timeline-icon-not-active.svg" selected-image="images/${this.platform}/timeline-icon-active.svg" @click="${() => store.dispatch(navigate('/saved-readings-page'))}"></morph-tabbar-item>
+          <morph-tabbar-item name="settings" not-selected-image="images/${this.platform}/settings-icon-not-active.svg" selected-image="images/${this.platform}/settings-icon-active.svg" @click="${() => store.dispatch(navigate('/settings-page'))}"></morph-tabbar-item>
         </morph-tabbar>
 
         <instructions-page class="page" ?active="${this._page === 'instructions-page'}"></instructions-page>
