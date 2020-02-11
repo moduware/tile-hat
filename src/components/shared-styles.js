@@ -56,6 +56,10 @@ export const SharedStyles = css`
     line-height: 64px;
   }
 
+button {
+  border: none;
+}
+
 .action-button {
   display: block;
   width: 100%;

@@ -23,6 +23,10 @@ import * as translation from '../translations/language.js';
 class AddReadingPage extends connect(store)(PageViewElement) {
 	static get properties() {
 		return {
+      platform: {
+				type: String,
+				reflect: true
+			},
 			_page: { type: String },
 			_language: { type: String }
 		};
@@ -32,9 +36,102 @@ class AddReadingPage extends connect(store)(PageViewElement) {
 		return [
 			SharedStyles,
 			css`
-        h2 {
-					color: red;
-        }
+      :host {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        box-sizing: border-box;
+      }
+
+      :host([platform="ios"]) {
+        padding: 10px;
+      }
+
+      :host([platform="android"]) .button-container {
+        padding: 10px;
+      }
+
+      .snapshot-item {
+          background-color: white;
+          font-size: 16px;
+          padding: 0 15px 10px 15px;
+          overflow: hidden;
+      }
+
+      :host([platform="ios"]) .snapshot-item {
+          border-radius: 12px;
+      }
+
+      :host([platform="android"]) .snapshot-item {
+          box-shadow: 0 0 1px rgba(0,0,0,.12), 0 1px 1px rgba(0,0,0,.24);
+      }
+
+      .snapshot-item__title {
+          width: 100%;
+          line-height: 50px;
+
+          color: black;
+          font-size: 16px;
+          font-weight: 400;
+          text-align: left;
+          border: none;
+          outline: none;
+          outline-offset: 0;
+          -webkit-appearance:none;
+      }
+
+      .snapshot-item__title::-webkit-input-placeholder {
+          color: #929292;
+      }
+
+      :host([platform="ios"]) .snapshot-item__title {
+          font-size: 17px;
+      }
+
+      :host([platform="android"]) .snapshot-item__title {
+          padding-top: 15px;
+          box-sizing: border-box;
+          margin-bottom: 15px;
+          line-height: calc(35px);
+          border-bottom: 1px solid rgba(0,0,0,.12);
+      }
+
+      .snapshot-item__values {
+          width: 100%;
+          margin-bottom: 20px;
+      }
+
+      .snapshot-item__line {
+          line-height: 30px;
+          font-size: 17px;
+      }
+
+      :host([platform="android"]) .snapshot-item__line {
+          line-height: 40px;
+      }
+
+      .snapshot-item__field-value {
+          text-align: right;
+      }
+
+      .snapshot-item__field-value--temperature::after {
+          content: '°';
+      }
+
+      .snapshot-item__field-value--humidity::after {
+          content: '%';
+      }
+
+      .snapshot-item__daytime,
+      .snapshot-item__location {
+          font-size: 14px;
+          color: #929292;
+      }
+
+      .snapshot-item__daytime {
+          margin-bottom: 5px;
+      }
+
       `
 		];
 	}
@@ -55,15 +152,37 @@ class AddReadingPage extends connect(store)(PageViewElement) {
 
 	render() {
 		return html`
-			<section>
-				 
-				<h2>Add Reading</h2>
-				<button @click="${() => store.dispatch(navigate('/temperature-page'))}">Back</button>
-      </section>
+      <link rel="stylesheet" href="node_modules/reset-css/reset.css">
+
+      <div class="snapshot-item" id="snapshot-item">
+        <input type="text" id="snapshot-title" class="snapshot-item__title" placeholder="Add label"
+          onfocus="this.placeholder=''" onblur="this.placeholder='Add Label'">
+
+        <div class="snapshot-item__daytime" id="snapshotDayAndTime">4:14 PM</div>
+
+        <table class="snapshot-item__values">
+          <tr class="snapshot-item__line">
+            <td class="snapshot-item__field-title" id="snapshot-temperature-title">
+              <span>Temperature</span>
+            </td>
+            <td class="snapshot-item__field-value snapshot-item__field-value--temperature">23.0</td>
+          </tr>
+          <tr class="snapshot-item__line">
+            <td class="snapshot-item__field-title">Humidity</td>
+            <td class="snapshot-item__field-value snapshot-item__field-value--humidity">80</td>
+          </tr>
+        </table>
+        <!-- <div class="snapshot-item__location" id="snapshotDayAndTime">One Kowloon, 1 Wang Yuen Street, Kowloon Bay, Hong Kong</div> -->
+      </div>
+      <div class="button-container" id="snapshot-buttons-container">
+        <button class="action-button" id="snapshot-button-cancel" @click="${() => store.dispatch(navigate('/temperature-page'))}">Cancel</button>
+        <a class="action-button action-button--primary" id="history-snapshot" @click="${() => store.dispatch(navigate('/saved-readings-page'))}">Save</a>
+      </div>
     `;
 	}
 
 	stateChanged(state) {
+    this.platform = state.app.platform;
 		this._page = state.app.page;
 		this._language = state.app.language;
 	}

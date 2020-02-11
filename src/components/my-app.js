@@ -231,7 +231,7 @@ class MyApp extends connect(store)(LitElement) {
       <!-- Main content -->
       <main role="main" class="main-content">
         <!--<morph-tabbar class="navigation-tabs" @selected-changed="currentPage = $event.target.selected" :class="{ hidden: currentPage == 'instruction' || currentPage == 'snapshot'}">-->
-        <morph-tabbar class="navigation-tabs ${this._page === 'instructions-page' ? 'hidden' : ''}" selected="result">
+        <morph-tabbar class="navigation-tabs ${this._page == 'instructions-page' || this._page == 'add-reading-page' ? 'hidden' : ''}" selected="result">
           <morph-tabbar-item name="result" not-selected-image="images/${this.platform}/sensor-icon-not-active.svg" selected-image="images/${this.platform}/sensor-icon-active.svg" @click="${() => store.dispatch(navigate('/temperature-page'))}"></morph-tabbar-item>
           <morph-tabbar-item name="history" not-selected-image="images/${this.platform}/timeline-icon-not-active.svg" selected-image="images/${this.platform}/timeline-icon-active.svg" @click="${() => store.dispatch(navigate('/saved-readings-page'))}"></morph-tabbar-item>
           <morph-tabbar-item name="settings" not-selected-image="images/${this.platform}/settings-icon-not-active.svg" selected-image="images/${this.platform}/settings-icon-active.svg" @click="${() => store.dispatch(navigate('/settings-page'))}"></morph-tabbar-item>
@@ -271,7 +271,7 @@ class MyApp extends connect(store)(LitElement) {
 	firstUpdated() {
 		store.dispatch(loadLanguageTranslation());
     //store.dispatch(navigate("/instructions-page"));
-		store.dispatch(navigate("/saved-readings-page"));
+		store.dispatch(navigate("/add-reading-page"));
 		store.dispatch(initializeModuwareApiAsync());
 	}
 
