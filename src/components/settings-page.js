@@ -168,7 +168,9 @@ class SettingsPage extends connect(store)(PageViewElement) {
 
   firstUpdated() {
     componentHandler.upgradeElement(this.shadowRoot.querySelector(".mdl-switch"));
-    componentHandler.upgradeElements(this.shadowRoot.querySelectorAll(".mdl-radio"));
+    if(this.platform == 'android') {
+      componentHandler.upgradeElements(this.shadowRoot.querySelectorAll(".mdl-radio"));
+    }
   }
 
 	updated(changedProperties) {
@@ -200,65 +202,72 @@ class SettingsPage extends connect(store)(PageViewElement) {
        </label>
      </div>
 
-     <div class="settings-container ${this.platform != 'ios' ? 'hidden' : ''}">
-       <span class="settings-container__title">Measure</span>
+     ${this.platform == 'ios' ? html`
+      <div class="settings-container">
+        <span class="settings-container__title">Measure</span>
 
-       <input type="radio" name="measureType" value="ambient" id="ambientSetting" checked>
-       <label class="settings-container__label" for="ambientSetting">Ambient temperature</label>
+        <input type="radio" name="measureType" value="ambient" id="ambientSetting" checked>
+        <label class="settings-container__label" for="ambientSetting">Ambient temperature</label>
 
-       <input type="radio" name="measureType" value="object" id="objectSetting" >
-       <label class="settings-container__label" for="objectSetting">Object temperature</label>
-     </div>
+        <input type="radio" name="measureType" value="object" id="objectSetting" >
+        <label class="settings-container__label" for="objectSetting">Object temperature</label>
+      </div>
 
-     <div class="settings-container ${this.platform != 'android' ? 'hidden' : ''}">
-       <span class="settings-container__title">Measure</span>
+      <div class="settings-container">
+        <span class="settings-container__title">Units</span>
 
-       <label class="settings-container__label" for="ambientSetting">
-         <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="ambientSetting">
-           <input type="radio" id="ambientSetting" class="mdl-radio__button" name="measureType" value="ambient" checked>
-           <span class="mdl-radio"></span>
-         </label>
-         Ambient temperature
-       </label>
+        <input type="radio" class="celsius" name="measureUnit" value="celsius" checked>
+        <label class="settings-container__label unit-celsius" for="celsiusSetting">Celsius</label>
 
-       <label class="settings-container__label" for="objectSetting">
-         <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="objectSetting">
-           <input type="radio" id="objectSetting" class="mdl-radio__button" name="measureType" value="object">
-           <span class="mdl-radio"></span>
-         </label>
-         Object temperature
-       </label>
-     </div>
+        <input type="radio" class="fahrenheit" name="measureUnit" value="fahrenheit" id="fahrenheitSetting" >
+        <label class="settings-container__label unit-fahrenheit" for="fahrenheitSetting">Fahrenheit</label>
+      </div>
 
-     <div class="settings-container ${this.platform != 'ios' ? 'hidden' : ''}">
-       <span class="settings-container__title">Units</span>
+     ` : html`
+      <div class="settings-container">
+        <span class="settings-container__title">Measure</span>
 
-       <input type="radio" class="celsius" name="measureUnit" value="celsius" checked>
-       <label class="settings-container__label unit-celsius" for="celsiusSetting">Celsius</label>
+        <label class="settings-container__label" for="ambientSetting">
+          <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="ambientSetting">
+            <input type="radio" id="ambientSetting" class="mdl-radio__button" name="measureType" value="ambient" checked>
+            <span class="mdl-radio"></span>
+          </label>
+          Ambient temperature
+        </label>
 
-       <input type="radio" class="fahrenheit" name="measureUnit" value="fahrenheit" id="fahrenheitSetting" >
-       <label class="settings-container__label unit-fahrenheit" for="fahrenheitSetting">Fahrenheit</label>
-     </div>
+        <label class="settings-container__label" for="objectSetting">
+          <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="objectSetting">
+            <input type="radio" id="objectSetting" class="mdl-radio__button" name="measureType" value="object">
+            <span class="mdl-radio"></span>
+          </label>
+          Object temperature
+        </label>
+      </div>
 
-     <div class="settings-container ${this.platform != 'android' ? 'hidden' : ''}">
-       <span class="settings-container__title">Units</span>
+      <div class="settings-container">
+        <span class="settings-container__title">Units</span>
 
-       <label class="settings-container__label unit-celsius" for="celsiusSetting">
-         <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="celsiusSetting">
-           <input type="radio" id="celsiusSetting" class="mdl-radio__button celsius" name="measureUnit" value="celsius" checked>
-           <span class="mdl-radio"></span>
-         </label>
-         Celsius
-       </label>
+        <label class="settings-container__label unit-celsius" for="celsiusSetting">
+          <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="celsiusSetting">
+            <input type="radio" id="celsiusSetting" class="mdl-radio__button celsius" name="measureUnit" value="celsius" checked>
+            <span class="mdl-radio"></span>
+          </label>
+          Celsius
+        </label>
 
-       <label class="settings-container__label unit-fahrenheit" for="fahrenheitSetting">
-         <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="fahrenheitSetting">
-           <input type="radio" id="fahrenheitSetting" class="mdl-radio__button fahrenheit" name="measureUnit" value="fahrenheit">
-           <span class="mdl-radio"></span>
-         </label>
-         Fahrenheit
-       </label>
-     </div>
+        <label class="settings-container__label unit-fahrenheit" for="fahrenheitSetting">
+          <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="fahrenheitSetting">
+            <input type="radio" id="fahrenheitSetting" class="mdl-radio__button fahrenheit" name="measureUnit" value="fahrenheit">
+            <span class="mdl-radio"></span>
+          </label>
+          Fahrenheit
+        </label>
+      </div>
+
+     `}
+
+
+
     `;
 	}
 
