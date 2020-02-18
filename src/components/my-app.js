@@ -19,6 +19,7 @@ import '@polymer/app-layout/app-scroll-effects/effects/waterfall.js';
 import '@polymer/app-layout/app-toolbar/app-toolbar.js';
 import '@moduware/morph-tabbar/morph-tabbar.js';
 import '@moduware/morph-tabbar-item/morph-tabbar-item.js';
+import '@moduware/morph-pages/morph-pages.js';
 import './icons.js';
 import 'webview-tile-header/webview-tile-header';
 import { registerTranslateConfig, use, translate, get } from "@appnest/lit-translate";
@@ -153,14 +154,19 @@ class MyApp extends connect(store)(LitElement) {
         padding-top: 44px;
       }
 
+      morph-pages {
+        width: 100%;
+        flex-grow: 1;
+      }
+
         .page {
           width: 100%;
           flex-grow: 1;
         }
 
-        .page:not([active]) {
-          display: none; /* better as allows different display values for page like flex */
-        }
+      /*.page:not([active]) {
+          display: none; /* better as allows different display values for page like flex
+    }*/
 
         footer {
           padding: 24px;
@@ -237,12 +243,14 @@ class MyApp extends connect(store)(LitElement) {
           <morph-tabbar-item name="settings" not-selected-image="images/${this.platform}/settings-icon-not-active.svg" selected-image="images/${this.platform}/settings-icon-active.svg" @click="${() => store.dispatch(navigate('/settings-page'))}"></morph-tabbar-item>
         </morph-tabbar>
 
-        <instructions-page class="page" ?active="${this._page === 'instructions-page'}"></instructions-page>
-        <temperature-page class="page" ?active="${this._page === 'temperature-page'}"></temperature-page>
-				<saved-readings-page class="page" ?active="${this._page === 'saved-readings-page'}"></saved-readings-page>
-				<settings-page class="page" ?active="${this._page === 'settings-page'}"></settings-page>
-        <add-reading-page class="page" ?active="${this._page === 'add-reading-page'}"></add-reading-page>
-        <error-page class="page" ?active="${this._page === 'error-page'}"></error-page>
+        <morph-pages current-page="${this._page}" attr-for-selected="name" no-swipeback>
+          <instructions-page name="instructions-page" class="page" ?active="${this._page === "instructions-page"}"></instructions-page>
+          <temperature-page name="temperature-page" class="page" ?active="${this._page === "temperature-page"}"></temperature-page>
+				  <saved-readings-page name="saved-readings-page" class="page" ?active="${this._page === "saved-readings-page"}"></saved-readings-page>
+				  <settings-page name="settings-page" class="page" ?active="${this._page === "settings-page"}"></settings-page>
+          <add-reading-page name="add-reading-page" class="page" ?active="${this._page === "add-reading-page"}"></add-reading-page>
+          <error-page name="error-page" class="page" ?active="${this._page === "error-page"}"></error-page>
+        </morph-pages>
 
 
       </main>
@@ -251,6 +259,7 @@ class MyApp extends connect(store)(LitElement) {
 
 	constructor() {
 		super();
+    this._page = "instructions-page"; // default page to avoid morph-pages confusions
     store.dispatch(getPlatformInfo());
 		// To force all event listeners for gestures to be passive.
 		// See https://www.polymer-project.org/3.0/docs/devguide/settings#setting-passive-touch-gestures

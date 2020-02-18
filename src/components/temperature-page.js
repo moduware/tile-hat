@@ -40,6 +40,7 @@ class TemperaturePage extends connect(store)(PageViewElement) {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        background-color: #FFB931;
       }
 
       .result-screen__content {

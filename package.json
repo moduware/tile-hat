@@ -36,6 +36,7 @@
     "@moduware/morph-list-view": "github:moduware/morph-list-view",
     "@moduware/morph-list-view-item": "github:moduware/morph-list-view-item",
     "@moduware/morph-list-view-title": "github:moduware/morph-list-view-title",
+    "@moduware/morph-pages": "git+https://github.com/moduware/morph-pages.git#lit-element",
     "@moduware/morph-swipeout": "github:moduware/morph-swipeout",
     "@moduware/morph-tabbar": "github:moduware/morph-tabbar",
     "@moduware/morph-tabbar-item": "github:moduware/morph-tabbar-item",

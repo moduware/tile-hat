@@ -16,7 +16,7 @@ import {
 } from '../actions/app.js';
 
 const INITIAL_STATE = {
-	page: '',
+	page: 'instructions-page',
 	apiReady: false,
   language: 'en',
   platform: ''

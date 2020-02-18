@@ -41,6 +41,7 @@ class AddReadingPage extends connect(store)(PageViewElement) {
         flex-direction: column;
         justify-content: space-between;
         box-sizing: border-box;
+        background-color: #FFB931;
       }
 
       :host([platform="ios"]) {
