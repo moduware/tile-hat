@@ -152,7 +152,7 @@ class AddReadingPage extends connect(store)(PageViewElement) {
 
 	render() {
 		return html`
-      <link rel="stylesheet" href="node_modules/reset-css/reset.css">
+      <link rel="stylesheet" href="/node_modules/reset-css/reset.css">
 
       <div class="snapshot-item" id="snapshot-item">
         <input type="text" id="snapshot-title" class="snapshot-item__title" placeholder="Add label"

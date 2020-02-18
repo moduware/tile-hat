@@ -189,7 +189,7 @@ class SettingsPage extends connect(store)(PageViewElement) {
 
 	render() {
 		return html`
-      <link rel="stylesheet" href="node_modules/material-design-lite/material.min.css">
+      <link rel="stylesheet" href="/node_modules/material-design-lite/material.min.css">
      <div class="settings-container">
        <span class="settings-container__title">General</span>
 

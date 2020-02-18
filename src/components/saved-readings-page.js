@@ -181,7 +181,7 @@ class SavedReadingsPage extends connect(store)(PageViewElement) {
 
 	render() {
 		return html`
-      <link rel="stylesheet" href="node_modules/reset-css/reset.css">
+      <link rel="stylesheet" href="/node_modules/reset-css/reset.css">
       ${/* history length == 0 */ false ? html`
        <div class="history-placeholder">
          <img class="history-placeholder-icon" src="images/history-empty-icon.svg" />
