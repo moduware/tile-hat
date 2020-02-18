@@ -33,6 +33,7 @@
     "webview-tile-header": "git+https://github.com/moduware/webview-tile-header.git#lit"
   },
   "devDependencies": {
+    "@moduware/morph-button": "^2.0.0",
     "@moduware/morph-list-view": "github:moduware/morph-list-view",
     "@moduware/morph-list-view-item": "github:moduware/morph-list-view-item",
     "@moduware/morph-list-view-title": "github:moduware/morph-list-view-title",

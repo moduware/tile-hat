@@ -22,6 +22,7 @@ import '@moduware/morph-list-view/morph-list-view.js';
 import '@moduware/morph-list-view-item/morph-list-view-item.js';
 import '@moduware/morph-list-view-title/morph-list-view-title.js';
 import '@moduware/morph-swipeout/morph-swipeout.js';
+import '@moduware/morph-button/morph-button.js';
 
 
 class SavedReadingsPage extends connect(store)(PageViewElement) {
