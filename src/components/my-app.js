@@ -214,6 +214,7 @@ class MyApp extends connect(store)(LitElement) {
         moduware-header {
           --style-background-color: transparent;
           --style-shadow-android: transparent;
+          --back-button-color: white;
           border: none;
           color: white;
         }
