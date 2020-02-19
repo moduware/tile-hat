@@ -14,6 +14,7 @@ import { navigate } from '../actions/app.js';
 import { store } from '../store.js';
 import { connect } from 'pwa-helpers/connect-mixin.js';
 import { SharedStyles } from './shared-styles.js';
+import { SwiperStyles } from '../vendor/swiper.min.css.js';
 import Swiper from 'swiper';
 import app from '../reducers/app.js';
 import './icons.js';
@@ -32,6 +33,7 @@ class InstructionsPage extends connect(store)(PageViewElement) {
 	static get styles() {
 		return [
 			SharedStyles,
+      SwiperStyles,
 			css`
       :host {
         display: flex;
@@ -182,7 +184,7 @@ class InstructionsPage extends connect(store)(PageViewElement) {
 
 	render() {
 		return html`
-          <link rel="stylesheet" href="/node_modules/swiper/css/swiper.min.css">
+      <!--<link rel="stylesheet" href="./../../node_modules/swiper/css/swiper.min.css">-->
           <div class="swiper-container">
             <div class="swiper-wrapper">
               <div class="swiper-slide">

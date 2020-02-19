@@ -14,6 +14,7 @@ import { navigate } from '../actions/app.js';
 import { store } from '../store.js';
 import { connect } from 'pwa-helpers/connect-mixin.js';
 import { SharedStyles } from './shared-styles.js';
+import { MaterialStyles } from '../vendor/material.min.css.js';
 import app from '../reducers/app.js';
 import './icons.js';
 import { registerTranslateConfig, use, translate, get } from "@appnest/lit-translate";
@@ -37,6 +38,7 @@ class SettingsPage extends connect(store)(PageViewElement) {
 	static get styles() {
 		return [
 			SharedStyles,
+      MaterialStyles,
 			css`
 
       :host {
@@ -189,7 +191,7 @@ class SettingsPage extends connect(store)(PageViewElement) {
 
 	render() {
 		return html`
-      <link rel="stylesheet" href="/node_modules/material-design-lite/material.min.css">
+      <!--<link rel="stylesheet" href="../../node_modules/material-design-lite/material.min.css">-->
      <div class="settings-container">
        <span class="settings-container__title">General</span>
 

@@ -13,6 +13,7 @@ import { PageViewElement } from './page-view-element.js';
 import { navigate } from '../actions/app.js';
 import { store } from '../store.js';
 import { connect } from 'pwa-helpers/connect-mixin.js';
+import { ResetStyles } from '../vendor/reset.css.js';
 import { SharedStyles } from './shared-styles.js';
 import app from '../reducers/app.js';
 import './icons.js';
@@ -34,6 +35,7 @@ class AddReadingPage extends connect(store)(PageViewElement) {
 
 	static get styles() {
 		return [
+      ResetStyles,
 			SharedStyles,
 			css`
       :host {
@@ -153,7 +155,7 @@ class AddReadingPage extends connect(store)(PageViewElement) {
 
 	render() {
 		return html`
-      <link rel="stylesheet" href="/node_modules/reset-css/reset.css">
+      <!--<link rel="stylesheet" href="../../node_modules/reset-css/reset.css">-->
 
       <div class="snapshot-item" id="snapshot-item">
         <input type="text" id="snapshot-title" class="snapshot-item__title" placeholder="Add label"
