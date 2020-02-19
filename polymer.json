@@ -8,7 +8,8 @@
 	"extraDependencies": [
 		"manifest.json",
 		"icon.svg",
-		"node_modules/@webcomponents/webcomponentsjs/**"
+		"node_modules/@webcomponents/webcomponentsjs/**",
+    "fonts/**"
 	],
 	"builds": [
 		{
