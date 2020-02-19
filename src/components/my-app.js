@@ -43,7 +43,9 @@ class MyApp extends connect(store)(LitElement) {
 		return [
 			css`
         :host {
-          display: block;
+          display: flex;
+          flex-direction: column;
+          height: 100%;
           background-color: #FFB931;
 
           --app-drawer-width: 256px;
@@ -147,7 +149,8 @@ class MyApp extends connect(store)(LitElement) {
 
         .main-content {
           padding-top: 55px; /* 43px for iOS */
-          min-height: 100vh;
+          /*min-height: 100vh;*/
+          flex-grow: 1;
         }
 
       :host([platform="ios"]) .main-content {
@@ -212,6 +215,7 @@ class MyApp extends connect(store)(LitElement) {
           order: 10;
         }
         moduware-header {
+          position: absolute;
           --style-background-color: transparent;
           --style-shadow-android: transparent;
           --back-button-color: white;
