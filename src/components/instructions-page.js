@@ -153,10 +153,11 @@ class InstructionsPage extends connect(store)(PageViewElement) {
 
   firstUpdated() {
     const swiperElement = this.shadowRoot.querySelector('.swiper-container');
+    const swiperPagination = this.shadowRoot.querySelector('.swiper-pagination');
     const instructionSwiper = new Swiper(swiperElement, {
       direction: 'horizontal',
       pagination: {
-        el: '.swiper-pagination'
+        el: swiperPagination
       }
     });
 
@@ -180,6 +181,7 @@ class InstructionsPage extends connect(store)(PageViewElement) {
 
 	render() {
 		return html`
+          <link rel="stylesheet" href="/node_modules/swiper/css/swiper.min.css">
           <div class="swiper-container">
             <div class="swiper-wrapper">
               <div class="swiper-slide">
