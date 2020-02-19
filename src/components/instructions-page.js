@@ -128,8 +128,9 @@ class InstructionsPage extends connect(store)(PageViewElement) {
           display: flex;
           justify-content: center;
           align-items: flex-end;
-          margin-bottom: 50px;
+        /*margin-bottom: 50px;*/
           min-height: 150px;
+          margin-top: 15vh;
       }
       .swiper-container .swiper-pagination-bullet,
       .swiper-container .swiper-pagination-bullet-active {
@@ -186,7 +187,8 @@ class InstructionsPage extends connect(store)(PageViewElement) {
             <div class="swiper-wrapper">
               <div class="swiper-slide">
                 <div class="slide-image-container">
-                  <svg class="slide-image" width="273px" height="35px" viewBox="0 0 273 35" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                  <img src="images/instruction-ambient.png" />
+                  <!--<svg class="slide-image" width="273px" height="35px" viewBox="0 0 273 35" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                       <g transform="translate(-44.000000, -285.000000)">
                         <g transform="translate(44.000000, 285.000000)">
@@ -198,7 +200,7 @@ class InstructionsPage extends connect(store)(PageViewElement) {
                         </g>
                       </g>
                     </g>
-                  </svg>
+                  </svg>-->
                 </div>
                 <p class="slide-note">
                   When measuring ambient temperature, place the device away from extraneous influences and allow it to stabilise.
@@ -208,8 +210,9 @@ class InstructionsPage extends connect(store)(PageViewElement) {
                 <p class="slide-note slide-note__heading">
                   IMPORTANT: Don't use module as a thermometer
                 </p>
-                <div class="slide-image-container">
-                  <svg class="slide-image" width="273px" height="142px" viewBox="0 0 273 142" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <div class="slide-image-container" style="margin-top:0;">
+                  <img src="images/instruction-object.png" />
+                  <!--<svg class="slide-image" width="273px" height="142px" viewBox="0 0 273 142" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                       <g transform="translate(-39.000000, -178.000000)">
                         <g transform="translate(39.000000, 156.000000)">
@@ -223,7 +226,7 @@ class InstructionsPage extends connect(store)(PageViewElement) {
                         </g>
                       </g>
                     </g>
-                  </svg>
+                  </svg>-->
                 </div>
                 <p class="slide-note">
                   When measuring the temperature of an object, don't disconnect the module. Simply place the temperature sensor up against the intended object.
