@@ -18,14 +18,12 @@ import app from '../reducers/app.js';
 import './icons.js';
 import { registerTranslateConfig, use, translate, get } from "@appnest/lit-translate";
 import * as translation from '../translations/language.js';
+import TemperatureUnit from '../enums/TemperatureUnit';
+import MeasureType from '../enums/MeasureType';
+
 
 class TemperaturePage extends connect(store)(PageViewElement) {
-	static get properties() {
-		return {
-			_page: { type: String },
-			_language: { type: String },
-		};
-	}
+
 
 	static get styles() {
 		return [
@@ -171,23 +169,33 @@ class TemperaturePage extends connect(store)(PageViewElement) {
       <div class="result-screen__content">
         <div class="result-screen__left-side">
           <div class="temperature-scale">
-            <div class="temperature-scale__scale temperature-scale__scale--celsius" style="transform: translateY(${23 * 7}px)"></div>
+            <div class="temperature-scale__scale ${this._unit.name === TemperatureUnit.Celsius.name ? 'temperature-scale__scale--celsius' : 'temperature-scale__scale--fahrenheit'}" style="transform: translateY(${23 * 7}px)"></div>
           </div>
         </div>
         <div class="result-screen__right-side">
           <div class="temperature-numbers">
             <!-- <div class="temperature-numbers__temparature-value" id="temperature-value">{{ temperatureOutput }} {{ temperatureUnitSelected }}</div> -->
-            <span class="temperature-numbers__temparature-value" id="temperature-value">23.0</span>
-            <span class="temperature-numbers__temparature-unit" id="temperature-unit">C</span>
+            <span class="temperature-numbers__temparature-value" id="temperature-value">${this._temperature}</span>
+            <span class="temperature-numbers__temparature-unit" id="temperature-unit">${this._unit.symbol}</span>
             <div class="temperature-numbers__humidity">
               <span class="temperature-numbers__humidity-title">Humidity</span>
-              <span class="temperature-numbers__humidity-value" id="humidity-value">80</span>
+              <span class="temperature-numbers__humidity-value" id="humidity-value">${this._humidity}</span>
             </div>
           </div>
         </div>
       </div>
       <a class="action-button action-button--primary" @click="${() => store.dispatch(navigate('/add-reading-page'))}">Save</a>
     `;
+	}
+
+	static get properties() {
+		return {
+			_page: { type: String },
+			_language: { type: String },
+			_temperature: { type: Number },
+			_unit: { type: Object },
+			_humidity: { type: String },
+		};
 	}
 
 	updated(changedProperties) {
@@ -205,6 +213,14 @@ class TemperaturePage extends connect(store)(PageViewElement) {
 	stateChanged(state) {
 		this._page = state.app.page;
 		this._language = state.app.language;
+		this._unit = state.app.unit;
+		this._humidity = state.app.humidity;
+
+		if (state.app.measureType === MeasureType.Ambient) {
+			this._temperature = state.app.ambientTemperature;
+		} else {
+			this._temperature = state.app.objectTemperature;
+		}
 	}
 }
 

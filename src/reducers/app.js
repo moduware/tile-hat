@@ -15,11 +15,21 @@ import {
   GET_PLATFORM
 } from '../actions/app.js';
 
+import TemperatureUnit from '../enums/TemperatureUnit';
+import MeasureType from '../enums/MeasureType';
+
 const INITIAL_STATE = {
 	page: 'instructions-page',
 	apiReady: false,
   language: 'en',
-  platform: ''
+	platform: '',
+	ambientTemperature: 0,
+	objectTemperature: 0,
+	humidity: 0,
+	temperatureHistoryValues: [],
+	unit: TemperatureUnit.Celsius,
+	measureType: MeasureType.Ambient,
+	showInstruction: true
 };
 
 const app = (state = INITIAL_STATE, action) => {

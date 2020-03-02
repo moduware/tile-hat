@@ -52,7 +52,7 @@ export const navigate = (path) => (dispatch) => {
 };
 
 export const loadLanguageTranslation = () => async dispatch => {
-	language = Moduware.Arguments.language;
+	var language = Moduware.Arguments.language;
 	console.log(Moduware.Arguments);
 	dispatch({ type: LOAD_LANGUAGE_TRANSLATION, language });
 }
