@@ -41,6 +41,7 @@
     "@moduware/morph-swipeout": "github:moduware/morph-swipeout",
     "@moduware/morph-tabbar": "github:moduware/morph-tabbar",
     "@moduware/morph-tabbar-item": "github:moduware/morph-tabbar-item",
+    "@moduware/morph-radio": "git+https://github.com/moduware/morph-radio.git#master",
     "@polymer/test-fixture": "^4.0.2",
     "axe-core": "^3.0.0",
     "chai": "^4.1.2",

@@ -12,7 +12,9 @@ import {
 	UPDATE_PAGE,
 	MODUWARE_API_READY,
 	LOAD_LANGUAGE_TRANSLATION,
-  GET_PLATFORM
+	GET_PLATFORM,
+	DATA_RECEIVED,
+	TEMPERATURE_UNIT_CHANGED
 } from '../actions/app.js';
 
 import TemperatureUnit from '../enums/TemperatureUnit';
@@ -21,13 +23,13 @@ import MeasureType from '../enums/MeasureType';
 const INITIAL_STATE = {
 	page: 'instructions-page',
 	apiReady: false,
-  language: 'en',
+	language: 'en',
 	platform: '',
 	ambientTemperature: 0,
 	objectTemperature: 0,
 	humidity: 0,
 	temperatureHistoryValues: [],
-	unit: TemperatureUnit.Celsius,
+	unit: TemperatureUnit.Fahrenheit,
 	measureType: MeasureType.Ambient,
 	showInstruction: true
 };
@@ -39,7 +41,7 @@ const app = (state = INITIAL_STATE, action) => {
 				...state,
 				apiReady: true
 			};
-    case GET_PLATFORM:
+		case GET_PLATFORM:
 			return {
 				...state,
 				platform: action.platform
@@ -53,7 +55,19 @@ const app = (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				language: action.language
-			}
+			};
+		case DATA_RECEIVED:
+			return {
+				...state,
+				ambientTemperature: action.ambientTemperature,
+				objectTemperature: action.objectTemperature,
+				humidity: action.humidity
+			};
+		case TEMPERATURE_UNIT_CHANGED:
+			return {
+				...state,
+				unit: action.unit
+			};
 		default:
 			return state;
 	}

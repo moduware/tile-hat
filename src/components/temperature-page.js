@@ -169,7 +169,7 @@ class TemperaturePage extends connect(store)(PageViewElement) {
       <div class="result-screen__content">
         <div class="result-screen__left-side">
           <div class="temperature-scale">
-            <div class="temperature-scale__scale ${this._unit.name === TemperatureUnit.Celsius.name ? 'temperature-scale__scale--celsius' : 'temperature-scale__scale--fahrenheit'}" style="transform: translateY(${23 * 7}px)"></div>
+            <div class="temperature-scale__scale ${this._unit.name === TemperatureUnit.Celsius.name ? 'temperature-scale__scale--celsius' : 'temperature-scale__scale--fahrenheit'}" style="transform: translateY(${this._temperature * 7}px)"></div>
           </div>
         </div>
         <div class="result-screen__right-side">

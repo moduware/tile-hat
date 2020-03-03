@@ -13,6 +13,9 @@ export const GET_PLATFORM = 'GET_PLATFORM';
 export const UPDATE_PAGE = 'UPDATE_PAGE';
 export const MODUWARE_API_READY = 'MODUWARE_API_READY';
 export const LOAD_LANGUAGE_TRANSLATION = 'LOAD_LANGUAGE_TRANSLATION';
+export const DATA_RECEIVED = 'DATA_RECEIVED';
+export const TEMPERATURE_UNIT_CHANGED = 'TEMPERATURE_UNIT_CHANGED';
+
 
 // This is a fix to iOS not auto connecting and not finding any devices
 export const initializeModuwareApiAsync = () => async dispatch => {
@@ -41,15 +44,39 @@ export const moduwareApiReady = () => async dispatch => {
 	dispatch({ type: MODUWARE_API_READY });
 	dispatch(loadLanguageTranslation());
 
+	Moduware.v1.Module.ExecuteCommand(Moduware.Arguments[0], 'StartSensor', []);
+
 	Moduware.API.addEventListener('HardwareBackButtonPressed', () => {
 		dispatch(hardwareBackButtonPressed());
 	});
+
+	Moduware.API.addEventListener('BeforeExit', () => {
+		Moduware.v1.Module.ExecuteCommand(Moduware.Arguments[0], 'StopSensor', []);
+	});
+
+	Moduware.v1.Module.addEventListener('MessageReceived', async (e) => {
+		if (e.ModuleUuid === Moduware.Arguments.uuid && e.Message.dataSource === 'SensorValue') {
+			dispatch({
+				type: DATA_RECEIVED,
+				ambientTemperature: parseFloat(e.Message.variables.ambient_temperature).toFixed(1),
+				objectTemperature: parseFloat(e.Message.variables.object_temperature).toFixed(1),
+				humidity: parseFloat(e.Message.variables.humidity).toFixed(1)
+			});
+		}
+	});
+}
+
+export const changeTemperatureUnit = (unit) => (dispatch, getState) => {
+	// we should save to local storage here the new unit
+	dispatch({ type: TEMPERATURE_UNIT_CHANGED, unit: unit });
 }
 
 export const navigate = (path) => (dispatch) => {
 	const page = path === '/' ? 'instructions-page' : path.slice(1);
 	dispatch(loadPage(page));
-};
+}
+
+
 
 export const loadLanguageTranslation = () => async dispatch => {
 	var language = Moduware.Arguments.language;
