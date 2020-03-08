@@ -264,7 +264,7 @@ class MyApp extends connect(store)(LitElement) {
 
 	constructor() {
 		super();
-    this._page = "instructions-page"; // default page to avoid morph-pages confusions
+    this._page = "temperature-page"; // default page to avoid morph-pages confusions
     store.dispatch(getPlatformInfo());
 		// To force all event listeners for gestures to be passive.
 		// See https://www.polymer-project.org/3.0/docs/devguide/settings#setting-passive-touch-gestures
@@ -284,7 +284,7 @@ class MyApp extends connect(store)(LitElement) {
 
 	firstUpdated() {
 		store.dispatch(loadLanguageTranslation());
-    store.dispatch(navigate("/settings-page"));
+		store.dispatch(navigate("/instructions-page"));
 		store.dispatch(initializeModuwareApiAsync());
 	}
 

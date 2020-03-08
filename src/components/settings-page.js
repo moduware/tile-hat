@@ -22,7 +22,7 @@ import * as translation from '../translations/language.js';
 import 'material-design-lite/material.min.js';
 import TemperatureUnit from '../enums/TemperatureUnit';
 import MeasureType from '../enums/MeasureType';
-import { changeTemperatureUnit } from '../actions/app';
+import { changeTemperatureUnit, changeMeasureType } from '../actions/app';
 
 class SettingsPage extends connect(store)(PageViewElement) {
 
@@ -42,37 +42,53 @@ class SettingsPage extends connect(store)(PageViewElement) {
      ${this.platform == 'ios' ? html`
       <div class="settings-container">
         <span class="settings-container__title">Measure</span>
-        <input type="radio" name="measureType" value="ambient" id="ambientSetting" checked>
+        <input type="radio" name="measureType" value="ambient" id="ambientSetting" 
+								?checked="${this._measureType === MeasureType.Ambient}"
+								@change="${() => this._changeMeasureTypeHandler(MeasureType.Ambient)}">
         <label class="settings-container__label" for="ambientSetting">Ambient temperature</label>
-        <input type="radio" name="measureType" value="object" id="objectSetting" >
+        <input type="radio" name="measureType" value="object" id="objectSetting" 
+								?checked="${this._measureType === MeasureType.Object}"
+								@change="${() => this._changeMeasureTypeHandler(MeasureType.Object)}">
         <label class="settings-container__label" for="objectSetting">Object temperature</label>
       </div>
       <div class="settings-container">
         <span class="settings-container__title">Units</span>
         <input type="radio" class="celsius" name="measureUnit" value="celsius" 
 								?checked="${this._unit.name === TemperatureUnit.Celsius.name}"
-								@change="${() => this._changeTemperatureUnit(TemperatureUnit.Celsius)}"
+								@change="${() => this._changeTemperatureUnitHandler(TemperatureUnit.Celsius)}"
 								id="celsiusSetting-ios">
         <label class="settings-container__label unit-celsius" for="celsiusSetting-ios">Celsius</label>
         <input type="radio" class="fahrenheit" name="measureUnit" value="fahrenheit" 
 								?checked="${this._unit.name === TemperatureUnit.Fahrenheit.name}"
-								@change="${() => this._changeTemperatureUnit(TemperatureUnit.Fahrenheit)}"
+								@change="${() => this._changeTemperatureUnitHandler(TemperatureUnit.Fahrenheit)}"
 								id="fahrenheitSetting-ios" >
         <label class="settings-container__label unit-fahrenheit" for="fahrenheitSetting-ios">Fahrenheit</label>
       </div>
      ` : html`
       <div class="settings-container">
         <span class="settings-container__title">Measure</span>
-        <label class="settings-container__label" for="ambientSetting">
-          <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="ambientSetting">
-            <input type="radio" id="ambientSetting" class="mdl-radio__button" name="measureType" value="ambient" checked>
+        <label class="settings-container__label" for="ambientSetting-android">
+          <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="ambientSetting-android">
+            <input type="radio" 
+										id="ambientSetting-android" 
+										class="mdl-radio__button" 
+										name="measureType" 
+										value="ambient" 
+										?checked="${this._measureType === MeasureType.Ambient}"
+										@change="${() => this._changeMeasureTypeHandler(MeasureType.Ambient)}">
             <span class="mdl-radio"></span>
           </label>
           Ambient temperature
         </label>
-        <label class="settings-container__label" for="objectSetting">
-          <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="objectSetting">
-            <input type="radio" id="objectSetting" class="mdl-radio__button" name="measureType" value="object">
+        <label class="settings-container__label" for="objectSetting-android">
+          <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="objectSetting-android">
+            <input type="radio" 
+										id="objectSetting-android" 
+										class="mdl-radio__button" 
+										name="measureType" 
+										value="object"
+										?checked="${this._measureType === MeasureType.Object}"
+										@change="${() => this._changeMeasureTypeHandler(MeasureType.Object)}">
             <span class="mdl-radio"></span>
           </label>
           Object temperature
@@ -82,18 +98,26 @@ class SettingsPage extends connect(store)(PageViewElement) {
         <span class="settings-container__title">Units</span>
         <label class="settings-container__label unit-celsius" for="celsiusSetting-android" >
           <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="celsiusSetting-android">
-            <input type="radio" id="celsiusSetting-android" class="mdl-radio__button celsius" name="measureUnit" value="celsius" 
-									?checked="${this._unit.name === TemperatureUnit.Celsius.name}"
-									@change="${() => this._changeTemperatureUnit(TemperatureUnit.Celsius)}" >
+            <input type="radio" 
+										id="celsiusSetting-android" 
+										class="mdl-radio__button celsius" 
+										name="measureUnit" 
+										value="celsius" 
+										?checked="${this._unit.name === TemperatureUnit.Celsius.name}"
+										@change="${() => this._changeTemperatureUnitHandler(TemperatureUnit.Celsius)}" >
             <span class="mdl-radio"></span>
           </label>
           Celsius
         </label>
         <label class="settings-container__label unit-fahrenheit" for="fahrenheitSetting-android" >
           <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="fahrenheitSetting-android">
-            <input type="radio" id="fahrenheitSetting-android" class="mdl-radio__button fahrenheit" name="measureUnit" value="fahrenheit" 
+            <input type="radio" 
+										id="fahrenheitSetting-android" 
+										class="mdl-radio__button fahrenheit" 
+										name="measureUnit" 
+										value="fahrenheit" 
 										?checked="${this._unit.name === TemperatureUnit.Fahrenheit.name}"
-										@change="${() => this._changeTemperatureUnit(TemperatureUnit.Fahrenheit)}">
+										@change="${() => this._changeTemperatureUnitHandler(TemperatureUnit.Fahrenheit)}">
             <span class="mdl-radio"></span>
           </label>
           Fahrenheit
@@ -102,7 +126,6 @@ class SettingsPage extends connect(store)(PageViewElement) {
      `}
     `;
 	}
-
 
 	static get properties() {
 		return {
@@ -113,6 +136,7 @@ class SettingsPage extends connect(store)(PageViewElement) {
 			_page: { type: String },
 			_language: { type: String },
 			_unit: { type: Object },
+			_measureType: { type: String }
 		};
 	}
 
@@ -270,7 +294,7 @@ class SettingsPage extends connect(store)(PageViewElement) {
 		super.connectedCallback();
 	}
 
-	_changeTemperatureUnit(unit) {
+	_changeTemperatureUnitHandler(unit) {
 
 		store.dispatch(changeTemperatureUnit(unit));
 		if (unit.name === TemperatureUnit.Fahrenheit.name && this.platform === 'android') {
@@ -282,11 +306,24 @@ class SettingsPage extends connect(store)(PageViewElement) {
 		}
 	}
 
+	_changeMeasureTypeHandler(measureType) {
+		store.dispatch(changeMeasureType(measureType));
+
+		if (measureType === MeasureType.Object && this.platform === 'android') {
+			this.shadowRoot.getElementById('ambientSetting-android').parentNode.classList.remove('is-checked');
+			this.shadowRoot.getElementById('objectSetting-android').parentNode.classList.add('is-checked');
+		} else if (measureType === MeasureType.Ambient && this.platform === 'android') {
+			this.shadowRoot.getElementById('ambientSetting-android').parentNode.classList.add('is-checked');
+			this.shadowRoot.getElementById('objectSetting-android').parentNode.classList.remove('is-checked');
+		}
+	}
+
 	stateChanged(state) {
 		this.platform = state.app.platform;
 		this._page = state.app.page;
 		this._language = state.app.language;
 		this._unit = state.app.unit;
+		this._measureType = state.app.measureType
 	}
 }
 

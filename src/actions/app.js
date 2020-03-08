@@ -15,7 +15,7 @@ export const MODUWARE_API_READY = 'MODUWARE_API_READY';
 export const LOAD_LANGUAGE_TRANSLATION = 'LOAD_LANGUAGE_TRANSLATION';
 export const DATA_RECEIVED = 'DATA_RECEIVED';
 export const TEMPERATURE_UNIT_CHANGED = 'TEMPERATURE_UNIT_CHANGED';
-
+export const MEASURE_TYPE_CHANGED = 'MEASURE_TYPE_CHANGED';
 
 // This is a fix to iOS not auto connecting and not finding any devices
 export const initializeModuwareApiAsync = () => async dispatch => {
@@ -58,21 +58,26 @@ export const moduwareApiReady = () => async dispatch => {
 		if (e.ModuleUuid === Moduware.Arguments.uuid && e.Message.dataSource === 'SensorValue') {
 			dispatch({
 				type: DATA_RECEIVED,
-				ambientTemperature: parseFloat(e.Message.variables.ambient_temperature).toFixed(1),
-				objectTemperature: parseFloat(e.Message.variables.object_temperature).toFixed(1),
-				humidity: parseFloat(e.Message.variables.humidity).toFixed(1)
+				ambientTemperature: parseFloat(e.Message.variables.ambient_temperature),
+				objectTemperature: parseFloat(e.Message.variables.object_temperature),
+				humidity: parseFloat(e.Message.variables.humidity)
 			});
 		}
 	});
 }
 
-export const changeTemperatureUnit = (unit) => (dispatch, getState) => {
+export const changeTemperatureUnit = (unit) => (dispatch) => {
 	// we should save to local storage here the new unit
 	dispatch({ type: TEMPERATURE_UNIT_CHANGED, unit: unit });
 }
 
+export const changeMeasureType = (measureType) => (dispatch) => {
+	// we should save to local storage here the new unit
+	dispatch({ type: MEASURE_TYPE_CHANGED, measureType: measureType });
+}
+
 export const navigate = (path) => (dispatch) => {
-	const page = path === '/' ? 'instructions-page' : path.slice(1);
+	const page = path === '/' ? 'temperature-page' : path.slice(1);
 	dispatch(loadPage(page));
 }
 

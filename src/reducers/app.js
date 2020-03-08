@@ -14,14 +14,15 @@ import {
 	LOAD_LANGUAGE_TRANSLATION,
 	GET_PLATFORM,
 	DATA_RECEIVED,
-	TEMPERATURE_UNIT_CHANGED
+	TEMPERATURE_UNIT_CHANGED,
+	MEASURE_TYPE_CHANGED
 } from '../actions/app.js';
 
 import TemperatureUnit from '../enums/TemperatureUnit';
 import MeasureType from '../enums/MeasureType';
 
 const INITIAL_STATE = {
-	page: 'instructions-page',
+	page: 'temperature-page',
 	apiReady: false,
 	language: 'en',
 	platform: '',
@@ -67,6 +68,11 @@ const app = (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				unit: action.unit
+			};
+		case MEASURE_TYPE_CHANGED:
+			return {
+				...state,
+				measureType: action.measureType
 			};
 		default:
 			return state;

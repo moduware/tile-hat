@@ -16,6 +16,7 @@ import { connect } from 'pwa-helpers/connect-mixin.js';
 import { SharedStyles } from './shared-styles.js';
 import app from '../reducers/app.js';
 import './icons.js';
+import * as Utils from '../lib/Utils';
 import { registerTranslateConfig, use, translate, get } from "@appnest/lit-translate";
 import * as translation from '../translations/language.js';
 import TemperatureUnit from '../enums/TemperatureUnit';
@@ -169,17 +170,18 @@ class TemperaturePage extends connect(store)(PageViewElement) {
       <div class="result-screen__content">
         <div class="result-screen__left-side">
           <div class="temperature-scale">
-            <div class="temperature-scale__scale ${this._unit.name === TemperatureUnit.Celsius.name ? 'temperature-scale__scale--celsius' : 'temperature-scale__scale--fahrenheit'}" style="transform: translateY(${this._temperature * 7}px)"></div>
+            <div class="temperature-scale__scale ${this._unit.name === TemperatureUnit.Celsius.name ? 'temperature-scale__scale--celsius' : 'temperature-scale__scale--fahrenheit'}" 
+									style="transform: translateY(${this._temperature * (this._unit.name === TemperatureUnit.Celsius.name ? 7 : 3)}px)"></div>
           </div>
         </div>
         <div class="result-screen__right-side">
           <div class="temperature-numbers">
             <!-- <div class="temperature-numbers__temparature-value" id="temperature-value">{{ temperatureOutput }} {{ temperatureUnitSelected }}</div> -->
-            <span class="temperature-numbers__temparature-value" id="temperature-value">${this._temperature}</span>
+            <span class="temperature-numbers__temparature-value" id="temperature-value">${this._temperature.toFixed(1)}</span>
             <span class="temperature-numbers__temparature-unit" id="temperature-unit">${this._unit.symbol}</span>
             <div class="temperature-numbers__humidity">
               <span class="temperature-numbers__humidity-title">Humidity</span>
-              <span class="temperature-numbers__humidity-value" id="humidity-value">${this._humidity}</span>
+              <span class="temperature-numbers__humidity-value" id="humidity-value">${this._humidity.toFixed(1)}</span>
             </div>
           </div>
         </div>
@@ -217,9 +219,17 @@ class TemperaturePage extends connect(store)(PageViewElement) {
 		this._humidity = state.app.humidity;
 
 		if (state.app.measureType === MeasureType.Ambient) {
-			this._temperature = state.app.ambientTemperature;
+			if (this._unit.name === TemperatureUnit.Fahrenheit.name) {
+				this._temperature = Utils.Celsius2Farenheit(state.app.ambientTemperature);
+			} else {
+				this._temperature = state.app.ambientTemperature;
+			}
 		} else {
-			this._temperature = state.app.objectTemperature;
+			if (this._unit.name === TemperatureUnit.Fahrenheit.name) {
+				this._temperature = Utils.Celsius2Farenheit(state.app.objectTemperature);
+			} else {
+				this._temperature = state.app.objectTemperature;
+			}
 		}
 	}
 }
