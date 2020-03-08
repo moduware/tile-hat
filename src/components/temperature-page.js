@@ -176,7 +176,6 @@ class TemperaturePage extends connect(store)(PageViewElement) {
         </div>
         <div class="result-screen__right-side">
           <div class="temperature-numbers">
-            <!-- <div class="temperature-numbers__temparature-value" id="temperature-value">{{ temperatureOutput }} {{ temperatureUnitSelected }}</div> -->
             <span class="temperature-numbers__temparature-value" id="temperature-value">${this._temperature.toFixed(1)}</span>
             <span class="temperature-numbers__temparature-unit" id="temperature-unit">${this._unit.symbol}</span>
             <div class="temperature-numbers__humidity">

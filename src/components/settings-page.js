@@ -28,7 +28,6 @@ class SettingsPage extends connect(store)(PageViewElement) {
 
 	render() {
 		return html`
-      <!--<link rel="stylesheet" href="../../node_modules/material-design-lite/material.min.css">-->
      <div class="settings-container">
        <span class="settings-container__title">General</span>
        <label class="settings-container__label" for="instructionSetting">
@@ -282,7 +281,6 @@ class SettingsPage extends connect(store)(PageViewElement) {
 	}
 
 	updated(changedProperties) {
-
 		if (changedProperties.has('_language')) {
 			use(this._language);
 		}
@@ -309,8 +307,8 @@ class SettingsPage extends connect(store)(PageViewElement) {
 	}
 
 	_changeMeasureTypeHandler(measureType) {
+		
 		store.dispatch(changeMeasureType(measureType));
-
 		if (measureType === MeasureType.Object && this.platform === 'android') {
 			this.shadowRoot.getElementById('ambientSetting-android').parentNode.classList.remove('is-checked');
 			this.shadowRoot.getElementById('objectSetting-android').parentNode.classList.add('is-checked');
