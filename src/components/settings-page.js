@@ -22,7 +22,7 @@ import * as translation from '../translations/language.js';
 import 'material-design-lite/material.min.js';
 import TemperatureUnit from '../enums/TemperatureUnit';
 import MeasureType from '../enums/MeasureType';
-import { changeTemperatureUnit, changeMeasureType } from '../actions/app';
+import { changeTemperatureUnit, changeMeasureType, toggleShowInstructions } from '../actions/app';
 
 class SettingsPage extends connect(store)(PageViewElement) {
 
@@ -34,7 +34,7 @@ class SettingsPage extends connect(store)(PageViewElement) {
        <label class="settings-container__label" for="instructionSetting">
          Show instruction
          <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="instructionSetting">
-           <input type="checkbox" id="instructionSetting" class="mdl-switch__input">
+           <input type="checkbox" id="instructionSetting" class="mdl-switch__input" ?checked="${this._showInstruction}" @change="${() => store.dispatch(toggleShowInstructions())}">
            <span class="mdl-switch__label"></span>
          </label>
        </label>
@@ -136,7 +136,8 @@ class SettingsPage extends connect(store)(PageViewElement) {
 			_page: { type: String },
 			_language: { type: String },
 			_unit: { type: Object },
-			_measureType: { type: String }
+			_measureType: { type: String },
+			_showInstruction: { type: Boolean }
 		};
 	}
 
@@ -281,6 +282,7 @@ class SettingsPage extends connect(store)(PageViewElement) {
 	}
 
 	updated(changedProperties) {
+
 		if (changedProperties.has('_language')) {
 			use(this._language);
 		}
@@ -323,7 +325,8 @@ class SettingsPage extends connect(store)(PageViewElement) {
 		this._page = state.app.page;
 		this._language = state.app.language;
 		this._unit = state.app.unit;
-		this._measureType = state.app.measureType
+		this._measureType = state.app.measureType;
+		this._showInstruction = state.app.showInstruction;
 	}
 }
 

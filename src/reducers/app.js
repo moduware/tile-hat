@@ -15,14 +15,15 @@ import {
 	GET_PLATFORM,
 	DATA_RECEIVED,
 	TEMPERATURE_UNIT_CHANGED,
-	MEASURE_TYPE_CHANGED
+	MEASURE_TYPE_CHANGED,
+	SHOW_INSTRUCTION_TOGGLED
 } from '../actions/app.js';
 
 import TemperatureUnit from '../enums/TemperatureUnit';
 import MeasureType from '../enums/MeasureType';
 
 const INITIAL_STATE = {
-	page: 'temperature-page',
+	page: 'instructions-page',
 	apiReady: false,
 	language: 'en',
 	platform: '',
@@ -30,7 +31,7 @@ const INITIAL_STATE = {
 	objectTemperature: 0,
 	humidity: 0,
 	temperatureHistoryValues: [],
-	unit: TemperatureUnit.Fahrenheit,
+	unit: TemperatureUnit.Celsius,
 	measureType: MeasureType.Ambient,
 	showInstruction: true
 };
@@ -73,6 +74,11 @@ const app = (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				measureType: action.measureType
+			};
+		case SHOW_INSTRUCTION_TOGGLED:
+			return {
+				...state,
+				showInstruction: action.showInstruction
 			};
 		default:
 			return state;

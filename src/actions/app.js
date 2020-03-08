@@ -8,6 +8,7 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 */
 import { getPlatform } from '@moduware/lit-utils';
+import StorageKeys from '../enums/StorageKeys';
 
 export const GET_PLATFORM = 'GET_PLATFORM';
 export const UPDATE_PAGE = 'UPDATE_PAGE';
@@ -16,6 +17,7 @@ export const LOAD_LANGUAGE_TRANSLATION = 'LOAD_LANGUAGE_TRANSLATION';
 export const DATA_RECEIVED = 'DATA_RECEIVED';
 export const TEMPERATURE_UNIT_CHANGED = 'TEMPERATURE_UNIT_CHANGED';
 export const MEASURE_TYPE_CHANGED = 'MEASURE_TYPE_CHANGED';
+export const SHOW_INSTRUCTION_TOGGLED = 'SHOW_INSTRUCTION_TOGGLED';
 
 // This is a fix to iOS not auto connecting and not finding any devices
 export const initializeModuwareApiAsync = () => async dispatch => {
@@ -66,14 +68,51 @@ export const moduwareApiReady = () => async dispatch => {
 	});
 }
 
+
 export const changeTemperatureUnit = (unit) => (dispatch) => {
-	// we should save to local storage here the new unit
+	localStorage.setItem(StorageKeys.UNIT_STORAGE_KEY, JSON.stringify(unit));
 	dispatch({ type: TEMPERATURE_UNIT_CHANGED, unit: unit });
 }
 
 export const changeMeasureType = (measureType) => (dispatch) => {
-	// we should save to local storage here the new unit
+	localStorage.setItem(StorageKeys.MEASURE_TYPE_STORAGE_KEY, JSON.stringify(measureType));
 	dispatch({ type: MEASURE_TYPE_CHANGED, measureType: measureType });
+}
+
+export const loadStoredSettings = () => (dispatch) => {
+
+	var unitJson = localStorage.getItem(StorageKeys.UNIT_STORAGE_KEY);
+	if (unitJson != null) {
+		var savedUnit = JSON.parse(unitJson);
+		dispatch({ type: TEMPERATURE_UNIT_CHANGED, unit: savedUnit });
+	}
+
+	var measureTypejson = localStorage.getItem(StorageKeys.MEASURE_TYPE_STORAGE_KEY);
+	if (measureTypejson != null) {
+		var savedMeasureType = JSON.parse(measureTypejson);
+		dispatch({ type: MEASURE_TYPE_CHANGED, measureType: savedMeasureType });
+	}
+
+	var showInstructionJson = localStorage.getItem(StorageKeys.SHOW_INSTRUCTION_KEY);
+	if (showInstructionJson != null) {
+		var savedShowInstruction = JSON.parse(showInstructionJson);
+		dispatch({ type: SHOW_INSTRUCTION_TOGGLED, showInstruction: savedShowInstruction });
+	}
+}
+
+export const toggleShowInstructions = () => (dispatch, getState) => {
+	if (getState().app.showInstruction === true) {
+		localStorage.setItem(StorageKeys.SHOW_INSTRUCTION_KEY, JSON.stringify(false));
+		dispatch({ type: SHOW_INSTRUCTION_TOGGLED, showInstruction: false });
+	} else {
+		localStorage.setItem(StorageKeys.SHOW_INSTRUCTION_KEY, JSON.stringify(true));
+		dispatch({ type: SHOW_INSTRUCTION_TOGGLED, showInstruction: true });
+	}
+}
+
+export const disableShowInstruction = () => (dispatch) => {
+	localStorage.setItem(StorageKeys.SHOW_INSTRUCTION_KEY, JSON.stringify(false));
+	dispatch({ type: SHOW_INSTRUCTION_TOGGLED, showInstruction: false });
 }
 
 export const navigate = (path) => (dispatch) => {
@@ -81,11 +120,8 @@ export const navigate = (path) => (dispatch) => {
 	dispatch(loadPage(page));
 }
 
-
-
 export const loadLanguageTranslation = () => async dispatch => {
 	var language = Moduware.Arguments.language;
-	console.log(Moduware.Arguments);
 	dispatch({ type: LOAD_LANGUAGE_TRANSLATION, language });
 }
 

@@ -10,7 +10,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 import { html, css } from 'lit-element';
 import { PageViewElement } from './page-view-element.js';
-import { navigate } from '../actions/app.js';
+import { navigate, disableShowInstruction } from '../actions/app.js';
 import { store } from '../store.js';
 import { connect } from 'pwa-helpers/connect-mixin.js';
 import { SharedStyles } from './shared-styles.js';
@@ -26,14 +26,17 @@ class InstructionsPage extends connect(store)(PageViewElement) {
 	static get properties() {
 		return {
 			_page: { type: String },
-			_language: { type: String }
+			_language: { type: String },
+			_buttonText: { type: String },
+			_currentSlide: { type: Number },
+			_instructionSwiper: { type: Object }
 		};
 	}
 
 	static get styles() {
 		return [
 			SharedStyles,
-      SwiperStyles,
+			SwiperStyles,
 			css`
       :host {
         display: flex;
@@ -154,25 +157,32 @@ class InstructionsPage extends connect(store)(PageViewElement) {
 		}
 	}
 
-  firstUpdated() {
-    const swiperElement = this.shadowRoot.querySelector('.swiper-container');
-    const swiperPagination = this.shadowRoot.querySelector('.swiper-pagination');
-    const instructionSwiper = new Swiper(swiperElement, {
-      direction: 'horizontal',
-      pagination: {
-        el: swiperPagination
-      }
-    });
+	firstUpdated() {
+		this._buttonText = 'Next';
+		this._currentSlide = 1;
 
-    instructionSwiper.on('slideChange', function () {
-      if (instructionSwiper.isBeginning) {
-        console.log('First slide active');
-      } else if (instructionSwiper.isEnd) {
-        console.log('Second slide active');
-      }
-    });
+		const swiperElement = this.shadowRoot.querySelector('.swiper-container');
+		const swiperPagination = this.shadowRoot.querySelector('.swiper-pagination');
+		this._instructionSwiper = new Swiper(swiperElement, {
+			direction: 'horizontal',
+			pagination: {
+				el: swiperPagination
+			}
+		});
 
-  }
+		var self = this;
+
+		this._instructionSwiper.on('slideChange', () => {
+			if (self._instructionSwiper.isBeginning) {
+				self._buttonText = "Next";
+				self._currentSlide = 1;
+			} else if (self._instructionSwiper.isEnd) {
+				self._buttonText = "Got it!";
+				self._currentSlide = 2;
+			}
+		});
+
+	}
 
 	async connectedCallback() {
 		registerTranslateConfig({
@@ -239,8 +249,8 @@ class InstructionsPage extends connect(store)(PageViewElement) {
           </div>
           <div class="button-container">
           <!--<a class="action-button action-button-/-primary">Next</a>-->
-            <a class="action-button action-button--primary" @click="${() => store.dispatch(navigate('/temperature-page'))}">Got it!</a>
-            <a class="action-button action-button--link" @click="${() => store.dispatch(navigate('/temperature-page'))}">Don't Show Again</a>
+            <a class="action-button action-button--primary" @click="${() => this._sliderButtonClickHandler()}">${this._buttonText}</a>
+            <a class="action-button action-button--link" @click="${() => this._dontShowClickHandler()}">Don't Show Again</a>
           </div>
     `;
 	}
@@ -250,6 +260,18 @@ class InstructionsPage extends connect(store)(PageViewElement) {
 		this._language = state.app.language;
 	}
 
+	_dontShowClickHandler() {
+		store.dispatch(navigate('/temperature-page'));
+		store.dispatch(disableShowInstruction());
+	}
+
+	_sliderButtonClickHandler() {
+		if (this._currentSlide === 1) {
+			this._instructionSwiper.slideNext();
+		} else {
+			store.dispatch(navigate('/temperature-page'));
+		}
+	}
 }
 
 window.customElements.define('instructions-page', InstructionsPage);
