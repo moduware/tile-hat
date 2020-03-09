@@ -18,6 +18,8 @@ export const DATA_RECEIVED = 'DATA_RECEIVED';
 export const TEMPERATURE_UNIT_CHANGED = 'TEMPERATURE_UNIT_CHANGED';
 export const MEASURE_TYPE_CHANGED = 'MEASURE_TYPE_CHANGED';
 export const SHOW_INSTRUCTION_TOGGLED = 'SHOW_INSTRUCTION_TOGGLED';
+export const ADD_READING = 'ADD_READING';
+export const SAVE_READING = 'SAVE_READING';
 
 // This is a fix to iOS not auto connecting and not finding any devices
 export const initializeModuwareApiAsync = () => async dispatch => {
@@ -115,9 +117,21 @@ export const disableShowInstruction = () => (dispatch) => {
 	dispatch({ type: SHOW_INSTRUCTION_TOGGLED, showInstruction: false });
 }
 
+export const addReading = (toBeSavedReading) => (dispatch) => {
+	dispatch({ type: ADD_READING, toBeSavedReading: toBeSavedReading });
+	dispatch(navigate('/add-reading-page'));
+}
+
 export const navigate = (path) => (dispatch) => {
 	const page = path === '/' ? 'temperature-page' : path.slice(1);
 	dispatch(loadPage(page));
+}
+
+export const saveReading = (reading) => (dispatch, getState) => {
+	dispatch({ type: SAVE_READING, reading: reading });
+	var historyList = getState().app.historyList;
+	localStorage.setItem(StorageKeys.HISTORY_KEY, JSON.stringify(historyList));
+	dispatch(navigate('/saved-readings-page'));
 }
 
 export const loadLanguageTranslation = () => async dispatch => {
@@ -171,7 +185,6 @@ export const hardwareBackButtonPressed = () => (dispatch, getState) => {
 }
 
 export const headerBackButtonClicked = () => (dispatch, getState) => {
-	console.log('Webview header back button clicked!');
 	if (Moduware) {
 		if (getState().app.page === 'add-reading-page') {
 			dispatch(navigate('/temperature-page'))

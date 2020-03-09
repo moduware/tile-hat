@@ -16,7 +16,9 @@ import {
 	DATA_RECEIVED,
 	TEMPERATURE_UNIT_CHANGED,
 	MEASURE_TYPE_CHANGED,
-	SHOW_INSTRUCTION_TOGGLED
+	SHOW_INSTRUCTION_TOGGLED,
+	ADD_READING,
+	SAVE_READING
 } from '../actions/app.js';
 
 import TemperatureUnit from '../enums/TemperatureUnit';
@@ -30,10 +32,11 @@ const INITIAL_STATE = {
 	ambientTemperature: 0,
 	objectTemperature: 0,
 	humidity: 0,
-	temperatureHistoryValues: [],
+	historyList: [],
 	unit: TemperatureUnit.Celsius,
 	measureType: MeasureType.Ambient,
-	showInstruction: true
+	showInstruction: true,
+	toBeSavedReading: null
 };
 
 const app = (state = INITIAL_STATE, action) => {
@@ -79,6 +82,16 @@ const app = (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				showInstruction: action.showInstruction
+			};
+		case ADD_READING:
+			return {
+				...state,
+				toBeSavedReading: action.toBeSavedReading
+			};
+		case SAVE_READING:
+			return {
+				...state,
+				historyList: [...state.historyList, action.reading]
 			};
 		default:
 			return state;

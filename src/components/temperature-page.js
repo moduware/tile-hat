@@ -10,7 +10,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 import { html, css } from 'lit-element';
 import { PageViewElement } from './page-view-element.js';
-import { navigate } from '../actions/app.js';
+import { navigate, addReading } from '../actions/app.js';
 import { store } from '../store.js';
 import { connect } from 'pwa-helpers/connect-mixin.js';
 import { SharedStyles } from './shared-styles.js';
@@ -21,7 +21,7 @@ import { registerTranslateConfig, use, translate, get } from "@appnest/lit-trans
 import * as translation from '../translations/language.js';
 import TemperatureUnit from '../enums/TemperatureUnit';
 import MeasureType from '../enums/MeasureType';
-
+import moment from 'moment';
 
 class TemperaturePage extends connect(store)(PageViewElement) {
 
@@ -185,9 +185,24 @@ class TemperaturePage extends connect(store)(PageViewElement) {
           </div>
         </div>
       </div>
-      <a class="action-button action-button--primary" @click="${() => store.dispatch(navigate('/add-reading-page'))}">Save</a>
+      <a class="action-button action-button--primary" @click="${() => this._saveClickHandler()}">Save</a>
     `;
 	}
+
+	_saveClickHandler() {
+
+		var time = moment();
+		store.dispatch(addReading({
+			id: time.valueOf(),
+			temperature: this._temperature,
+			humidity: this._humidity,
+			unit: this._unit,
+			measureType: this._measureType,
+			timestamp: time,
+			label: ''
+		}));
+	}
+
 
 	static get properties() {
 		return {
@@ -196,6 +211,7 @@ class TemperaturePage extends connect(store)(PageViewElement) {
 			_temperature: { type: Number },
 			_unit: { type: Object },
 			_humidity: { type: String },
+			_measureType: { type: String }
 		};
 	}
 
@@ -204,6 +220,7 @@ class TemperaturePage extends connect(store)(PageViewElement) {
 			use(this._language);
 		}
 	}
+
 	async connectedCallback() {
 		registerTranslateConfig({
 			loader: (lang) => Promise.resolve(translation[lang])
@@ -216,6 +233,7 @@ class TemperaturePage extends connect(store)(PageViewElement) {
 		this._language = state.app.language;
 		this._unit = state.app.unit;
 		this._humidity = state.app.humidity;
+		this._measureType = state.app.measureType;
 
 		if (state.app.measureType === MeasureType.Ambient) {
 			if (this._unit.name === TemperatureUnit.Fahrenheit.name) {

@@ -10,7 +10,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 import { html, css } from 'lit-element';
 import { PageViewElement } from './page-view-element.js';
-import { navigate } from '../actions/app.js';
+import { navigate, saveReading } from '../actions/app.js';
 import { store } from '../store.js';
 import { connect } from 'pwa-helpers/connect-mixin.js';
 import { ResetStyles } from '../vendor/reset.css.js';
@@ -22,20 +22,27 @@ import * as translation from '../translations/language.js';
 
 
 class AddReadingPage extends connect(store)(PageViewElement) {
+	constructor() {
+		super();
+		this._label = '';
+	}
+
 	static get properties() {
 		return {
-      platform: {
+			platform: {
 				type: String,
 				reflect: true
 			},
 			_page: { type: String },
-			_language: { type: String }
+			_language: { type: String },
+			_toBeSavedReading: { type: Object, reflect: true },
+			_label: { type: String }
 		};
 	}
 
 	static get styles() {
 		return [
-      ResetStyles,
+			ResetStyles,
 			SharedStyles,
 			css`
       :host {
@@ -145,6 +152,9 @@ class AddReadingPage extends connect(store)(PageViewElement) {
 		}
 	}
 
+	firstUpdated() { }
+
+
 	async connectedCallback() {
 		registerTranslateConfig({
 			loader: (lang) => Promise.resolve(translation[lang])
@@ -155,39 +165,40 @@ class AddReadingPage extends connect(store)(PageViewElement) {
 
 	render() {
 		return html`
-      <!--<link rel="stylesheet" href="../../node_modules/reset-css/reset.css">-->
-
       <div class="snapshot-item" id="snapshot-item">
-        <input type="text" id="snapshot-title" class="snapshot-item__title" placeholder="Add label"
+        <input type="text" id="snapshot-title" class="snapshot-item__title" placeholder="Add label" .value="${this._label}"
           onfocus="this.placeholder=''" onblur="this.placeholder='Add Label'">
-
-        <div class="snapshot-item__daytime" id="snapshotDayAndTime">4:14 PM</div>
-
+        <div class="snapshot-item__daytime" id="snapshotDayAndTime">${this._toBeSavedReading.timestamp.format('LT')}</div>
         <table class="snapshot-item__values">
           <tr class="snapshot-item__line">
             <td class="snapshot-item__field-title" id="snapshot-temperature-title">
               <span>Temperature</span>
             </td>
-            <td class="snapshot-item__field-value snapshot-item__field-value--temperature">23.0</td>
+            <td class="snapshot-item__field-value snapshot-item__field-value--temperature">${this._toBeSavedReading.temperature.toFixed(1) + ' ' + this._toBeSavedReading.unit.symbol}</td>
           </tr>
           <tr class="snapshot-item__line">
             <td class="snapshot-item__field-title">Humidity</td>
-            <td class="snapshot-item__field-value snapshot-item__field-value--humidity">80</td>
+            <td class="snapshot-item__field-value snapshot-item__field-value--humidity">${this._toBeSavedReading.humidity.toFixed(1)}</td>
           </tr>
         </table>
-        <!-- <div class="snapshot-item__location" id="snapshotDayAndTime">One Kowloon, 1 Wang Yuen Street, Kowloon Bay, Hong Kong</div> -->
       </div>
       <div class="button-container" id="snapshot-buttons-container">
         <button class="action-button" id="snapshot-button-cancel" @click="${() => store.dispatch(navigate('/temperature-page'))}">Cancel</button>
-        <a class="action-button action-button--primary" id="history-snapshot" @click="${() => store.dispatch(navigate('/saved-readings-page'))}">Save</a>
+        <a class="action-button action-button--primary" id="history-snapshot" @click="${() => this._saveReading()}">Save</a>
       </div>
     `;
 	}
 
 	stateChanged(state) {
-    this.platform = state.app.platform;
+		this.platform = state.app.platform;
 		this._page = state.app.page;
 		this._language = state.app.language;
+		this._toBeSavedReading = state.app.toBeSavedReading;
+	}
+
+	_saveReading() {
+		this._toBeSavedReading.label = this.shadowRoot.getElementById('snapshot-title').value;
+		store.dispatch(saveReading(this._toBeSavedReading));
 	}
 }
 

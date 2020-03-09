@@ -24,19 +24,26 @@ import '@moduware/morph-list-view-item/morph-list-view-item.js';
 import '@moduware/morph-list-view-title/morph-list-view-title.js';
 import '@moduware/morph-swipeout/morph-swipeout.js';
 import '@moduware/morph-button/morph-button.js';
-
+import moment from 'moment';
 
 class SavedReadingsPage extends connect(store)(PageViewElement) {
+
+	constructor() {
+		super();
+		this._historyList = [];
+	}
+
 	static get properties() {
 		return {
 			_page: { type: String },
-			_language: { type: String }
+			_language: { type: String },
+			_historyList: { type: Array }
 		};
 	}
 
 	static get styles() {
 		return [
-      ResetStyles,
+			ResetStyles,
 			SharedStyles,
 			css`
         :host {
@@ -184,80 +191,90 @@ class SavedReadingsPage extends connect(store)(PageViewElement) {
 
 	render() {
 		return html`
-      <!--<link rel="stylesheet" href="../../node_modules/reset-css/reset.css">-->
-      ${/* history length == 0 */ false ? html`
+      ${this._historyList.length == 0 ? html`
        <div class="history-placeholder">
          <img class="history-placeholder-icon" src="images/history-empty-icon.svg" />
          <div class="history-placeholder-title">No saved mesaurements yet...</div>
          <span class="history-placeholder-text">Timeline will display the history of your measurements</span>
        </div>
-      ` : ''}
-
-
-       <morph-list-view class="temperature-list">
-         <morph-list-view-title>Yesterday</morph-list-view-title>
-
-         <morph-swipeout class="temperature-list-item">
+			` : this._historyList.map(dategroup => html`
+				<morph-list-view class="temperature-list">
+         <morph-list-view-title>${this._formatDate(dategroup.date)}</morph-list-view-title>
+				 ${dategroup.items.map(item => html`
+					<morph-swipeout class="temperature-list-item">
            <morph-list-view-item class="temperature-list-item">
              <span class="temperature-list-item__icon-container" slot="icon">
                <img src="images/temperature-icon-ambient-square.svg" />
              </span>
-             <span slot="header" class="temperature-list-item__title">LABEL</span>
-
+             <span slot="header" class="temperature-list-item__title">${item.label === '' ? 'Unlabeled' : item.label}</span>
              <span class="temperature-list-item__content">
                Temperature:
-               <span class="temperature-list-item__value temperature-list-item__value--temperature">23.0 C</span>
-
+               <span class="temperature-list-item__value temperature-list-item__value--temperature">${item.temperature.toFixed(1) + ' ' + item.unit.symbol}</span>
                <br> Humidity:
-               <span class="temperature-list-item__value temperature-list-item__value--humidity">80</span>
+               <span class="temperature-list-item__value temperature-list-item__value--humidity">${item.humidity.toFixed(1)}</span>
              </span>
-
              <span slot="secondary-content" class="temperature-list-item__time">
-
                4:14 PM
                <br>
              </span>
-
            </morph-list-view-item>
-
            <span slot="right-buttons">
              <morph-button class="swiper-integration-class" color="red" filled flat item-delete>Delete</morph-button>
            </span>
          </morph-swipeout>
-         <morph-swipeout class="temperature-list-item">
-           <morph-list-view-item class="temperature-list-item">
-             <span class="temperature-list-item__icon-container" slot="icon">
-               <img src="images/temperature-icon-ambient-square.svg" />
-             </span>
-             <span slot="header" class="temperature-list-item__title">LABEL</span>
-
-             <span class="temperature-list-item__content">
-               Temperature:
-               <span class="temperature-list-item__value temperature-list-item__value--temperature">23.0 C</span>
-
-               <br> Humidity:
-               <span class="temperature-list-item__value temperature-list-item__value--humidity">80</span>
-             </span>
-
-             <span slot="secondary-content" class="temperature-list-item__time">
-
-               4:14 PM
-               <br>
-             </span>
-
-           </morph-list-view-item>
-
-           <span slot="right-buttons">
-             <morph-button class="swiper-integration-class" color="red" filled flat item-delete>Delete</morph-button>
-           </span>
-         </morph-swipeout>
+				 `)}
        </morph-list-view>
+			`)}
     `;
 	}
+
+	_groupByDate(historyList) {
+		const dateGroups = historyList.reduce((dateGroups, item) => {
+			const date = item.timestamp;
+			const jsDate = new Date(date);
+			let day = moment(jsDate).startOf('day');
+
+			if (!dateGroups[day]) {
+				dateGroups[day] = [];
+			}
+			dateGroups[day].push(item);
+			return dateGroups;
+		}, {});
+
+		// To add it in the array format
+		const groupArrays = Object.keys(dateGroups).map((date) => {
+			return {
+				date,
+				items: dateGroups[date]
+			};
+		});
+		return groupArrays;
+	}
+
+	_formatDate(date) {
+		let jsDate = new Date(date);
+		let otherDates = moment(jsDate).fromNow();
+		
+		var callback = function () {
+			return "[" + otherDates + "]";
+		};
+
+		return moment(jsDate).calendar(null, {
+			sameDay: '[Today]',
+			nextDay: 'DD/MM/YYYY',
+			nextWeek: 'DD/MM/YYYY',
+			lastDay: '[Yesterday]',
+			lastWeek: 'DD/MM/YYYY',
+			sameElse: 'DD/MM/YYYY'
+		});
+	}
+
 
 	stateChanged(state) {
 		this._page = state.app.page;
 		this._language = state.app.language;
+		this._historyList = this._groupByDate(state.app.historyList);
+		console.log(this._historyList);
 	}
 }
 
