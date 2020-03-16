@@ -20,7 +20,6 @@ import './icons.js';
 import { registerTranslateConfig, use, translate, get } from "@appnest/lit-translate";
 import * as translation from '../translations/language.js';
 
-
 class AddReadingPage extends connect(store)(PageViewElement) {
 	constructor() {
 		super();
@@ -168,7 +167,7 @@ class AddReadingPage extends connect(store)(PageViewElement) {
       <div class="snapshot-item" id="snapshot-item">
         <input type="text" id="snapshot-title" class="snapshot-item__title" placeholder="Add label" .value="${this._label}"
           onfocus="this.placeholder=''" onblur="this.placeholder='Add Label'">
-        <div class="snapshot-item__daytime" id="snapshotDayAndTime">${this._toBeSavedReading.timestamp.format('LT')}</div>
+        <div class="snapshot-item__daytime" id="snapshotDayAndTime">${moment(this._toBeSavedReading.id).format('LT')}</div>
         <table class="snapshot-item__values">
           <tr class="snapshot-item__line">
             <td class="snapshot-item__field-title" id="snapshot-temperature-title">
@@ -183,7 +182,7 @@ class AddReadingPage extends connect(store)(PageViewElement) {
         </table>
       </div>
       <div class="button-container" id="snapshot-buttons-container">
-        <button class="action-button" id="snapshot-button-cancel" @click="${() => store.dispatch(navigate('/temperature-page'))}">Cancel</button>
+        <button class="action-button" id="snapshot-button-cancel" @click="${() => this._cancelClickHandler()}">Cancel</button>
         <a class="action-button action-button--primary" id="history-snapshot" @click="${() => this._saveReading()}">Save</a>
       </div>
     `;
@@ -196,8 +195,16 @@ class AddReadingPage extends connect(store)(PageViewElement) {
 		this._toBeSavedReading = state.app.toBeSavedReading;
 	}
 
+	_cancelClickHandler() {
+		var snapshotLabel = this.shadowRoot.getElementById('snapshot-title');
+		snapshotLabel.value = '';
+		store.dispatch(navigate('/temperature-page'))
+	}
+
 	_saveReading() {
-		this._toBeSavedReading.label = this.shadowRoot.getElementById('snapshot-title').value;
+		var snapshotLabel = this.shadowRoot.getElementById('snapshot-title');
+		this._toBeSavedReading.label = snapshotLabel.value;
+		snapshotLabel.value = '';
 		store.dispatch(saveReading(this._toBeSavedReading));
 	}
 }

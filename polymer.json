@@ -9,6 +9,7 @@
 		"manifest.json",
 		"icon.svg",
 		"node_modules/@webcomponents/webcomponentsjs/**",
+		"node_modules/moment/moment.js",
     "fonts/**"
 	],
 	"builds": [

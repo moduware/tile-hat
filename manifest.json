@@ -1,7 +1,7 @@
 {
 	"id": "nexpaq.tile.hat.develop-pwa",
-	"name": "Temperature and Humidity develop-pwa",
-	"description": "Moduware T&H tile module interface",
+	"name": "Temperature and Humidity",
+	"description": "(develop-pwa) Moduware T&H tile module interface",
 	"version": "1.3.2",
 	"changes": "Add swipe delete of history list items",
 	"minumumAppVersion": "1.1.8",

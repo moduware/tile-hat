@@ -18,7 +18,9 @@ import {
 	MEASURE_TYPE_CHANGED,
 	SHOW_INSTRUCTION_TOGGLED,
 	ADD_READING,
-	SAVE_READING
+	SAVE_READING,
+	HISTORY_LIST_CHANGED,
+	REMOVE_READING
 } from '../actions/app.js';
 
 import TemperatureUnit from '../enums/TemperatureUnit';
@@ -92,6 +94,21 @@ const app = (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				historyList: [...state.historyList, action.reading]
+			};
+		case REMOVE_READING:
+			return {
+				...state,
+				historyList: state.historyList.filter(item => {
+					if (item.id === action.id) {
+						return false;
+					}
+					return true;
+				})
+			};
+		case HISTORY_LIST_CHANGED:
+			return {
+				...state,
+				historyList: action.historyList
 			};
 		default:
 			return state;

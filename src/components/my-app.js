@@ -12,7 +12,7 @@ import { LitElement, html, css } from 'lit-element';
 import { setPassiveTouchGestures } from '@polymer/polymer/lib/utils/settings.js';
 import { connect } from 'pwa-helpers/connect-mixin.js';
 import { store } from '../store.js';
-import { navigate, headerBackButtonClicked, initializeModuwareApiAsync, loadLanguageTranslation, getPlatformInfo, loadStoredSettings } from '../actions/app.js';
+import { navigate, headerBackButtonClicked, initializeModuwareApiAsync, loadLanguageTranslation, getPlatformInfo, loadStoredSettings, loadHistoryList } from '../actions/app.js';
 import '@polymer/app-layout/app-drawer/app-drawer.js';
 import '@polymer/app-layout/app-header/app-header.js';
 import '@polymer/app-layout/app-scroll-effects/effects/waterfall.js';
@@ -284,6 +284,7 @@ class MyApp extends connect(store)(LitElement) {
 
 	firstUpdated() {
 		store.dispatch(loadStoredSettings());
+		store.dispatch(loadHistoryList());
 		store.dispatch(loadLanguageTranslation());
 		store.dispatch(navigate(this._showInstruction ? "/instructions-page" : "/temperature-page"));
 		store.dispatch(initializeModuwareApiAsync());

@@ -1,13 +1,14 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>Moduware Tile Template</title>
-    <meta name="generator" content="PWA Starter Kit">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Moduware Tile Template">
 
-    <!--
+<head>
+	<meta charset="utf-8">
+	<title>Moduware Tile Template</title>
+	<meta name="generator" content="PWA Starter Kit">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Moduware Tile Template">
+
+	<!--
       The `<base>` tag below is present to support two advanced deployment options:
       1) Differential serving. 2) Serving from a non-root path.
 
@@ -15,38 +16,42 @@
       a) Add a `basePath` property to the build configuration in your `polymer.json`.
       b) Use the `base-path` command-line option for `polymer build`.
     -->
-    <base href="./">
+	<base href="./">
 
-    <!-- Performance tip: hint to the browser to start the handshake for the fonts site -->
-    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
-    <script>
-      // Redux assumes `process.env.NODE_ENV` exists in the ES module build.
-      // https://github.com/reactjs/redux/issues/2907
-      window.process = { env: { NODE_ENV: 'production' } };
-    </script>
+	<!-- Performance tip: hint to the browser to start the handshake for the fonts site -->
+	<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+	<script>
+		// Redux assumes `process.env.NODE_ENV` exists in the ES module build.
+		// https://github.com/reactjs/redux/issues/2907
+		window.process = { env: { NODE_ENV: 'production' } };
+	</script>
 
-    <link rel="stylesheet" href="fonts/fonts.css">
-    <style>
-    html {
-      background-color: #FFB931;
-    }
-    body {
-      height: 100vh;
-      font-family: Roboto, sans-serif;
-      margin: 0;
-      /*min-height: 100vh;*/
-      -webkit-font-smoothing: antialiased;
-    }
-    </style>
-  </head>
-  <body>
-    <my-app appTitle="Tile Template"></my-app>
-    <noscript>
-      Please enable JavaScript to view this website.
-    </noscript>
-    <!-- Load webcomponents-loader.js to check and load any polyfills your browser needs -->
-    <script src="node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
-    <!-- Built with love using PWA Starter Kit -->
-    <script type="module" src="src/components/my-app.js"></script>
-  </body>
+	<link rel="stylesheet" href="fonts/fonts.css">
+	<style>
+		html {
+			background-color: #FFB931;
+		}
+
+		body {
+			height: 100vh;
+			font-family: Roboto, sans-serif;
+			margin: 0;
+			/*min-height: 100vh;*/
+			-webkit-font-smoothing: antialiased;
+		}
+	</style>
+</head>
+
+<body>
+	<my-app appTitle="Tile Template"></my-app>
+	<noscript>
+		Please enable JavaScript to view this website.
+	</noscript>
+	<!-- Load webcomponents-loader.js to check and load any polyfills your browser needs -->
+	<script src="node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+	<script src="node_modules/moment/moment.js"></script>
+	<!-- Built with love using PWA Starter Kit -->
+	<script type="module" src="src/components/my-app.js"></script>
+</body>
+
 </html>

@@ -21,7 +21,6 @@ import { registerTranslateConfig, use, translate, get } from "@appnest/lit-trans
 import * as translation from '../translations/language.js';
 import TemperatureUnit from '../enums/TemperatureUnit';
 import MeasureType from '../enums/MeasureType';
-import moment from 'moment';
 
 class TemperaturePage extends connect(store)(PageViewElement) {
 
@@ -192,15 +191,17 @@ class TemperaturePage extends connect(store)(PageViewElement) {
 	_saveClickHandler() {
 
 		var time = moment();
-		store.dispatch(addReading({
+		var reading = {
 			id: time.valueOf(),
 			temperature: this._temperature,
 			humidity: this._humidity,
 			unit: this._unit,
 			measureType: this._measureType,
-			timestamp: time,
+			//timestamp: time,
 			label: ''
-		}));
+		};
+		console.log('reading: ', reading);
+		store.dispatch(addReading(reading));
 	}
 
 

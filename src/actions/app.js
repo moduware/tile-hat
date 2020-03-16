@@ -20,6 +20,8 @@ export const MEASURE_TYPE_CHANGED = 'MEASURE_TYPE_CHANGED';
 export const SHOW_INSTRUCTION_TOGGLED = 'SHOW_INSTRUCTION_TOGGLED';
 export const ADD_READING = 'ADD_READING';
 export const SAVE_READING = 'SAVE_READING';
+export const HISTORY_LIST_CHANGED = 'HISTORY_LIST_CHANGED';
+export const REMOVE_READING = 'REMOVE_READING';
 
 // This is a fix to iOS not auto connecting and not finding any devices
 export const initializeModuwareApiAsync = () => async dispatch => {
@@ -102,6 +104,15 @@ export const loadStoredSettings = () => (dispatch) => {
 	}
 }
 
+export const loadHistoryList = () => (dispatch) => {
+
+	var historyList = localStorage.getItem(StorageKeys.HISTORY_KEY);
+	if (historyList != null) {
+		var savedHistoryList = JSON.parse(historyList);
+		dispatch({ type: HISTORY_LIST_CHANGED, historyList: savedHistoryList });
+	}
+}
+
 export const toggleShowInstructions = () => (dispatch, getState) => {
 	if (getState().app.showInstruction === true) {
 		localStorage.setItem(StorageKeys.SHOW_INSTRUCTION_KEY, JSON.stringify(false));
@@ -122,22 +133,28 @@ export const addReading = (toBeSavedReading) => (dispatch) => {
 	dispatch(navigate('/add-reading-page'));
 }
 
-export const navigate = (path) => (dispatch) => {
-	const page = path === '/' ? 'temperature-page' : path.slice(1);
-	dispatch(loadPage(page));
+export const saveReading = (reading) => (dispatch, getState) => {
+
+	dispatch({ type: SAVE_READING, reading: reading });
+	localStorage.setItem(StorageKeys.HISTORY_KEY, JSON.stringify(getState().app.historyList));
+	dispatch(navigate('/saved-readings-page'));
 }
 
-export const saveReading = (reading) => (dispatch, getState) => {
-	dispatch({ type: SAVE_READING, reading: reading });
-	var historyList = getState().app.historyList;
-	localStorage.setItem(StorageKeys.HISTORY_KEY, JSON.stringify(historyList));
-	dispatch(navigate('/saved-readings-page'));
+export const removeReading = (id) => (dispatch, getState) => {
+	dispatch({ type: REMOVE_READING, id: id });
+	localStorage.setItem(StorageKeys.HISTORY_KEY, JSON.stringify(getState().app.historyList));
 }
 
 export const loadLanguageTranslation = () => async dispatch => {
 	var language = Moduware.Arguments.language;
 	dispatch({ type: LOAD_LANGUAGE_TRANSLATION, language });
 }
+
+export const navigate = (path) => (dispatch) => {
+	const page = path === '/' ? 'temperature-page' : path.slice(1);
+	dispatch(loadPage(page));
+}
+
 
 const loadPage = (page) => (dispatch) => {
 	switch (page) {

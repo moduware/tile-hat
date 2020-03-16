@@ -10,7 +10,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 import { html, css } from 'lit-element';
 import { PageViewElement } from './page-view-element.js';
-import { navigate } from '../actions/app.js';
+import { navigate, removeReading } from '../actions/app.js';
 import { store } from '../store.js';
 import { connect } from 'pwa-helpers/connect-mixin.js';
 import { ResetStyles } from '../vendor/reset.css.js';
@@ -24,7 +24,6 @@ import '@moduware/morph-list-view-item/morph-list-view-item.js';
 import '@moduware/morph-list-view-title/morph-list-view-title.js';
 import '@moduware/morph-swipeout/morph-swipeout.js';
 import '@moduware/morph-button/morph-button.js';
-import moment from 'moment';
 
 class SavedReadingsPage extends connect(store)(PageViewElement) {
 
@@ -219,7 +218,8 @@ class SavedReadingsPage extends connect(store)(PageViewElement) {
              </span>
            </morph-list-view-item>
            <span slot="right-buttons">
-             <morph-button class="swiper-integration-class" color="red" filled flat item-delete>Delete</morph-button>
+						 <morph-button class="swiper-integration-class" color="red" 
+						 								filled flat item-delete @click="${() => store.dispatch(removeReading(item.id))}" >Delete</morph-button>
            </span>
          </morph-swipeout>
 				 `)}
@@ -230,9 +230,9 @@ class SavedReadingsPage extends connect(store)(PageViewElement) {
 
 	_groupByDate(historyList) {
 		const dateGroups = historyList.reduce((dateGroups, item) => {
-			const date = item.timestamp;
+			const date = item.id;
 			const jsDate = new Date(date);
-			let day = moment(jsDate).startOf('day');
+			let day = moment(jsDate).local().startOf('day');
 
 			if (!dateGroups[day]) {
 				dateGroups[day] = [];
@@ -240,6 +240,7 @@ class SavedReadingsPage extends connect(store)(PageViewElement) {
 			dateGroups[day].push(item);
 			return dateGroups;
 		}, {});
+
 
 		// To add it in the array format
 		const groupArrays = Object.keys(dateGroups).map((date) => {
@@ -254,7 +255,7 @@ class SavedReadingsPage extends connect(store)(PageViewElement) {
 	_formatDate(date) {
 		let jsDate = new Date(date);
 		let otherDates = moment(jsDate).fromNow();
-		
+
 		var callback = function () {
 			return "[" + otherDates + "]";
 		};
