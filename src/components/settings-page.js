@@ -10,14 +10,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 import { html, css } from 'lit-element';
 import { PageViewElement } from './page-view-element.js';
-import { navigate } from '../actions/app.js';
 import { store } from '../store.js';
 import { connect } from 'pwa-helpers/connect-mixin.js';
 import { SharedStyles } from './shared-styles.js';
 import { MaterialStyles } from '../vendor/material.min.css.js';
-import app from '../reducers/app.js';
 import './icons.js';
-import { registerTranslateConfig, use, translate, get } from "@appnest/lit-translate";
+import { registerTranslateConfig, use, translate } from "@appnest/lit-translate";
 import * as translation from '../translations/language.js';
 import 'material-design-lite/material.min.js';
 import TemperatureUnit from '../enums/TemperatureUnit';
@@ -307,7 +305,7 @@ class SettingsPage extends connect(store)(PageViewElement) {
 	}
 
 	_changeMeasureTypeHandler(measureType) {
-		
+
 		store.dispatch(changeMeasureType(measureType));
 		if (measureType === MeasureType.Object && this.platform === 'android') {
 			this.shadowRoot.getElementById('ambientSetting-android').parentNode.classList.remove('is-checked');

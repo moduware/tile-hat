@@ -16,9 +16,8 @@ import { connect } from 'pwa-helpers/connect-mixin.js';
 import { SharedStyles } from './shared-styles.js';
 import { SwiperStyles } from '../vendor/swiper.min.css.js';
 import Swiper from 'swiper';
-import app from '../reducers/app.js';
 import './icons.js';
-import { registerTranslateConfig, use, translate, get } from "@appnest/lit-translate";
+import { registerTranslateConfig, use, translate } from "@appnest/lit-translate";
 import * as translation from '../translations/language.js';
 
 class InstructionsPage extends connect(store)(PageViewElement) {

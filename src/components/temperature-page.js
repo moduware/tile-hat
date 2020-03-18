@@ -10,14 +10,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 import { html, css } from 'lit-element';
 import { PageViewElement } from './page-view-element.js';
-import { navigate, addReading } from '../actions/app.js';
+import { addReading } from '../actions/app.js';
 import { store } from '../store.js';
 import { connect } from 'pwa-helpers/connect-mixin.js';
 import { SharedStyles } from './shared-styles.js';
-import app from '../reducers/app.js';
 import './icons.js';
 import * as Utils from '../lib/Utils';
-import { registerTranslateConfig, use, translate, get } from "@appnest/lit-translate";
+import { registerTranslateConfig, use, translate } from "@appnest/lit-translate";
 import * as translation from '../translations/language.js';
 import TemperatureUnit from '../enums/TemperatureUnit';
 import MeasureType from '../enums/MeasureType';
@@ -197,10 +196,8 @@ class TemperaturePage extends connect(store)(PageViewElement) {
 			humidity: this._humidity,
 			unit: this._unit,
 			measureType: this._measureType,
-			//timestamp: time,
 			label: ''
 		};
-		console.log('reading: ', reading);
 		store.dispatch(addReading(reading));
 	}
 

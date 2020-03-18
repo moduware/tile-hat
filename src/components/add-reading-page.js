@@ -15,7 +15,6 @@ import { store } from '../store.js';
 import { connect } from 'pwa-helpers/connect-mixin.js';
 import { ResetStyles } from '../vendor/reset.css.js';
 import { SharedStyles } from './shared-styles.js';
-import app from '../reducers/app.js';
 import './icons.js';
 import { registerTranslateConfig, use, translate, get } from "@appnest/lit-translate";
 import * as translation from '../translations/language.js';

@@ -10,14 +10,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 import { html, css } from 'lit-element';
 import { PageViewElement } from './page-view-element.js';
-import { navigate, removeReading } from '../actions/app.js';
+import { removeReading } from '../actions/app.js';
 import { store } from '../store.js';
 import { connect } from 'pwa-helpers/connect-mixin.js';
 import { ResetStyles } from '../vendor/reset.css.js';
 import { SharedStyles } from './shared-styles.js';
-import app from '../reducers/app.js';
 import './icons.js';
-import { registerTranslateConfig, use, translate, get } from "@appnest/lit-translate";
+import { registerTranslateConfig, use, translate } from "@appnest/lit-translate";
 import * as translation from '../translations/language.js';
 import '@moduware/morph-list-view/morph-list-view.js';
 import '@moduware/morph-list-view-item/morph-list-view-item.js';
@@ -196,35 +195,37 @@ class SavedReadingsPage extends connect(store)(PageViewElement) {
          <div class="history-placeholder-title">${translate('history.placeholder.title')}</div>
          <span class="history-placeholder-text">${translate('history.placeholder.message')}</span>
        </div>
-			` : this._historyList.map(dategroup => html`
+			` : html`
 				<morph-list-view class="temperature-list">
-         <morph-list-view-title>${this._formatDate(dategroup.date)}</morph-list-view-title>
-				 ${dategroup.items.map(item => html`
-					<morph-swipeout class="temperature-list-item">
-           <morph-list-view-item class="temperature-list-item">
-             <span class="temperature-list-item__icon-container" slot="icon">
-               <img src="images/temperature-icon-ambient-square.svg" />
-             </span>
-             <span slot="header" class="temperature-list-item__title">${item.label === '' ? translate('history.list.unlabeled') : item.label}</span>
-             <span class="temperature-list-item__content">
-               ${translate('history.list.temperature')}:
-               <span class="temperature-list-item__value temperature-list-item__value--temperature">${item.temperature.toFixed(1) + ' ' + item.unit.symbol}</span>
-               <br> ${translate('history.list.humidity')}:
-               <span class="temperature-list-item__value temperature-list-item__value--humidity">${item.humidity.toFixed(1)}</span>
-             </span>
-             <span slot="secondary-content" class="temperature-list-item__time">
-               ${moment(item.id).format('LT')}
-               <br>
-             </span>
-           </morph-list-view-item>
-           <span slot="right-buttons">
-						 <morph-button class="swiper-integration-class" color="red" 
-						 								filled flat item-delete @click="${() => store.dispatch(removeReading(item.id))}" >${translate('history.list.delete')}</morph-button>
-           </span>
-         </morph-swipeout>
-				 `)}
-       </morph-list-view>
-			`)}
+					${this._historyList.map(dategroup => html`
+						<morph-list-view-title>${this._formatDate(dategroup.date)}</morph-list-view-title>
+						${dategroup.items.map(item => html`
+							<morph-swipeout class="temperature-list-item">
+								<morph-list-view-item class="temperature-list-item">
+									<span class="temperature-list-item__icon-container" slot="icon">
+										<img src="images/temperature-icon-ambient-square.svg" />
+									</span>
+									<span slot="header" class="temperature-list-item__title">${item.label === '' ? translate('history.list.unlabeled') : item.label}</span>
+									<span class="temperature-list-item__content">
+										${translate('history.list.temperature')}:
+										<span class="temperature-list-item__value temperature-list-item__value--temperature">${item.temperature.toFixed(1) + ' ' + item.unit.symbol}</span>
+										<br> ${translate('history.list.humidity')}:
+										<span class="temperature-list-item__value temperature-list-item__value--humidity">${item.humidity.toFixed(1)}</span>
+									</span>
+									<span slot="secondary-content" class="temperature-list-item__time">
+										${moment(item.id).format('LT')}
+										<br>
+									</span>
+								</morph-list-view-item>
+								<span slot="right-buttons">
+									<morph-button class="swiper-integration-class" color="red" 
+																	filled flat item-delete @click="${() => store.dispatch(removeReading(item.id))}" >${translate('history.list.delete')}</morph-button>
+								</span>
+							</morph-swipeout>
+						`)}
+      		`)}
+        </morph-list-view>
+			`}
     `;
 	}
 
@@ -260,7 +261,7 @@ class SavedReadingsPage extends connect(store)(PageViewElement) {
 			return "[" + otherDates + "]";
 		};
 
-		return moment(jsDate).calendar(null, {
+		var result = moment(jsDate).calendar(null, {
 			sameDay: '[Today]',
 			nextDay: 'DD/MM/YYYY',
 			nextWeek: 'DD/MM/YYYY',
@@ -268,6 +269,14 @@ class SavedReadingsPage extends connect(store)(PageViewElement) {
 			lastWeek: 'DD/MM/YYYY',
 			sameElse: 'DD/MM/YYYY'
 		});
+
+		if (result === 'Today') {
+			return translate('history.list.today');
+		} else if (result === 'Yesterday') {
+			return translate('history.list.yesterday');
+		} else {
+			return result;
+		}
 	}
 
 
@@ -275,7 +284,6 @@ class SavedReadingsPage extends connect(store)(PageViewElement) {
 		this._page = state.app.page;
 		this._language = state.app.language;
 		this._historyList = this._groupByDate(state.app.historyList);
-		console.log(this._historyList);
 	}
 }
 
