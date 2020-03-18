@@ -237,7 +237,7 @@ class MyApp extends connect(store)(LitElement) {
       <!-- Webview Header -->
       <moduware-header
         @back-button-click="${() => store.dispatch(headerBackButtonClicked())}"
-				title="${translate('header.title')}">
+				title="${translate('main.header.title')}">
 			</moduware-header>
       <!-- Main content -->
       <main role="main" class="main-content">

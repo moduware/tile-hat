@@ -29,9 +29,9 @@ class SettingsPage extends connect(store)(PageViewElement) {
 	render() {
 		return html`
      <div class="settings-container">
-       <span class="settings-container__title">General</span>
+       <span class="settings-container__title">${translate('settings.general.title')}</span>
        <label class="settings-container__label" for="instructionSetting">
-         Show instruction
+         ${translate('settings.general.message')}
          <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="instructionSetting">
            <input type="checkbox" id="instructionSetting" class="mdl-switch__input" ?checked="${this._showInstruction}" @change="${() => store.dispatch(toggleShowInstructions())}">
            <span class="mdl-switch__label"></span>
@@ -40,32 +40,32 @@ class SettingsPage extends connect(store)(PageViewElement) {
      </div>
      ${this.platform == 'ios' ? html`
       <div class="settings-container">
-        <span class="settings-container__title">Measure</span>
+        <span class="settings-container__title">${translate('settings.measure.title')}</span>
         <input type="radio" name="measureType" value="ambient" id="ambientSetting" 
 								?checked="${this._measureType === MeasureType.Ambient}"
 								@change="${() => this._changeMeasureTypeHandler(MeasureType.Ambient)}">
-        <label class="settings-container__label" for="ambientSetting">Ambient temperature</label>
+        <label class="settings-container__label" for="ambientSetting">${translate('settings.measure.ambient')}</label>
         <input type="radio" name="measureType" value="object" id="objectSetting" 
 								?checked="${this._measureType === MeasureType.Object}"
 								@change="${() => this._changeMeasureTypeHandler(MeasureType.Object)}">
-        <label class="settings-container__label" for="objectSetting">Object temperature</label>
+        <label class="settings-container__label" for="objectSetting">${translate('settings.measure.object')}</label>
       </div>
       <div class="settings-container">
-        <span class="settings-container__title">Units</span>
+        <span class="settings-container__title">${translate('settings.units.title')}</span>
         <input type="radio" class="celsius" name="measureUnit" value="celsius" 
 								?checked="${this._unit.name === TemperatureUnit.Celsius.name}"
 								@change="${() => this._changeTemperatureUnitHandler(TemperatureUnit.Celsius)}"
 								id="celsiusSetting-ios">
-        <label class="settings-container__label unit-celsius" for="celsiusSetting-ios">Celsius</label>
+        <label class="settings-container__label unit-celsius" for="celsiusSetting-ios">${translate('settings.units.celcius')}</label>
         <input type="radio" class="fahrenheit" name="measureUnit" value="fahrenheit" 
 								?checked="${this._unit.name === TemperatureUnit.Fahrenheit.name}"
 								@change="${() => this._changeTemperatureUnitHandler(TemperatureUnit.Fahrenheit)}"
 								id="fahrenheitSetting-ios" >
-        <label class="settings-container__label unit-fahrenheit" for="fahrenheitSetting-ios">Fahrenheit</label>
+        <label class="settings-container__label unit-fahrenheit" for="fahrenheitSetting-ios">${translate('settings.units.fahrenheit')}</label>
       </div>
      ` : html`
       <div class="settings-container">
-        <span class="settings-container__title">Measure</span>
+        <span class="settings-container__title">${translate('settings.measure.title')}</span>
         <label class="settings-container__label" for="ambientSetting-android">
           <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="ambientSetting-android">
             <input type="radio" 
@@ -77,7 +77,7 @@ class SettingsPage extends connect(store)(PageViewElement) {
 										@change="${() => this._changeMeasureTypeHandler(MeasureType.Ambient)}">
             <span class="mdl-radio"></span>
           </label>
-          Ambient temperature
+          ${translate('settings.measure.ambient')}
         </label>
         <label class="settings-container__label" for="objectSetting-android">
           <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="objectSetting-android">
@@ -90,11 +90,11 @@ class SettingsPage extends connect(store)(PageViewElement) {
 										@change="${() => this._changeMeasureTypeHandler(MeasureType.Object)}">
             <span class="mdl-radio"></span>
           </label>
-          Object temperature
+          ${translate('settings.measure.object')}
         </label>
       </div>
       <div class="settings-container">
-        <span class="settings-container__title">Units</span>
+        <span class="settings-container__title">${translate('settings.units.title')}</span>
         <label class="settings-container__label unit-celsius" for="celsiusSetting-android" >
           <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="celsiusSetting-android">
             <input type="radio" 
@@ -106,7 +106,7 @@ class SettingsPage extends connect(store)(PageViewElement) {
 										@change="${() => this._changeTemperatureUnitHandler(TemperatureUnit.Celsius)}" >
             <span class="mdl-radio"></span>
           </label>
-          Celsius
+          ${translate('settings.units.celcius')}
         </label>
         <label class="settings-container__label unit-fahrenheit" for="fahrenheitSetting-android" >
           <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="fahrenheitSetting-android">
@@ -119,7 +119,7 @@ class SettingsPage extends connect(store)(PageViewElement) {
 										@change="${() => this._changeTemperatureUnitHandler(TemperatureUnit.Fahrenheit)}">
             <span class="mdl-radio"></span>
           </label>
-          Fahrenheit
+          ${translate('settings.units.fahrenheit')}
         </label>
       </div>
      `}

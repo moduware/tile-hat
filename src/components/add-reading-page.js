@@ -165,25 +165,25 @@ class AddReadingPage extends connect(store)(PageViewElement) {
 	render() {
 		return html`
       <div class="snapshot-item" id="snapshot-item">
-        <input type="text" id="snapshot-title" class="snapshot-item__title" placeholder="Add label" .value="${this._label}"
-          onfocus="this.placeholder=''" onblur="this.placeholder='Add Label'">
+        <input type="text" id="snapshot-title" class="snapshot-item__title" placeholder="${translate('snapshot.label')}" .value="${this._label}"
+          onfocus="this.placeholder=''" onblur="this.placeholder='${translate('snapshot.label')}'">
         <div class="snapshot-item__daytime" id="snapshotDayAndTime">${moment(this._toBeSavedReading.id).format('LT')}</div>
         <table class="snapshot-item__values">
           <tr class="snapshot-item__line">
             <td class="snapshot-item__field-title" id="snapshot-temperature-title">
-              <span>Temperature</span>
+              <span>${translate('snapshot.temperature')}</span>
             </td>
             <td class="snapshot-item__field-value snapshot-item__field-value--temperature">${this._toBeSavedReading.temperature.toFixed(1) + ' ' + this._toBeSavedReading.unit.symbol}</td>
           </tr>
           <tr class="snapshot-item__line">
-            <td class="snapshot-item__field-title">Humidity</td>
+            <td class="snapshot-item__field-title">${translate('snapshot.humidity')}</td>
             <td class="snapshot-item__field-value snapshot-item__field-value--humidity">${this._toBeSavedReading.humidity.toFixed(1)}</td>
           </tr>
         </table>
       </div>
       <div class="button-container" id="snapshot-buttons-container">
-        <button class="action-button" id="snapshot-button-cancel" @click="${() => this._cancelClickHandler()}">Cancel</button>
-        <a class="action-button action-button--primary" id="history-snapshot" @click="${() => this._saveReading()}">Save</a>
+        <button class="action-button" id="snapshot-button-cancel" @click="${() => this._cancelClickHandler()}">${translate('snapshot.button.cancel')}</button>
+        <a class="action-button action-button--primary" id="history-snapshot" @click="${() => this._saveReading()}">${translate('snapshot.button.save')}</a>
       </div>
     `;
 	}

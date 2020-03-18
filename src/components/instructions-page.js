@@ -158,7 +158,7 @@ class InstructionsPage extends connect(store)(PageViewElement) {
 	}
 
 	firstUpdated() {
-		this._buttonText = 'Next';
+		this._buttonText = translate('slide.button.next');
 		this._currentSlide = 1;
 
 		const swiperElement = this.shadowRoot.querySelector('.swiper-container');
@@ -174,10 +174,10 @@ class InstructionsPage extends connect(store)(PageViewElement) {
 
 		this._instructionSwiper.on('slideChange', () => {
 			if (self._instructionSwiper.isBeginning) {
-				self._buttonText = "Next";
+				self._buttonText = translate('slide.button.next');
 				self._currentSlide = 1;
 			} else if (self._instructionSwiper.isEnd) {
-				self._buttonText = "Got it!";
+				self._buttonText = translate('slide.button.gotIt');
 				self._currentSlide = 2;
 			}
 		});
@@ -201,18 +201,18 @@ class InstructionsPage extends connect(store)(PageViewElement) {
                   <img src="images/instruction-ambient.png" />
                 </div>
                 <p class="slide-note">
-                  When measuring ambient temperature, place the device away from extraneous influences and allow it to stabilise.
+                  ${translate('slide.instruction.ambient')}
                 </p>
               </div>
               <div class="swiper-slide">
                 <p class="slide-note slide-note__heading">
-                  IMPORTANT: Don't use module as a thermometer
+                  ${translate('slide.instruction.important')}
                 </p>
                 <div class="slide-image-container" style="margin-top:0;">
                   <img src="images/instruction-object.png" />
                 </div>
                 <p class="slide-note">
-                  When measuring the temperature of an object, don't disconnect the module. Simply place the temperature sensor up against the intended object.
+                  ${translate('slide.instruction.object')}
                 </p>
               </div>
             </div>
@@ -220,7 +220,7 @@ class InstructionsPage extends connect(store)(PageViewElement) {
           </div>
           <div class="button-container">
             <a class="action-button action-button--primary" @click="${() => this._sliderButtonClickHandler()}">${this._buttonText}</a>
-            <a class="action-button action-button--link" @click="${() => this._dontShowClickHandler()}">Don't Show Again</a>
+            <a class="action-button action-button--link" @click="${() => this._dontShowClickHandler()}">${translate('slide.noShow')}</a>
           </div>
     `;
 	}

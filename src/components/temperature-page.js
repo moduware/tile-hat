@@ -178,13 +178,13 @@ class TemperaturePage extends connect(store)(PageViewElement) {
             <span class="temperature-numbers__temparature-value" id="temperature-value">${this._temperature.toFixed(1)}</span>
             <span class="temperature-numbers__temparature-unit" id="temperature-unit">${this._unit.symbol}</span>
             <div class="temperature-numbers__humidity">
-              <span class="temperature-numbers__humidity-title">Humidity</span>
+              <span class="temperature-numbers__humidity-title">${translate('main.humidity')}</span>
               <span class="temperature-numbers__humidity-value" id="humidity-value">${this._humidity.toFixed(1)}</span>
             </div>
           </div>
         </div>
       </div>
-      <a class="action-button action-button--primary" @click="${() => this._saveClickHandler()}">Save</a>
+      <a class="action-button action-button--primary" @click="${() => this._saveClickHandler()}">${translate('main.button.save')}</a>
     `;
 	}
 

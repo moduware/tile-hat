@@ -193,8 +193,8 @@ class SavedReadingsPage extends connect(store)(PageViewElement) {
       ${this._historyList.length == 0 ? html`
        <div class="history-placeholder">
          <img class="history-placeholder-icon" src="images/history-empty-icon.svg" />
-         <div class="history-placeholder-title">No saved mesaurements yet...</div>
-         <span class="history-placeholder-text">Timeline will display the history of your measurements</span>
+         <div class="history-placeholder-title">${translate('history.placeholder.title')}</div>
+         <span class="history-placeholder-text">${translate('history.placeholder.message')}</span>
        </div>
 			` : this._historyList.map(dategroup => html`
 				<morph-list-view class="temperature-list">
@@ -205,21 +205,21 @@ class SavedReadingsPage extends connect(store)(PageViewElement) {
              <span class="temperature-list-item__icon-container" slot="icon">
                <img src="images/temperature-icon-ambient-square.svg" />
              </span>
-             <span slot="header" class="temperature-list-item__title">${item.label === '' ? 'Unlabeled' : item.label}</span>
+             <span slot="header" class="temperature-list-item__title">${item.label === '' ? translate('history.list.unlabeled') : item.label}</span>
              <span class="temperature-list-item__content">
-               Temperature:
+               ${translate('history.list.temperature')}:
                <span class="temperature-list-item__value temperature-list-item__value--temperature">${item.temperature.toFixed(1) + ' ' + item.unit.symbol}</span>
-               <br> Humidity:
+               <br> ${translate('history.list.humidity')}:
                <span class="temperature-list-item__value temperature-list-item__value--humidity">${item.humidity.toFixed(1)}</span>
              </span>
              <span slot="secondary-content" class="temperature-list-item__time">
-               4:14 PM
+               ${moment(item.id).format('LT')}
                <br>
              </span>
            </morph-list-view-item>
            <span slot="right-buttons">
 						 <morph-button class="swiper-integration-class" color="red" 
-						 								filled flat item-delete @click="${() => store.dispatch(removeReading(item.id))}" >Delete</morph-button>
+						 								filled flat item-delete @click="${() => store.dispatch(removeReading(item.id))}" >${translate('history.list.delete')}</morph-button>
            </span>
          </morph-swipeout>
 				 `)}
