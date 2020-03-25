@@ -14,7 +14,7 @@
 	],
 	"builds": [
 		{
-			"name": "nexpaq.tile.hat.develop-pwa",
+			"name": "nexpaq.tile.hat",
 			"js": {
 				"compile": "es5",
 				"minify": false,
