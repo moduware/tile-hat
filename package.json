@@ -27,7 +27,7 @@
     "reset-css": "^3.0.0",
     "sass-loader": "^6.0.7",
     "style-loader": "^0.20.3",
-    "swiper": "^4.3.2",
+    "swiper": "^6.5.1",
     "vue": "^2.5.16",
     "webpack": "^4.1.1",
     "webpack-cli": "^2.0.12",
